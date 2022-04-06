@@ -42,6 +42,7 @@
             this.canvas.TabIndex = 0;
             this.canvas.TabStop = false;
             this.canvas.MouseClick += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseClick);
+            this.canvas.MouseDown += new System.Windows.Forms.MouseEventHandler(this.canvas_MouseDown);
             // 
             // XDrawer
             // 
