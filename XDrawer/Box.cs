@@ -8,14 +8,23 @@ namespace XDrawer
 {
     internal class Box
     {
-        public int x1;
-        public int y1;
-        public int x2;
-        public int y2;
+        private int _x1;
+        private int _y1;
+        private int _x2;
+        private int _y2;
         public Box(int x, int y)
         {
-            x1 = x2 = x;
-            y1 = y2 = y;
+            _x1 = _x2 = x;
+            _y1 = _y2 = y;
+        }
+        public void draw(Graphics g, Pen pen)
+        {
+            g.DrawRectangle(pen, Math.Min(_x1, _x2), Math.Min(_y1, _y2), Math.Abs(_x2 - _x1), Math.Abs(_y2 - _y1));
+        }
+        public void setXY2(int newX, int newY)
+        {
+            _x2 = newX;
+            _y2 = newY;
         }
     }
 }

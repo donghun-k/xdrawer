@@ -38,6 +38,10 @@ namespace XDrawer
                 int eY = e.Y;
 
                 Graphics g = canvas.CreateGraphics();
+
+                Pen pen = new Pen(Color.Black);
+
+                currentBox.draw(g, pen);
                
                 g.Dispose(); // garbage collection!
             }       
@@ -61,14 +65,13 @@ namespace XDrawer
                 Pen backPen = new Pen(canvas.BackColor);
 
                 // remove temporary box
-                g.DrawRectangle(backPen, Math.Min(currentBox.x1, currentBox.x2), Math.Min(currentBox.y1, currentBox.y2), Math.Abs(currentBox.x2 - currentBox.x1), Math.Abs(currentBox.y2 - currentBox.y1));
+                currentBox.draw(g, backPen);
                 // draw temporary box
-                g.DrawRectangle(pen, Math.Min(currentBox.x1, newX), Math.Min(currentBox.y1, newY), Math.Abs(newX - currentBox.x1), Math.Abs(newY - currentBox.y1));
+                currentBox.draw(g, pen);
 
                 g.Dispose(); // garbage collection!
 
-                currentBox.x2 = newX;
-                currentBox.y2 = newY;
+                currentBox.setXY2(newX, newY);
             }
         }
 
@@ -80,7 +83,7 @@ namespace XDrawer
 
             for (int i = 0; i < nBox; i++)
             {
-                g.DrawRectangle(pen, Math.Min(boxes[i].x1, boxes[i].x2), Math.Min(boxes[i].y1, boxes[i].y2), Math.Abs(boxes[i].x2 - boxes[i].x1), Math.Abs(boxes[i].y2 - boxes[i].y1));
+                boxes[i].draw(g, pen);
             }
         }
     }
