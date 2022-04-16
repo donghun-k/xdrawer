@@ -93,6 +93,12 @@ namespace XDrawer
             }
         }
 
+        public void addFigure(Figure fig)
+        {
+            _figures.Add(fig);
+            canvas.Invalidate();
+        }
+
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
@@ -128,6 +134,20 @@ namespace XDrawer
         private void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_CIRCLE;
+        }
+
+        private void modalDialogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FigureDialog dlg = new FigureDialog(this);
+
+            dlg.ShowDialog();
+        }
+
+        private void modalessDialogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FigureDialog dlg = new FigureDialog(this);
+
+            dlg.Show();
         }
     }
 }
