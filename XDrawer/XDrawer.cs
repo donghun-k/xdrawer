@@ -27,7 +27,27 @@ namespace XDrawer
 
         private void canvas_MouseDown(object sender, MouseEventArgs e)
         {
-            if (_whatToDraw == DRAW_LINE)
+            if (e.Button == MouseButtons.Right)
+            {
+                ContextMenuStrip mainPopup = new ContextMenuStrip();
+                mainPopup.Items.Add("Figure");
+                mainPopup.Items.Add("-");
+                ToolStripMenuItem lineItem = new ToolStripMenuItem("Line");
+                ToolStripMenuItem boxItem = new ToolStripMenuItem("Box");
+                ToolStripMenuItem circleItem = new ToolStripMenuItem("Circle");
+                mainPopup.Items.Add(lineItem);
+                mainPopup.Items.Add(boxItem);
+                mainPopup.Items.Add(circleItem);
+
+                lineItem.Click += new EventHandler(this.lineToolStripMenuItem_Click);
+                boxItem.Click += new EventHandler(this.boxToolStripMenuItem_Click);
+                circleItem.Click += new EventHandler(this.circleToolStripMenuItem_Click);
+
+                mainPopup.Show(canvas, e.Location);
+                return;
+            }
+
+            else if (_whatToDraw == DRAW_LINE)
             {
                 // upcasting
                 _selectedFigure = new Line(e.X, e.Y);                
@@ -59,15 +79,16 @@ namespace XDrawer
                 _selectedFigure.draw(g, pen);
                                
                 g.Dispose(); // garbage collection!
-            }     
-            
-            isClicked = false;
-            _figures.Add(_selectedFigure);
 
-            _selectedFigure = null;
+                _figures.Add(_selectedFigure);
 
-            // reset canvas -> result in canvas_Paint()
-            canvas.Invalidate();
+                isClicked = false;
+
+                _selectedFigure = null;
+
+                // reset canvas -> result in canvas_Paint()
+                canvas.Invalidate();
+            }         
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
