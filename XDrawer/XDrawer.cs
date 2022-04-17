@@ -8,7 +8,21 @@ namespace XDrawer
 
         bool isClicked = false;
 
-        int _whatToDraw;       
+        int _whatToDraw;
+
+        public Popup mainPopup = null;
+        public Popup pointPopup = null;
+        public Popup linePopup = null;
+        public Popup boxPopup = null;
+        public Popup circlePopup = null;
+
+        public PictureBox Canvas
+        {
+            get
+            {
+                return canvas;
+            }
+        }
 
         Figure _selectedFigure;
         List<Figure> _figures;
@@ -18,6 +32,12 @@ namespace XDrawer
             InitializeComponent();
             _figures = new List<Figure>();
             _whatToDraw = DRAW_LINE;
+
+            mainPopup = new MainPopup(this);
+            pointPopup = new FigurePopup(this, "Point", false);
+            linePopup = new FigurePopup(this, "Point", false);
+            boxPopup = new FigurePopup(this, "Point", true);
+            circlePopup = new FigurePopup(this, "Point", true);
         }
 
         private void XDrawer_Load(object sender, EventArgs e)
@@ -29,21 +49,8 @@ namespace XDrawer
         {
             if (e.Button == MouseButtons.Right)
             {
-                ContextMenuStrip mainPopup = new ContextMenuStrip();
-                mainPopup.Items.Add("Figure");
-                mainPopup.Items.Add("-");
-                ToolStripMenuItem lineItem = new ToolStripMenuItem("Line");
-                ToolStripMenuItem boxItem = new ToolStripMenuItem("Box");
-                ToolStripMenuItem circleItem = new ToolStripMenuItem("Circle");
-                mainPopup.Items.Add(lineItem);
-                mainPopup.Items.Add(boxItem);
-                mainPopup.Items.Add(circleItem);
-
-                lineItem.Click += new EventHandler(this.lineToolStripMenuItem_Click);
-                boxItem.Click += new EventHandler(this.boxToolStripMenuItem_Click);
-                circleItem.Click += new EventHandler(this.circleToolStripMenuItem_Click);
-
-                mainPopup.Show(canvas, e.Location);
+                pointPopup.popup(e.Location);
+                
                 return;
             }
 
@@ -142,17 +149,15 @@ namespace XDrawer
 
         }
 
-        private void boxToolStripMenuItem_Click(object sender, EventArgs e)
+        public void boxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_BOX;
         }
-
-        private void lineToolStripMenuItem_Click(object sender, EventArgs e)
+        public void lineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_LINE;
         }
-
-        private void circleToolStripMenuItem_Click(object sender, EventArgs e)
+        public void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_CIRCLE;
         }
