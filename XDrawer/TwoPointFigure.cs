@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing.Drawing2D;
 
 namespace XDrawer
 {
@@ -28,6 +29,24 @@ namespace XDrawer
         {
             _x2 = newX;
             _y2 = newY;
+        }
+        public override void makeRegion()
+        {
+            Point[] pt = new Point[4];
+            pt[0].X = _x1; pt[0].Y = _y1;
+            pt[1].X = _x2; pt[1].Y = _y1;
+            pt[2].X = _x2; pt[2].Y = _y2;
+            pt[3].X = _x1; pt[3].Y = _y2;
+
+            byte[] type = new byte[4];
+            type[0] = (byte)PathPointType.Line;
+            type[1] = (byte)PathPointType.Line;
+            type[2] = (byte)PathPointType.Line;
+            type[3] = (byte)PathPointType.Line;
+
+            GraphicsPath gp = new GraphicsPath(pt, type);
+            _region = new Region(gp);
+
         }
     }
 }

@@ -10,11 +10,11 @@ namespace XDrawer
 
         int _whatToDraw;
 
-        public Popup mainPopup = null;
-        public Popup pointPopup = null;
-        public Popup linePopup = null;
-        public Popup boxPopup = null;
-        public Popup circlePopup = null;
+        public Popup mainPopup;
+        public Popup pointPopup;
+        public Popup linePopup;
+        public Popup boxPopup;
+        public Popup circlePopup;
 
         public PictureBox Canvas
         {
@@ -85,17 +85,20 @@ namespace XDrawer
                 // dynamic binding
                 _selectedFigure.draw(g, pen);
                                
-                g.Dispose(); // garbage collection!
+                g.Dispose(); // garbage collection!             
+                
+            }
 
+            isClicked = false;
+            
+            if (e.Button == MouseButtons.Left)
+            {
+                _selectedFigure.makeRegion();
                 _figures.Add(_selectedFigure);
-
-                isClicked = false;
-
-                _selectedFigure = null;
-
-                // reset canvas -> result in canvas_Paint()
-                canvas.Invalidate();
-            }         
+            }            
+            _selectedFigure = null;
+            // reset canvas -> result in canvas_Paint()
+            canvas.Invalidate();
         }
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
