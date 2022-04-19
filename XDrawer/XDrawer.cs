@@ -35,9 +35,9 @@ namespace XDrawer
 
             mainPopup = new MainPopup(this);
             pointPopup = new FigurePopup(this, "Point", false);
-            linePopup = new FigurePopup(this, "Point", false);
-            boxPopup = new FigurePopup(this, "Point", true);
-            circlePopup = new FigurePopup(this, "Point", true);
+            linePopup = new FigurePopup(this, "Line", false);
+            boxPopup = new FigurePopup(this, "Box", true);
+            circlePopup = new FigurePopup(this, "Circle", true);
         }
 
         private void XDrawer_Load(object sender, EventArgs e)
@@ -49,7 +49,23 @@ namespace XDrawer
         {
             if (e.Button == MouseButtons.Right)
             {
-                pointPopup.popup(e.Location);
+                _selectedFigure = null;
+                foreach (Figure ptr in _figures)
+                {
+                    if (ptr.ptInRegion(e.X, e.Y))
+                    {
+                        _selectedFigure = ptr;
+                        break;
+                    }
+                }
+                if (_selectedFigure != null)
+                {
+                    _selectedFigure.popup(e.Location);
+                }
+                else
+                {
+                    mainPopup.popup(e.Location);
+                }                
                 
                 return;
             }
@@ -57,15 +73,15 @@ namespace XDrawer
             else if (_whatToDraw == DRAW_LINE)
             {
                 // upcasting
-                _selectedFigure = new Line(e.X, e.Y);                
+                _selectedFigure = new Line(linePopup, e.X, e.Y);                
             }
             else if (_whatToDraw == DRAW_BOX)
             {
-                _selectedFigure = new Box(e.X, e.Y);
+                _selectedFigure = new Box(boxPopup, e.X, e.Y);
             }
             else if (_whatToDraw == DRAW_CIRCLE)
             {
-                _selectedFigure = new Circle(e.X, e.Y);
+                _selectedFigure = new Circle(circlePopup, e.X, e.Y);
             }           
 
             isClicked = true;
@@ -95,8 +111,8 @@ namespace XDrawer
             {
                 _selectedFigure.makeRegion();
                 _figures.Add(_selectedFigure);
-            }            
-            _selectedFigure = null;
+                _selectedFigure = null;
+            }                        
             // reset canvas -> result in canvas_Paint()
             canvas.Invalidate();
         }
@@ -126,6 +142,7 @@ namespace XDrawer
 
         public void addFigure(Figure fig)
         {
+            fig.makeRegion();
             _figures.Add(fig);
             canvas.Invalidate();
         }
@@ -175,8 +192,13 @@ namespace XDrawer
         private void modalessDialogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FigureDialog dlg = new FigureDialog(this);
-
             dlg.Show();
+        }
+        public void deleteFigure(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+            _figures.Remove(_selectedFigure);
+            canvas.Invalidate();
         }
     }
 }

@@ -9,7 +9,8 @@ namespace XDrawer
 {
     internal class Line : TwoPointFigure
     {
-        public Line(int x, int y) : base(x, y)
+        public Line(Popup popup, int x, int y)
+            : base(popup, x, y)
         {
         }
         public override void draw(Graphics g, Pen pen)

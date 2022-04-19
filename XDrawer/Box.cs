@@ -8,10 +8,12 @@ namespace XDrawer
 {
     internal class Box : TwoPointFigure
     {
-        public Box(int x, int y) : base(x, y)
+        public Box(Popup popup, int x, int y)
+            : base(popup, x, y)
         {
         }
-        public Box(int x1, int y1, int x2, int y2) : base(x1, y1, x2, y2)
+        public Box(Popup popup, int x1, int y1, int x2, int y2)
+            : base(popup, x1, y1, x2, y2)
         {
         }
         public override void draw(Graphics g, Pen pen)

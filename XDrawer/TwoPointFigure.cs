@@ -13,12 +13,14 @@ namespace XDrawer
         protected int _y1;
         protected int _x2;
         protected int _y2;
-        public TwoPointFigure(int x, int y)
+        public TwoPointFigure(Popup popup, int x, int y)
+            : base(popup)
         {
             _x1 = _x2 = x;
             _y1 = _y2 = y;
         }
-        public TwoPointFigure(int x1, int y1, int x2, int y2)
+        public TwoPointFigure(Popup popup, int x1, int y1, int x2, int y2)
+            : base(popup)
         {
             _x1 = x1;
             _y1 = y1;

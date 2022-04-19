@@ -8,9 +8,15 @@ namespace XDrawer
 {
     public abstract class Figure
     {
+        protected Popup _popup;
         protected Region _region;
-        public Figure()
+        public Figure(Popup popup)
         {
+            _popup = popup;
+        }
+        public void popup(Point pos)
+        {
+            _popup.popup(pos);
         }
         public bool ptInRegion(int x, int y)
         {

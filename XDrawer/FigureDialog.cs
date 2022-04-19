@@ -41,7 +41,7 @@ namespace XDrawer
             int x2 = int.Parse(textX2.Text);
             int y2 = int.Parse(textY2.Text);
 
-            Box newFigure = new Box(x1, y1, x2, y2);
+            Box newFigure = new Box(mainForm.boxPopup, x1, y1, x2, y2);
             mainForm.addFigure(newFigure);
 
             Hide();

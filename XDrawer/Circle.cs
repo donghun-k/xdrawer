@@ -8,7 +8,8 @@ namespace XDrawer
 {
     internal class Circle : TwoPointFigure
     {
-        public Circle(int x, int y) : base(x, y)
+        public Circle(Popup popup, int x, int y)
+            : base(popup, x, y)
         {
         }
         public override void draw(Graphics g, Pen pen)
