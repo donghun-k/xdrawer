@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace XDrawer
 {
-    internal class Box : TwoPointFigure
+    public class Box : TwoPointFigure
     {
         public Box(Popup popup, int x, int y)
             : base(popup, x, y)

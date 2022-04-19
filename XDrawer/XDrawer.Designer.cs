@@ -35,12 +35,13 @@
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.figureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.boxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.boxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modalDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modalessDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pointToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -104,6 +105,7 @@
             // figureToolStripMenuItem
             // 
             this.figureToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.pointToolStripMenuItem,
             this.lineToolStripMenuItem,
             this.boxToolStripMenuItem,
             this.circleToolStripMenuItem});
@@ -112,24 +114,24 @@
             this.figureToolStripMenuItem.Text = "Figure";
             this.figureToolStripMenuItem.Click += new System.EventHandler(this.figureToolStripMenuItem_Click);
             // 
-            // boxToolStripMenuItem
-            // 
-            this.boxToolStripMenuItem.Name = "boxToolStripMenuItem";
-            this.boxToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
-            this.boxToolStripMenuItem.Text = "Box";
-            this.boxToolStripMenuItem.Click += new System.EventHandler(this.boxToolStripMenuItem_Click);
-            // 
             // lineToolStripMenuItem
             // 
             this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.lineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.lineToolStripMenuItem.Text = "Line";
             this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
+            // 
+            // boxToolStripMenuItem
+            // 
+            this.boxToolStripMenuItem.Name = "boxToolStripMenuItem";
+            this.boxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.boxToolStripMenuItem.Text = "Box";
+            this.boxToolStripMenuItem.Click += new System.EventHandler(this.boxToolStripMenuItem_Click);
             // 
             // circleToolStripMenuItem
             // 
             this.circleToolStripMenuItem.Name = "circleToolStripMenuItem";
-            this.circleToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.circleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.circleToolStripMenuItem.Text = "Circle";
             this.circleToolStripMenuItem.Click += new System.EventHandler(this.circleToolStripMenuItem_Click);
             // 
@@ -155,6 +157,13 @@
             this.modalessDialogToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.modalessDialogToolStripMenuItem.Text = "Modaless Dialog";
             this.modalessDialogToolStripMenuItem.Click += new System.EventHandler(this.modalessDialogToolStripMenuItem_Click);
+            // 
+            // pointToolStripMenuItem
+            // 
+            this.pointToolStripMenuItem.Name = "pointToolStripMenuItem";
+            this.pointToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pointToolStripMenuItem.Text = "Point";
+            this.pointToolStripMenuItem.Click += new System.EventHandler(this.pointToolStripMenuItem_Click);
             // 
             // XDrawer
             // 
@@ -190,5 +199,6 @@
         private ToolStripMenuItem dialogToolStripMenuItem;
         private ToolStripMenuItem modalDialogToolStripMenuItem;
         private ToolStripMenuItem modalessDialogToolStripMenuItem;
+        private ToolStripMenuItem pointToolStripMenuItem;
     }
 }

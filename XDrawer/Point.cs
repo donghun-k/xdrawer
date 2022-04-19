@@ -6,15 +6,16 @@ using System.Threading.Tasks;
 
 namespace XDrawer
 {
-    public class Circle : TwoPointFigure
+    public class Point : OnePointFigure
     {
-        public Circle(Popup popup, int x, int y)
+        public Point(Popup popup, int x, int y)
             : base(popup, x, y)
         {
         }
         public override void draw(Graphics g, Pen pen)
         {
-            g.DrawEllipse(pen, Math.Min(_x1, _x2), Math.Min(_y1, _y2), Math.Abs(_x2 - _x1), Math.Abs(_y2 - _y1));
+            g.DrawRectangle(pen, _x1 - DELTA, _y1 - DELTA, 2*DELTA, 2*DELTA);
         }
     }
 }
+

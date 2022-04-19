@@ -7,7 +7,7 @@ using System.Drawing.Drawing2D;
 
 namespace XDrawer
 {
-    internal class Line : TwoPointFigure
+    public class Line : TwoPointFigure
     {
         public Line(Popup popup, int x, int y)
             : base(popup, x, y)

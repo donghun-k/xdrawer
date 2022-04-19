@@ -14,7 +14,7 @@ namespace XDrawer
         {
             _popup = popup;
         }
-        public void popup(Point pos)
+        public void popup(System.Drawing.Point pos)
         {
             _popup.popup(pos);
         }

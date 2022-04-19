@@ -23,7 +23,7 @@ namespace XDrawer
             }
         }
 
-        public void popup(Point pos)
+        public void popup(System.Drawing.Point pos)
         {
             _popupPtr.Show(_pView.Canvas, pos);
         }

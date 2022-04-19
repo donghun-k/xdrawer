@@ -2,6 +2,7 @@ namespace XDrawer
 {
     public partial class XDrawer : Form
     {
+        static int DRAW_POINT = 1;
         static int DRAW_LINE = 2;
         static int DRAW_BOX = 3;
         static int DRAW_CIRCLE = 4;
@@ -69,7 +70,10 @@ namespace XDrawer
                 
                 return;
             }
-
+            else if (_whatToDraw == DRAW_POINT)
+            {             
+                _selectedFigure = new Point(pointPopup, e.X, e.Y);
+            }
             else if (_whatToDraw == DRAW_LINE)
             {
                 // upcasting
@@ -168,15 +172,18 @@ namespace XDrawer
         {
 
         }
-
-        public void boxToolStripMenuItem_Click(object sender, EventArgs e)
+        public void pointToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            _whatToDraw = DRAW_BOX;
+            _whatToDraw = DRAW_POINT;
         }
         public void lineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_LINE;
         }
+        public void boxToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _whatToDraw = DRAW_BOX;
+        }        
         public void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_CIRCLE;
@@ -199,6 +206,6 @@ namespace XDrawer
             if (_selectedFigure == null) return;
             _figures.Remove(_selectedFigure);
             canvas.Invalidate();
-        }
+        }        
     }
 }
