@@ -8,13 +8,28 @@ namespace XDrawer
 {
     public class Circle : TwoPointFigure
     {
+        private bool _fillFlag;
         public Circle(Popup popup, int x, int y)
             : base(popup, x, y)
         {
+            _fillFlag = false;
+        }        
+        public override void setFill()
+        {
+            _fillFlag = !_fillFlag;
         }
         public override void draw(Graphics g, Pen pen)
         {
+            if (_fillFlag == true)
+            {
+                Brush br = new SolidBrush(_color);
+                g.FillEllipse(br, Math.Min(_x1, _x2), Math.Min(_y1, _y2), Math.Abs(_x2 - _x1), Math.Abs(_y2 - _y1));
+                br.Dispose();
+            }
+            Color oldColor = pen.Color;
+            pen.Color = _color;
             g.DrawEllipse(pen, Math.Min(_x1, _x2), Math.Min(_y1, _y2), Math.Abs(_x2 - _x1), Math.Abs(_y2 - _y1));
+            pen.Color = oldColor;
         }
     }
 }

@@ -8,11 +8,17 @@ namespace XDrawer
 {
     public abstract class Figure
     {
+        protected Color _color;
         protected Popup _popup;
         protected Region _region;
         public Figure(Popup popup)
         {
+            _color = Color.Black;
             _popup = popup;
+        }
+        public void setColor(Color color)
+        {
+            _color=color;
         }
         public void popup(System.Drawing.Point pos)
         {
@@ -28,6 +34,10 @@ namespace XDrawer
             {
                 return false;
             }
+        }
+        public virtual void setFill()
+        {
+
         }
         public abstract void draw(Graphics g, Pen pen);
         public abstract void setXY2(int newX, int newY);

@@ -206,6 +206,34 @@ namespace XDrawer
             if (_selectedFigure == null) return;
             _figures.Remove(_selectedFigure);
             canvas.Invalidate();
-        }        
+        }   
+        private void setColor(Color color)
+        {
+            if (_selectedFigure == null) return;
+            _selectedFigure.setColor(color);
+            canvas.Invalidate();
+        }
+        public void setBlackColor(object sender, EventArgs e)
+        {
+            setColor(Color.Black);
+        }
+        public void setRedColor(object sender, EventArgs e)
+        {
+            setColor(Color.Red);
+        }
+        public void setYellowColor(object sender, EventArgs e)
+        {
+            setColor(Color.Yellow);
+        }
+        public void setBlueColor(object sender, EventArgs e)
+        {
+            setColor(Color.Blue);
+        }
+        public void setFill(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+            _selectedFigure.setFill();
+            canvas.Invalidate();
+        }
     }
 }

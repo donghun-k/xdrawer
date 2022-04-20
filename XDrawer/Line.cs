@@ -14,8 +14,11 @@ namespace XDrawer
         {
         }
         public override void draw(Graphics g, Pen pen)
-        {   
+        {
+            Color oldColor = pen.Color;
+            pen.Color = _color;
             g.DrawLine(pen, _x1, _y1, _x2, _y2);
+            pen.Color = oldColor;
         }
         public override void makeRegion()
         {

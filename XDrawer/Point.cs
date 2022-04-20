@@ -14,7 +14,10 @@ namespace XDrawer
         }
         public override void draw(Graphics g, Pen pen)
         {
+            Color oldColor = pen.Color;
+            pen.Color = _color;
             g.DrawRectangle(pen, _x1 - DELTA, _y1 - DELTA, 2*DELTA, 2*DELTA);
+            pen.Color = oldColor;
         }
     }
 }
