@@ -2,10 +2,10 @@ namespace XDrawer
 {
     public partial class XDrawer : Form
     {
-        static int DRAW_POINT = 1;
-        static int DRAW_LINE = 2;
-        static int DRAW_BOX = 3;
-        static int DRAW_CIRCLE = 4;
+        public static int DRAW_POINT = 1;
+        public static int DRAW_LINE = 2;
+        public static int DRAW_BOX = 3;
+        public static int DRAW_CIRCLE = 4;
 
         bool isClicked = false;
 

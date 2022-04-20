@@ -20,8 +20,15 @@ namespace XDrawer
 
             textX1.Text = "0";
             textY1.Text = "0";
-            textX2.Text = "100";
-            textY2.Text = "100";
+            textX2.Text = "0";
+            textY2.Text = "0";
+
+            selectBox.Items.Add("Point");
+            selectBox.Items.Add("Line");
+            selectBox.Items.Add("Box");
+            selectBox.Items.Add("Circle");
+
+            selectBox.SelectedIndex = 2;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -41,15 +48,40 @@ namespace XDrawer
             int x2 = int.Parse(textX2.Text);
             int y2 = int.Parse(textY2.Text);
 
-            Box newFigure = new Box(mainForm.boxPopup, x1, y1, x2, y2);
-            mainForm.addFigure(newFigure);
+            Figure newFigure = null;
 
-            Hide();
+            if (selectBox.SelectedIndex+1 == XDrawer.DRAW_POINT)
+            {
+                newFigure = new Point(mainForm.pointPopup, x1, y1);
+            }
+            else if (selectBox.SelectedIndex+1 == XDrawer.DRAW_LINE)
+            {
+                newFigure = new Line(mainForm.linePopup, x1, y1, x2, y2);
+            }
+            else if (selectBox.SelectedIndex+1 == XDrawer.DRAW_BOX)
+            {
+                newFigure = new Box(mainForm.boxPopup, x1, y1, x2, y2);
+            }
+            else if (selectBox.SelectedIndex+1 == XDrawer.DRAW_CIRCLE)
+            {
+                newFigure = new Circle(mainForm.circlePopup, x1, y1, x2, y2);
+            }                
+            mainForm.addFigure(newFigure);
         }
 
         private void cancelButton_Click(object sender, EventArgs e)
         {
             Hide();
+        }
+
+        private void FigureDialog_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void selectBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
