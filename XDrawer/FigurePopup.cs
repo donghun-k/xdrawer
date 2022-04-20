@@ -14,6 +14,7 @@ namespace XDrawer
             ToolStripMenuItem deleteItem = new ToolStripMenuItem("지우기");
             deleteItem.Click += new EventHandler(view.deleteFigure);
             ToolStripMenuItem copyItem = new ToolStripMenuItem("복사하기");
+            copyItem.Click += new EventHandler(view.copyFigure);
             _popupPtr.Items.Add(deleteItem);
             _popupPtr.Items.Add(copyItem);
 

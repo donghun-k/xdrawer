@@ -235,5 +235,12 @@ namespace XDrawer
             _selectedFigure.setFill();
             canvas.Invalidate();
         }
+        public void copyFigure(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+            Figure newFigure = _selectedFigure.clone();
+            newFigure.move(10, 20);
+            addFigure(newFigure);
+        }
     }
 }

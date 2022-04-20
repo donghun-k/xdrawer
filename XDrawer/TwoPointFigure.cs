@@ -32,6 +32,11 @@ namespace XDrawer
             _x2 = newX;
             _y2 = newY;
         }
+        public override void move(int dx, int dy)
+        {
+            _x1 = _x1 + dx; _y1 = _y1 + dy;
+            _x2 = _x2 + dx; _y2 = _y2 + dy;
+        }
         public override void makeRegion()
         {
             System.Drawing.Point[] pt = new System.Drawing.Point[4];

@@ -19,6 +19,12 @@ namespace XDrawer
             g.DrawRectangle(pen, _x1 - DELTA, _y1 - DELTA, 2*DELTA, 2*DELTA);
             pen.Color = oldColor;
         }
+        public override Figure clone()
+        {
+            Point newFigure = new Point(_popup, _x1, _y1);
+            newFigure._color = _color;
+            return newFigure;
+        }
     }
 }
 

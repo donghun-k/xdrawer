@@ -36,5 +36,12 @@ namespace XDrawer
             g.DrawRectangle(pen, Math.Min(_x1, _x2), Math.Min(_y1, _y2), Math.Abs(_x2 - _x1), Math.Abs(_y2 - _y1));
             pen.Color = oldColor;            
         }
+        public override Figure clone()
+        {
+            Box newFigure = new Box(_popup, _x1, _y1, _x2, _y2); 
+            newFigure._color = _color;
+            newFigure._fillFlag = _fillFlag;
+            return newFigure;
+        }
     }
 }

@@ -13,6 +13,10 @@ namespace XDrawer
             : base(popup, x, y)
         {
         }
+        public Line(Popup popup, int x1, int y1, int x2, int y2)
+            : base(popup, x1, y1, x2, y2)
+        {
+        }
         public override void draw(Graphics g, Pen pen)
         {
             Color oldColor = pen.Color;
@@ -47,6 +51,12 @@ namespace XDrawer
             type[3] = (byte)PathPointType.Line;
             GraphicsPath gp = new GraphicsPath(pt, type);
             _region = new Region(gp);
+        }
+        public override Figure clone()
+        {
+            Line newFigure = new Line(_popup, _x1, _y1, _x2, _y2);
+            newFigure._color = _color;
+            return newFigure;
         }
     }
 }
