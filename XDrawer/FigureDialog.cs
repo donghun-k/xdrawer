@@ -12,7 +12,7 @@ namespace XDrawer
 {
     public partial class FigureDialog : Form
     {
-        XDrawer mainForm;
+        XDrawer mainForm;        
         public FigureDialog(XDrawer form)
         {   
             mainForm = form;
@@ -29,6 +29,20 @@ namespace XDrawer
             selectBox.Items.Add("Circle");
 
             selectBox.SelectedIndex = 2;
+
+            redButton.ForeColor = Color.Red;
+            yellowButton.ForeColor = Color.Yellow;
+            blueButton.ForeColor = Color.Blue;
+
+            ToolTip tip = new ToolTip();
+            tip.SetToolTip(blackButton, "Black Color");
+            tip.SetToolTip(redButton, "Red Color");
+            tip.SetToolTip(yellowButton, "Yellow Color");
+            tip.SetToolTip(blueButton, "Blue Color");
+            tip.SetToolTip(blackButton, "Black Color");
+
+            blackButton.Select();
+            mainForm.CurrentColor = Color.Black;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -66,6 +80,8 @@ namespace XDrawer
             {
                 newFigure = new Circle(mainForm.circlePopup, x1, y1, x2, y2);
             }                
+            newFigure.setColor(mainForm.CurrentColor);
+
             mainForm.addFigure(newFigure);
         }
 
@@ -82,6 +98,35 @@ namespace XDrawer
         private void selectBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             
+        }
+
+        private void blackButton_CheckedChanged(object sender, EventArgs e)
+        {
+            mainForm.CurrentColor = Color.Black;
+        }
+
+        private void redButton_CheckedChanged(object sender, EventArgs e)
+        {
+            mainForm.CurrentColor = Color.Red;
+        }
+
+        private void yellowButton_CheckedChanged(object sender, EventArgs e)
+        {
+            mainForm.CurrentColor = Color.Yellow;
+        }
+
+        private void blueButton_CheckedChanged(object sender, EventArgs e)
+        {
+            mainForm.CurrentColor = Color.Blue;
+        }
+
+        private void selectColor_Click(object sender, EventArgs e)
+        {
+            ColorDialog dialog = new ColorDialog();
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                mainForm.CurrentColor = dialog.Color;
+            }
         }
     }
 }

@@ -19,20 +19,25 @@ namespace XDrawer
 
         public PictureBox Canvas
         {
-            get
-            {
-                return canvas;
-            }
+            get { return canvas; }
         }
 
         Figure _selectedFigure;
         List<Figure> _figures;
+        Color _currentColor;
+
+        public Color CurrentColor
+        {
+            get { return _currentColor; } 
+            set { _currentColor = value; }
+        }
 
         public XDrawer()
         {            
             InitializeComponent();
             _figures = new List<Figure>();
             _whatToDraw = DRAW_LINE;
+            _currentColor = Color.Black;
 
             mainPopup = new MainPopup(this);
             pointPopup = new FigurePopup(this, "Point", false);
@@ -86,7 +91,8 @@ namespace XDrawer
             else if (_whatToDraw == DRAW_CIRCLE)
             {
                 _selectedFigure = new Circle(circlePopup, e.X, e.Y);
-            }           
+            }
+            _selectedFigure.setColor(_currentColor);
 
             isClicked = true;
         }
