@@ -12,7 +12,8 @@ namespace XDrawer
 {
     public partial class FigureDialog : Form
     {
-        XDrawer mainForm;        
+        XDrawer mainForm;
+        static String[] figureTypes = { "Point", "Box", "Line", "Circle" };
         public FigureDialog(XDrawer form)
         {   
             mainForm = form;
@@ -28,7 +29,7 @@ namespace XDrawer
             selectBox.Items.Add("Box");
             selectBox.Items.Add("Circle");
 
-            selectBox.SelectedIndex = 2;
+            selectBox.SelectedIndex = 1;
 
             redButton.ForeColor = Color.Red;
             yellowButton.ForeColor = Color.Yellow;
@@ -42,6 +43,7 @@ namespace XDrawer
             tip.SetToolTip(blackButton, "Black Color");
 
             blackButton.Select();
+
             mainForm.CurrentColor = Color.Black;
         }
 
@@ -64,6 +66,8 @@ namespace XDrawer
 
             Figure newFigure = null;
 
+            mainForm.setFigureTypeLable(figureTypes[selectBox.SelectedIndex]);
+
             if (selectBox.SelectedIndex+1 == XDrawer.DRAW_POINT)
             {
                 newFigure = new Point(mainForm.pointPopup, x1, y1);
@@ -80,7 +84,7 @@ namespace XDrawer
             {
                 newFigure = new Circle(mainForm.circlePopup, x1, y1, x2, y2);
             }                
-            newFigure.setColor(mainForm.CurrentColor);
+            newFigure.setColor(mainForm.CurrentColor);            
 
             mainForm.addFigure(newFigure);
         }

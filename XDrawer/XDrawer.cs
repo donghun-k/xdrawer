@@ -44,6 +44,18 @@ namespace XDrawer
             linePopup = new FigurePopup(this, "Line", false);
             boxPopup = new FigurePopup(this, "Box", true);
             circlePopup = new FigurePopup(this, "Circle", true);
+
+            toolStripBlackButton.Image = Image.FromFile("Black.png");
+            toolStripRedButton.Image = Image.FromFile("Red.png");
+            toolStripYellowButton.Image = Image.FromFile("Yellow.png");
+            toolStripBlueButton.Image = Image.FromFile("Blue.png");
+
+            toolStripSelectBox.Items.Add("Point");
+            toolStripSelectBox.Items.Add("Line");
+            toolStripSelectBox.Items.Add("Box");
+            toolStripSelectBox.Items.Add("Circle");
+
+            toolStripSelectBox.SelectedIndex = 1;
         }
 
         private void XDrawer_Load(object sender, EventArgs e)
@@ -129,6 +141,7 @@ namespace XDrawer
 
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
+            positionLable.Text = "X : " + e.X + ", Y : " + e.Y;
             if (isClicked == true)
             {
                 int newX = e.X;
@@ -178,21 +191,29 @@ namespace XDrawer
         {
 
         }
+        public void setFigureTypeLable(String s)
+        {
+            figureTypeLable.Text = s;
+        }
         public void pointToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_POINT;
+            setFigureTypeLable("Point");
         }
         public void lineToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_LINE;
+            setFigureTypeLable("Line");
         }
         public void boxToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_BOX;
+            setFigureTypeLable("Box");
         }        
         public void circleToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _whatToDraw = DRAW_CIRCLE;
+            setFigureTypeLable("Circle");
         }
 
         private void modalDialogToolStripMenuItem_Click(object sender, EventArgs e)
@@ -247,6 +268,46 @@ namespace XDrawer
             Figure newFigure = _selectedFigure.clone();
             newFigure.move(10, 20);
             addFigure(newFigure);
+        }
+
+        private void toolStripBlackButton_Click(object sender, EventArgs e)
+        {
+            _currentColor = Color.Black;
+        }
+
+        private void toolStripRedButton_Click(object sender, EventArgs e)
+        {
+            _currentColor = Color.Red;
+        }
+
+        private void toolStripYellowButton_Click(object sender, EventArgs e)
+        {
+            _currentColor = Color.Yellow;
+        }
+
+        private void toolStripBlueButton_Click(object sender, EventArgs e)
+        {
+            _currentColor = Color.Blue;
+        }
+
+        private void toolStripSelectBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (toolStripSelectBox.SelectedIndex + 1 == XDrawer.DRAW_POINT)
+            {
+                pointToolStripMenuItem_Click(sender, e);
+            }
+            else if (toolStripSelectBox.SelectedIndex + 1 == XDrawer.DRAW_LINE)
+            {
+                lineToolStripMenuItem_Click(sender, e);
+            }
+            else if (toolStripSelectBox.SelectedIndex + 1 == XDrawer.DRAW_BOX)
+            {
+                boxToolStripMenuItem_Click(sender, e);
+            }
+            else if (toolStripSelectBox.SelectedIndex + 1 == XDrawer.DRAW_CIRCLE)
+            {
+                circleToolStripMenuItem_Click(sender, e);
+            }
         }
     }
 }
