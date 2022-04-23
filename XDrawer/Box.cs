@@ -43,5 +43,9 @@ namespace XDrawer
             newFigure._fillFlag = _fillFlag;
             return newFigure;
         }
+        public override String getClassName()
+        {
+            return "Box";
+        }
     }
 }

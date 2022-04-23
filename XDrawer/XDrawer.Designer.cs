@@ -43,6 +43,9 @@
             this.dialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modalDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modalessDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStrip = new System.Windows.Forms.ToolStrip();
             this.toolStripBlackButton = new System.Windows.Forms.ToolStripButton();
             this.toolStripRedButton = new System.Windows.Forms.ToolStripButton();
@@ -53,9 +56,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.positionLable = new System.Windows.Forms.ToolStripStatusLabel();
             this.figureTypeLable = new System.Windows.Forms.ToolStripStatusLabel();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -182,6 +182,29 @@
             this.modalessDialogToolStripMenuItem.Text = "Modaless Dialog";
             this.modalessDialogToolStripMenuItem.Click += new System.EventHandler(this.modalessDialogToolStripMenuItem_Click);
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.treeToolStripMenuItem,
+            this.tableViewToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // treeToolStripMenuItem
+            // 
+            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.treeToolStripMenuItem.Text = "Tree View";
+            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
+            // 
+            // tableViewToolStripMenuItem
+            // 
+            this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
+            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tableViewToolStripMenuItem.Text = "Table View";
+            this.tableViewToolStripMenuItem.Click += new System.EventHandler(this.tableViewToolStripMenuItem_Click);
+            // 
             // toolStrip
             // 
             this.toolStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -274,28 +297,6 @@
             this.figureTypeLable.Name = "figureTypeLable";
             this.figureTypeLable.Size = new System.Drawing.Size(29, 17);
             this.figureTypeLable.Text = "Line";
-            // 
-            // viewToolStripMenuItem
-            // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.treeToolStripMenuItem,
-            this.tableViewToolStripMenuItem});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // treeToolStripMenuItem
-            // 
-            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
-            this.treeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.treeToolStripMenuItem.Text = "Tree View";
-            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
-            // 
-            // tableViewToolStripMenuItem
-            // 
-            this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
-            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.tableViewToolStripMenuItem.Text = "Table View";
             // 
             // XDrawer
             // 

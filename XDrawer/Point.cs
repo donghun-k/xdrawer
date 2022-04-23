@@ -25,6 +25,10 @@ namespace XDrawer
             newFigure._color = _color;
             return newFigure;
         }
+        public override String getClassName()
+        {
+            return "Point";
+        }
     }
 }
 

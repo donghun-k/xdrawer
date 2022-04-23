@@ -56,10 +56,15 @@ namespace XDrawer
         {
             return -1;
         }
+        public virtual String getClassName()
+        {
+            return "Figure"; 
+        }
         public abstract void draw(Graphics g, Pen pen);
         public abstract void setXY2(int newX, int newY);
         public abstract void makeRegion();
         public abstract Figure clone();
         public abstract void move(int dx, int dy);
+        
     }
 }

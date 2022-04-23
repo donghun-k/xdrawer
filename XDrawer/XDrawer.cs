@@ -315,9 +315,14 @@ namespace XDrawer
 
         private void treeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
             TreeForm tree = new TreeForm(this);
             tree.ShowDialog();
+        }
+
+        private void tableViewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            ListForm table = new ListForm(this);
+            table.ShowDialog();
         }
     }
 }
