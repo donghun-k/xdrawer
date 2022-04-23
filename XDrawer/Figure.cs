@@ -39,11 +39,27 @@ namespace XDrawer
         {
 
         }
+        // hook function
+        public virtual int getX1()
+        {
+            return -1;
+        }
+        public virtual int getY1()
+        {
+            return -1;
+        }
+        public virtual int getX2()
+        {
+            return -1;
+        }
+        public virtual int getY2()
+        {
+            return -1;
+        }
         public abstract void draw(Graphics g, Pen pen);
         public abstract void setXY2(int newX, int newY);
         public abstract void makeRegion();
         public abstract Figure clone();
-        public abstract void move (int dx, int dy);
-        
+        public abstract void move(int dx, int dy);
     }
 }

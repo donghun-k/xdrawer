@@ -32,6 +32,22 @@ namespace XDrawer
             _x2 = newX;
             _y2 = newY;
         }
+        public override int getX1()
+        {
+            return _x1;
+        }
+        public override int getY1()
+        {
+            return _y1;
+        }
+        public override int getX2()
+        {
+            return _x2;
+        }
+        public override int getY2()
+        {
+            return _y2;
+        }
         public override void move(int dx, int dy)
         {
             _x1 = _x1 + dx; _y1 = _y1 + dy;

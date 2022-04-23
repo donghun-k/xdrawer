@@ -15,17 +15,20 @@ namespace XDrawer
         public Popup pointPopup;
         public Popup linePopup;
         public Popup boxPopup;
-        public Popup circlePopup;
+        public Popup circlePopup;        
+
+        Figure _selectedFigure;
+        List<Figure> _figures;        
+        Color _currentColor;
 
         public PictureBox Canvas
         {
             get { return canvas; }
         }
-
-        Figure _selectedFigure;
-        List<Figure> _figures;
-        Color _currentColor;
-
+        public List<Figure> Figures
+        {
+            get { return _figures; }
+        }
         public Color CurrentColor
         {
             get { return _currentColor; } 
@@ -308,6 +311,13 @@ namespace XDrawer
             {
                 circleToolStripMenuItem_Click(sender, e);
             }
+        }
+
+        private void treeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
+            TreeForm tree = new TreeForm(this);
+            tree.ShowDialog();
         }
     }
 }

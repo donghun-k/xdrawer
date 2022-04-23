@@ -53,6 +53,9 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.positionLable = new System.Windows.Forms.ToolStripStatusLabel();
             this.figureTypeLable = new System.Windows.Forms.ToolStripStatusLabel();
+            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.treeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -80,7 +83,8 @@
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.figureToolStripMenuItem,
-            this.dialogToolStripMenuItem});
+            this.dialogToolStripMenuItem,
+            this.viewToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(556, 24);
@@ -271,6 +275,28 @@
             this.figureTypeLable.Size = new System.Drawing.Size(29, 17);
             this.figureTypeLable.Text = "Line";
             // 
+            // viewToolStripMenuItem
+            // 
+            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.treeToolStripMenuItem,
+            this.tableViewToolStripMenuItem});
+            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
+            this.viewToolStripMenuItem.Size = new System.Drawing.Size(45, 20);
+            this.viewToolStripMenuItem.Text = "View";
+            // 
+            // treeToolStripMenuItem
+            // 
+            this.treeToolStripMenuItem.Name = "treeToolStripMenuItem";
+            this.treeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.treeToolStripMenuItem.Text = "Tree View";
+            this.treeToolStripMenuItem.Click += new System.EventHandler(this.treeToolStripMenuItem_Click);
+            // 
+            // tableViewToolStripMenuItem
+            // 
+            this.tableViewToolStripMenuItem.Name = "tableViewToolStripMenuItem";
+            this.tableViewToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.tableViewToolStripMenuItem.Text = "Table View";
+            // 
             // XDrawer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -322,5 +348,8 @@
         private StatusStrip statusStrip1;
         private ToolStripStatusLabel positionLable;
         private ToolStripStatusLabel figureTypeLable;
+        private ToolStripMenuItem viewToolStripMenuItem;
+        private ToolStripMenuItem treeToolStripMenuItem;
+        private ToolStripMenuItem tableViewToolStripMenuItem;
     }
 }
