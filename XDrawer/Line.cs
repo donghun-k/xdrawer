@@ -17,6 +17,15 @@ namespace XDrawer
             : base(popup, x1, y1, x2, y2)
         {
         }
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        internal static extern bool MoveToEx(IntPtr hdc, int ulCornerX, int ulCornerY, int oldPos);
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        internal static extern bool LineTo(IntPtr hdc, int ulCornerX, int ulCornerY);
+        public override void draw(IntPtr hdc)
+        {
+            MoveToEx(hdc, _x1, _y1, 0);
+            LineTo(hdc, _x2, _y2);
+        }
         public override void draw(Graphics g, Pen pen)
         {
             Color oldColor = pen.Color;

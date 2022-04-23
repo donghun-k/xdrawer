@@ -12,6 +12,12 @@ namespace XDrawer
             : base(popup, x, y)
         {
         }
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        internal static extern bool Rectangle(IntPtr hdc, int ulCornerX, int ulCornerY, int IrCornerX, int IrCornerY);
+        public override void draw(IntPtr hdc)
+        {
+            Rectangle(hdc, _x1 - DELTA, _y1 - DELTA, _x1 + DELTA, _y1 + DELTA);
+        }
         public override void draw(Graphics g, Pen pen)
         {
             Color oldColor = pen.Color;

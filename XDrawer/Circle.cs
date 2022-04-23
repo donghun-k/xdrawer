@@ -23,6 +23,12 @@ namespace XDrawer
         {
             _fillFlag = !_fillFlag;
         }
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        internal static extern bool Ellipse(IntPtr hdc, int ulCornerX, int ulCornerY, int IrCornerX, int IrCornerY);
+        public override void draw(IntPtr hdc)
+        {
+            Ellipse(hdc, _x1, _y1, _x2, _y2);
+        }
         public override void draw(Graphics g, Pen pen)
         {
             if (_fillFlag == true)

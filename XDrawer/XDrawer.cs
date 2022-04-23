@@ -6,6 +6,7 @@ namespace XDrawer
         public static int DRAW_LINE = 2;
         public static int DRAW_BOX = 3;
         public static int DRAW_CIRCLE = 4;
+        static int R2_NOTXORPEN = 10;
 
         bool isClicked = false;
 
@@ -121,7 +122,7 @@ namespace XDrawer
 
                 Graphics g = canvas.CreateGraphics();
 
-                Pen pen = new Pen(Color.Black);
+                Pen pen = new Pen(Color.Black);                             
 
                 // dynamic binding
                 _selectedFigure.draw(g, pen);
@@ -142,6 +143,8 @@ namespace XDrawer
             canvas.Invalidate();
         }
 
+        [System.Runtime.InteropServices.DllImport("gdi32.dll")]
+        internal static extern int SetROP2(IntPtr hdc, int rop2);
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             positionLable.Text = "X : " + e.X + ", Y : " + e.Y;
@@ -150,18 +153,15 @@ namespace XDrawer
                 int newX = e.X;
                 int newY = e.Y;
 
-                Graphics g = canvas.CreateGraphics();
+                Graphics g = canvas.CreateGraphics();            
+                IntPtr hdc = g.GetHdc();
+                int oldMode = SetROP2(hdc, R2_NOTXORPEN);
 
-                Pen pen = new Pen(Color.Black);
-                Pen backPen = new Pen(canvas.BackColor);
-
-                // remove temporary figure
-                _selectedFigure.draw(g, backPen);
-                // update X, Y
+                _selectedFigure.draw(hdc);
                 _selectedFigure.setXY2(newX, newY);
-                // draw temporary figure
-                _selectedFigure.draw(g, pen);
-                
+                _selectedFigure.draw(hdc);
+                SetROP2(hdc, oldMode);
+                g.ReleaseHdc(hdc);
                 g.Dispose(); // garbage collection!
             }
         }
