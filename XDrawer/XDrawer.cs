@@ -6,9 +6,12 @@ namespace XDrawer
         public static int DRAW_LINE = 2;
         public static int DRAW_BOX = 3;
         public static int DRAW_CIRCLE = 4;
+
         static int R2_NOTXORPEN = 10;
 
-        bool isClicked = false;
+        static int MOUSE_DEFAULT = 0;
+        static int MOUSE_DRAWING = 1;
+        static int MOUSE_MOVING = 2;
 
         int _whatToDraw;
 
@@ -21,6 +24,10 @@ namespace XDrawer
         Figure _selectedFigure;
         List<Figure> _figures;        
         Color _currentColor;
+
+        int _actionMode;
+        int _currentX;
+        int _currentY;
 
         public PictureBox Canvas
         {
@@ -42,6 +49,10 @@ namespace XDrawer
             _figures = new List<Figure>();
             _whatToDraw = DRAW_LINE;
             _currentColor = Color.Black;
+            _selectedFigure = null;
+            _actionMode = MOUSE_DEFAULT;
+            _currentX = 0;
+            _currentY = 0;
 
             mainPopup = new MainPopup(this);
             pointPopup = new FigurePopup(this, "Point", false);
@@ -57,8 +68,7 @@ namespace XDrawer
             toolStripSelectBox.Items.Add("Point");
             toolStripSelectBox.Items.Add("Line");
             toolStripSelectBox.Items.Add("Box");
-            toolStripSelectBox.Items.Add("Circle");
-
+            toolStripSelectBox.Items.Add("Circle");     
             toolStripSelectBox.SelectedIndex = 1;
         }
 
@@ -87,11 +97,29 @@ namespace XDrawer
                 else
                 {
                     mainPopup.popup(e.Location);
-                }                
-                
+                }     
                 return;
             }
-            else if (_whatToDraw == DRAW_POINT)
+
+            _selectedFigure = null;
+            foreach (Figure ptr in _figures)
+            {
+                if (ptr.ptInRegion(e.X, e.Y))
+                {
+                    _selectedFigure = ptr;
+                    break;
+                }
+            }
+            if (_selectedFigure != null)
+            {
+                _actionMode = MOUSE_MOVING;
+                _figures.Remove(_selectedFigure);
+                _currentX = e.X;
+                _currentY = e.Y;
+                return;
+            }
+
+            if (_whatToDraw == DRAW_POINT)
             {             
                 _selectedFigure = new Point(pointPopup, e.X, e.Y);
             }
@@ -109,13 +137,12 @@ namespace XDrawer
                 _selectedFigure = new Circle(circlePopup, e.X, e.Y);
             }
             _selectedFigure.setColor(_currentColor);
-
-            isClicked = true;
+            _actionMode = MOUSE_DRAWING;
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
         {   
-            if (isClicked == true)
+            if (_actionMode != MOUSE_DEFAULT)
             {
                 int eX = e.X;
                 int eY = e.Y;
@@ -127,11 +154,8 @@ namespace XDrawer
                 // dynamic binding
                 _selectedFigure.draw(g, pen);
                                
-                g.Dispose(); // garbage collection!             
-                
+                g.Dispose(); // garbage collection!  
             }
-
-            isClicked = false;
             
             if (e.Button == MouseButtons.Left)
             {
@@ -141,6 +165,7 @@ namespace XDrawer
             }                        
             // reset canvas -> result in canvas_Paint()
             canvas.Invalidate();
+            _actionMode = MOUSE_DEFAULT;
         }
 
         [System.Runtime.InteropServices.DllImport("gdi32.dll")]
@@ -148,21 +173,27 @@ namespace XDrawer
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             positionLable.Text = "X : " + e.X + ", Y : " + e.Y;
-            if (isClicked == true)
+
+            if(_actionMode == MOUSE_DEFAULT) { return; }
+
+            int newX = e.X;
+            int newY = e.Y;
+
+            Graphics g = canvas.CreateGraphics();
+            IntPtr hdc = g.GetHdc();
+            int oldMode = SetROP2(hdc, R2_NOTXORPEN);
+
+            if (_actionMode == MOUSE_DRAWING)
             {
-                int newX = e.X;
-                int newY = e.Y;
-
-                Graphics g = canvas.CreateGraphics();            
-                IntPtr hdc = g.GetHdc();
-                int oldMode = SetROP2(hdc, R2_NOTXORPEN);
-
-                _selectedFigure.draw(hdc);
-                _selectedFigure.setXY2(newX, newY);
-                _selectedFigure.draw(hdc);
+                _selectedFigure.drawing(hdc, newX, newY);
                 SetROP2(hdc, oldMode);
                 g.ReleaseHdc(hdc);
                 g.Dispose(); // garbage collection!
+            } else if (_actionMode == MOUSE_MOVING)
+            {
+                _selectedFigure.move(hdc, newX - _currentX, newY - _currentY);
+                _currentX = newX;
+                _currentY = newY;  
             }
         }
 
