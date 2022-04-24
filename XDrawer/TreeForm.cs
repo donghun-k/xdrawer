@@ -22,8 +22,8 @@ namespace XDrawer
             this.TopMost = true;
             treeView.Nodes.Add("Figures");
             treeView.Nodes[0].Nodes.Add("Point");
-            treeView.Nodes[0].Nodes.Add("Box");
             treeView.Nodes[0].Nodes.Add("Line");
+            treeView.Nodes[0].Nodes.Add("Box");
             treeView.Nodes[0].Nodes.Add("Circle");
 
             showAllFigures();

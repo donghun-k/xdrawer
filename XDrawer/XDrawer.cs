@@ -1,3 +1,4 @@
+using System.Drawing.Printing;
 namespace XDrawer
 {
     public partial class XDrawer : Form
@@ -6,6 +7,7 @@ namespace XDrawer
         public static int DRAW_LINE = 2;
         public static int DRAW_BOX = 3;
         public static int DRAW_CIRCLE = 4;
+        public static int DRAW_KITE = 5;
 
         static int R2_NOTXORPEN = 10;
 
@@ -15,11 +17,12 @@ namespace XDrawer
 
         int _whatToDraw;
 
-        public Popup mainPopup;
-        public Popup pointPopup;
-        public Popup linePopup;
-        public Popup boxPopup;
-        public Popup circlePopup;        
+        public Popup mainPopup = null;
+        public Popup pointPopup = null;
+        public Popup linePopup = null;
+        public Popup boxPopup = null;
+        public Popup circlePopup = null;
+        public Popup kitePopup = null;
 
         Figure _selectedFigure;
         List<Figure> _figures;        
@@ -59,6 +62,7 @@ namespace XDrawer
             linePopup = new FigurePopup(this, "Line", false);
             boxPopup = new FigurePopup(this, "Box", true);
             circlePopup = new FigurePopup(this, "Circle", true);
+            kitePopup = new FigurePopup(this, "Kite", false);
 
             toolStripBlackButton.Image = Image.FromFile("Black.png");
             toolStripRedButton.Image = Image.FromFile("Red.png");
@@ -68,7 +72,8 @@ namespace XDrawer
             toolStripSelectBox.Items.Add("Point");
             toolStripSelectBox.Items.Add("Line");
             toolStripSelectBox.Items.Add("Box");
-            toolStripSelectBox.Items.Add("Circle");     
+            toolStripSelectBox.Items.Add("Circle");
+            toolStripSelectBox.Items.Add("Kite");
             toolStripSelectBox.SelectedIndex = 1;
         }
 
@@ -136,12 +141,18 @@ namespace XDrawer
             {
                 _selectedFigure = new Circle(circlePopup, e.X, e.Y);
             }
+            else if (_whatToDraw == DRAW_KITE)
+            {
+                _selectedFigure = new Kite(kitePopup, e.X, e.Y);
+            }
             _selectedFigure.setColor(_currentColor);
             _actionMode = MOUSE_DRAWING;
         }
 
         private void canvas_MouseUp(object sender, MouseEventArgs e)
-        {   
+        {
+            if (_selectedFigure == null) return;
+
             if (_actionMode != MOUSE_DEFAULT)
             {
                 int eX = e.X;
@@ -173,6 +184,24 @@ namespace XDrawer
         private void canvas_MouseMove(object sender, MouseEventArgs e)
         {
             positionLable.Text = "X : " + e.X + ", Y : " + e.Y;
+
+            bool inFigure = false;
+            foreach (Figure ptr in _figures)
+            {
+                if(ptr.ptInRegion(e.X, e.Y))
+                {
+                    inFigure = true;
+                    break;
+                }
+            }
+            if (inFigure == true)
+            {
+                Cursor = Cursors.NoMove2D;
+            }
+            else
+            {
+                Cursor = Cursors.Default;
+            }
 
             if(_actionMode == MOUSE_DEFAULT) { return; }
 
@@ -207,7 +236,6 @@ namespace XDrawer
         private void canvas_Paint(object sender, PaintEventArgs e)
         {
             Graphics g = e.Graphics;
-
             Pen pen = new Pen(Color.DarkRed);    
             
             foreach(Figure ptr in _figures)
@@ -249,7 +277,11 @@ namespace XDrawer
             _whatToDraw = DRAW_CIRCLE;
             setFigureTypeLable("Circle");
         }
-
+        public void kiteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _whatToDraw = DRAW_KITE;
+            setFigureTypeLable("Kite");
+        }
         private void modalDialogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FigureDialog dlg = new FigureDialog(this);
@@ -342,6 +374,10 @@ namespace XDrawer
             {
                 circleToolStripMenuItem_Click(sender, e);
             }
+            else if (toolStripSelectBox.SelectedIndex + 1 == XDrawer.DRAW_KITE)
+            {
+                kiteToolStripMenuItem_Click(sender, e);
+            }
         }
 
         private void treeToolStripMenuItem_Click(object sender, EventArgs e)
@@ -355,5 +391,40 @@ namespace XDrawer
             ListForm table = new ListForm(this);
             table.ShowDialog();
         }
+
+        private void printToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintDialog dialog = new PrintDialog();
+            PrintDocument document = new PrintDocument();
+
+            document.PrintPage += new PrintPageEventHandler(doPrint);
+            dialog.Document = document;
+
+            if (dialog.ShowDialog() == DialogResult.OK)
+            {
+                document.Print();
+            }
+        }
+        private void doPrint(object sender, PrintPageEventArgs ev)
+        {
+            Graphics g = ev.Graphics;
+            Pen pen = new Pen(Color.DarkRed);
+
+            foreach (Figure ptr in _figures)
+            { 
+                ptr.draw(g, pen);
+            }
+        }
+
+        private void printPreviewToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            PrintPreviewDialog dialog = new PrintPreviewDialog();
+            PrintDocument document = new PrintDocument();
+
+            document.PrintPage += new PrintPageEventHandler(doPrint);
+            dialog.Document = document;
+
+            dialog.ShowDialog();
+        }        
     }
 }

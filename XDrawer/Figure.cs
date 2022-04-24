@@ -15,11 +15,7 @@ namespace XDrawer
         {
             _color = Color.Black;
             _popup = popup;
-        }
-        public void setColor(Color color)
-        {
-            _color=color;
-        }
+        }        
         public void popup(System.Drawing.Point pos)
         {
             _popup.popup(pos);
@@ -35,9 +31,12 @@ namespace XDrawer
                 return false;
             }
         }
+        public virtual void setColor(Color color)
+        {
+            _color = color;
+        }
         public virtual void setFill()
         {
-
         }
         // hook function
         public virtual int getX1()
@@ -56,10 +55,9 @@ namespace XDrawer
         {
             return -1;
         }
-        public virtual String getClassName()
+        public virtual void setXY12(int x1, int y1, int x2, int y2)
         {
-            return "Figure"; 
-        }              
+        }                   
         public virtual void drawing(IntPtr hdc, int newX, int newY)
         {
             draw(hdc);
@@ -71,6 +69,10 @@ namespace XDrawer
             draw(hdc);
             move(dx, dy);
             draw(hdc);
+        }
+        public virtual String getClassName()
+        {
+            return "Figure";
         }
         public abstract void draw(Graphics g, Pen pen);
         public abstract void setXY2(int newX, int newY);

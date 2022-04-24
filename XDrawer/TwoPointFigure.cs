@@ -29,8 +29,12 @@ namespace XDrawer
         }
         public override void setXY2(int newX, int newY)
         {
-            _x2 = newX;
-            _y2 = newY;
+            _x2 = newX; _y2 = newY;
+        }
+        public override void setXY12(int x1, int y1, int x2, int y2)
+        {
+            _x1 = x1; _y1 = y1;
+            _x2 = x2; _y2 = y2;
         }
         public override int getX1()
         {

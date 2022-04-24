@@ -13,7 +13,7 @@ namespace XDrawer
     public partial class FigureDialog : Form
     {
         XDrawer mainForm;
-        static String[] figureTypes = { "Point", "Box", "Line", "Circle" };
+        static String[] figureTypes = { "Point", "Box", "Line", "Circle", "Kite" };
         public FigureDialog(XDrawer form)
         {   
             mainForm = form;
@@ -24,10 +24,10 @@ namespace XDrawer
             textX2.Text = "0";
             textY2.Text = "0";
 
-            selectBox.Items.Add("Point");
-            selectBox.Items.Add("Line");
-            selectBox.Items.Add("Box");
-            selectBox.Items.Add("Circle");
+            foreach (string type in figureTypes)
+            {
+                selectBox.Items.Add(type);
+            }
 
             selectBox.SelectedIndex = 1;
 
@@ -83,7 +83,11 @@ namespace XDrawer
             else if (selectBox.SelectedIndex+1 == XDrawer.DRAW_CIRCLE)
             {
                 newFigure = new Circle(mainForm.circlePopup, x1, y1, x2, y2);
-            }                
+            }
+            else if (selectBox.SelectedIndex + 1 == XDrawer.DRAW_KITE)
+            {
+                newFigure = new Kite(mainForm.kitePopup, x1, y1, x2, y2);
+            }
             newFigure.setColor(mainForm.CurrentColor);            
 
             mainForm.addFigure(newFigure);
