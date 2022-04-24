@@ -25,6 +25,8 @@ namespace XDrawer
             treeView.Nodes[0].Nodes.Add("Line");
             treeView.Nodes[0].Nodes.Add("Box");
             treeView.Nodes[0].Nodes.Add("Circle");
+            treeView.Nodes[0].Nodes.Add("Kite");
+            treeView.Nodes[0].Nodes.Add("TV");
 
             showAllFigures();
         }
@@ -43,6 +45,11 @@ namespace XDrawer
                 {
                     nodesToAdd = treeView.Nodes[0].Nodes[1].Nodes;
                 }
+                else if (ptr is Kite)
+                {
+                    // Kite가 Box로도 취급 받기 때문에 Box보다 먼저 체크
+                    nodesToAdd = treeView.Nodes[0].Nodes[4].Nodes;
+                }
                 else if (ptr is Box)
                 {
                     nodesToAdd = treeView.Nodes[0].Nodes[2].Nodes;
@@ -50,6 +57,10 @@ namespace XDrawer
                 else if (ptr is Circle)
                 {
                     nodesToAdd = treeView.Nodes[0].Nodes[3].Nodes;
+                }                
+                else if (ptr is TV)
+                {
+                    nodesToAdd = treeView.Nodes[0].Nodes[5].Nodes;
                 }
                 int x1 = ptr.getX1();
                 int y1 = ptr.getY1();

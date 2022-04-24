@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 
 namespace XDrawer
 {
+    [Serializable]
     public abstract class TwoPointFigure : Figure
     {
         protected int _x1;

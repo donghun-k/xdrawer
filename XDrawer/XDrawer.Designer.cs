@@ -43,6 +43,8 @@
             this.lineToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.boxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circleToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.kiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.dialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modalDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.modalessDialogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -59,7 +61,6 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.positionLable = new System.Windows.Forms.ToolStripStatusLabel();
             this.figureTypeLable = new System.Windows.Forms.ToolStripStatusLabel();
-            this.kiteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.canvas)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.toolStrip.SuspendLayout();
@@ -113,18 +114,21 @@
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
             this.newToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.newToolStripMenuItem.Text = "New";
+            this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
             this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.openToolStripMenuItem.Text = "Open";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveToolStripMenuItem.Text = "&Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // toolStripMenuItem1
             // 
@@ -152,7 +156,8 @@
             this.lineToolStripMenuItem,
             this.boxToolStripMenuItem,
             this.circleToolStripMenuItem,
-            this.kiteToolStripMenuItem});
+            this.kiteToolStripMenuItem,
+            this.tVToolStripMenuItem});
             this.figureToolStripMenuItem.Name = "figureToolStripMenuItem";
             this.figureToolStripMenuItem.Size = new System.Drawing.Size(52, 20);
             this.figureToolStripMenuItem.Text = "Figure";
@@ -161,30 +166,44 @@
             // pointToolStripMenuItem
             // 
             this.pointToolStripMenuItem.Name = "pointToolStripMenuItem";
-            this.pointToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.pointToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.pointToolStripMenuItem.Text = "Point";
             this.pointToolStripMenuItem.Click += new System.EventHandler(this.pointToolStripMenuItem_Click);
             // 
             // lineToolStripMenuItem
             // 
             this.lineToolStripMenuItem.Name = "lineToolStripMenuItem";
-            this.lineToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.lineToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.lineToolStripMenuItem.Text = "Line";
             this.lineToolStripMenuItem.Click += new System.EventHandler(this.lineToolStripMenuItem_Click);
             // 
             // boxToolStripMenuItem
             // 
             this.boxToolStripMenuItem.Name = "boxToolStripMenuItem";
-            this.boxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.boxToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.boxToolStripMenuItem.Text = "Box";
             this.boxToolStripMenuItem.Click += new System.EventHandler(this.boxToolStripMenuItem_Click);
             // 
             // circleToolStripMenuItem
             // 
             this.circleToolStripMenuItem.Name = "circleToolStripMenuItem";
-            this.circleToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.circleToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
             this.circleToolStripMenuItem.Text = "Circle";
             this.circleToolStripMenuItem.Click += new System.EventHandler(this.circleToolStripMenuItem_Click);
+            // 
+            // kiteToolStripMenuItem
+            // 
+            this.kiteToolStripMenuItem.Name = "kiteToolStripMenuItem";
+            this.kiteToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.kiteToolStripMenuItem.Text = "Kite";
+            this.kiteToolStripMenuItem.Click += new System.EventHandler(this.kiteToolStripMenuItem_Click);
+            // 
+            // tVToolStripMenuItem
+            // 
+            this.tVToolStripMenuItem.Name = "tVToolStripMenuItem";
+            this.tVToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+            this.tVToolStripMenuItem.Text = "TV";
+            this.tVToolStripMenuItem.Click += new System.EventHandler(this.tVToolStripMenuItem_Click);
             // 
             // dialogToolStripMenuItem
             // 
@@ -325,13 +344,6 @@
             this.figureTypeLable.Size = new System.Drawing.Size(29, 17);
             this.figureTypeLable.Text = "Line";
             // 
-            // kiteToolStripMenuItem
-            // 
-            this.kiteToolStripMenuItem.Name = "kiteToolStripMenuItem";
-            this.kiteToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.kiteToolStripMenuItem.Text = "Kite";
-            this.kiteToolStripMenuItem.Click += new System.EventHandler(this.kiteToolStripMenuItem_Click);
-            // 
             // XDrawer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -390,5 +402,6 @@
         private ToolStripMenuItem printPreviewToolStripMenuItem;
         private ToolStripMenuItem printToolStripMenuItem;
         private ToolStripMenuItem kiteToolStripMenuItem;
+        private ToolStripMenuItem tVToolStripMenuItem;
     }
 }

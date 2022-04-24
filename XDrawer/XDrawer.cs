@@ -1,4 +1,6 @@
 using System.Drawing.Printing;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.IO;
 namespace XDrawer
 {
     public partial class XDrawer : Form
@@ -8,6 +10,7 @@ namespace XDrawer
         public static int DRAW_BOX = 3;
         public static int DRAW_CIRCLE = 4;
         public static int DRAW_KITE = 5;
+        public static int DRAW_TV = 6;
 
         static int R2_NOTXORPEN = 10;
 
@@ -23,6 +26,7 @@ namespace XDrawer
         public Popup boxPopup = null;
         public Popup circlePopup = null;
         public Popup kitePopup = null;
+        public Popup tvPopup = null;
 
         Figure _selectedFigure;
         List<Figure> _figures;        
@@ -31,6 +35,7 @@ namespace XDrawer
         int _actionMode;
         int _currentX;
         int _currentY;
+        String _fileName;
 
         public PictureBox Canvas
         {
@@ -56,6 +61,7 @@ namespace XDrawer
             _actionMode = MOUSE_DEFAULT;
             _currentX = 0;
             _currentY = 0;
+            _fileName = ""; 
 
             mainPopup = new MainPopup(this);
             pointPopup = new FigurePopup(this, "Point", false);
@@ -63,6 +69,7 @@ namespace XDrawer
             boxPopup = new FigurePopup(this, "Box", true);
             circlePopup = new FigurePopup(this, "Circle", true);
             kitePopup = new FigurePopup(this, "Kite", false);
+            tvPopup = new TVPopup(this);
 
             toolStripBlackButton.Image = Image.FromFile("Black.png");
             toolStripRedButton.Image = Image.FromFile("Red.png");
@@ -74,6 +81,7 @@ namespace XDrawer
             toolStripSelectBox.Items.Add("Box");
             toolStripSelectBox.Items.Add("Circle");
             toolStripSelectBox.Items.Add("Kite");
+            toolStripSelectBox.Items.Add("TV");
             toolStripSelectBox.SelectedIndex = 1;
         }
 
@@ -144,6 +152,10 @@ namespace XDrawer
             else if (_whatToDraw == DRAW_KITE)
             {
                 _selectedFigure = new Kite(kitePopup, e.X, e.Y);
+            }
+            else if (_whatToDraw == DRAW_TV)
+            {
+                _selectedFigure = new TV(tvPopup, e.X, e.Y);
             }
             _selectedFigure.setColor(_currentColor);
             _actionMode = MOUSE_DRAWING;
@@ -282,6 +294,11 @@ namespace XDrawer
             _whatToDraw = DRAW_KITE;
             setFigureTypeLable("Kite");
         }
+        public void tVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _whatToDraw = DRAW_TV;
+            setFigureTypeLable("TV");
+        }
         private void modalDialogToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FigureDialog dlg = new FigureDialog(this);
@@ -335,7 +352,27 @@ namespace XDrawer
             newFigure.move(10, 20);
             addFigure(newFigure);
         }
+        public void onToggleTV(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+            if (_selectedFigure is TV)
+            {
+                TV pTV = (TV)_selectedFigure;
+                pTV.pressPowerButton();
+            }
+            canvas.Invalidate();
+        }
 
+        public void onSetAntenna(object sender, EventArgs e)
+        {
+            if (_selectedFigure == null) return;
+            if (_selectedFigure is TV)
+            {
+                TV pTV = (TV)_selectedFigure;
+                pTV.setAntenna();
+            }
+            canvas.Invalidate();
+        }
         private void toolStripBlackButton_Click(object sender, EventArgs e)
         {
             _currentColor = Color.Black;
@@ -377,6 +414,10 @@ namespace XDrawer
             else if (toolStripSelectBox.SelectedIndex + 1 == XDrawer.DRAW_KITE)
             {
                 kiteToolStripMenuItem_Click(sender, e);
+            }
+            else if (toolStripSelectBox.SelectedIndex + 1 == XDrawer.DRAW_TV)
+            {
+                tVToolStripMenuItem_Click(sender, e);
             }
         }
 
@@ -425,6 +466,87 @@ namespace XDrawer
             dialog.Document = document;
 
             dialog.ShowDialog();
-        }        
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            SaveFileDialog chooser = new SaveFileDialog();
+            chooser.Title = "File Save";
+            chooser.Filter = "XDrawer Files (*.xdr)|*.xdr";
+            chooser.InitialDirectory = ".";
+            chooser.OverwritePrompt = true;
+            if (chooser.ShowDialog() != DialogResult.OK) return;
+            String fileName = chooser.FileName;
+            if (fileName == null) return;
+            if (fileName.Length == 0) return;
+
+            _fileName = fileName;
+            doSave();
+
+        }
+        private void doSave()
+        {
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream output = File.Create(_fileName);
+
+            formatter.Serialize(output, _figures);
+
+            output.Close();
+        }
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog chooser = new OpenFileDialog();
+            chooser.Title = "File Open";
+            chooser.Filter = "XDrawer Files (*.xdr)|*.xdr";
+            chooser.InitialDirectory = ".";
+            if (chooser.ShowDialog() != DialogResult.OK) return;
+            _fileName = chooser.FileName;
+            _figures.Clear();
+            _selectedFigure = null;
+
+            BinaryFormatter formatter = new BinaryFormatter();
+            Stream input = File.OpenRead(_fileName);
+
+            _figures = (List<Figure>)formatter.Deserialize(input);
+
+            input.Close();
+
+            foreach(Figure ptr in _figures)
+            {
+                ptr.makeRegion();
+                if (ptr is Point)
+                {
+                    ptr.setPopup(pointPopup);
+                }
+                else if (ptr is Line)
+                {
+                    ptr.setPopup(linePopup);
+                }
+                else if (ptr is Kite)
+                {
+                    ptr.setPopup(kitePopup);
+                }
+                else if (ptr is Box)
+                {
+                    ptr.setPopup(boxPopup);
+                }
+                else if (ptr is Circle)
+                {
+                    ptr.setPopup(circlePopup);
+                }
+                else if (ptr is TV)
+                {
+                    ptr.setPopup(tvPopup);
+                }
+            }
+            canvas.Invalidate();
+        }
+
+        private void newToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _figures.Clear();
+            _selectedFigure = null;
+            canvas.Invalidate();
+        }
     }
 }

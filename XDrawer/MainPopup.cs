@@ -16,12 +16,14 @@ namespace XDrawer
             ToolStripMenuItem boxItem = new ToolStripMenuItem("Box");
             ToolStripMenuItem circleItem = new ToolStripMenuItem("Circle");
             ToolStripMenuItem kiteItem = new ToolStripMenuItem("Kite");
+            ToolStripMenuItem tvItem = new ToolStripMenuItem("TV");
 
             _popupPtr.Items.Add(pointItem);
             _popupPtr.Items.Add(lineItem);
             _popupPtr.Items.Add(boxItem);
             _popupPtr.Items.Add(circleItem);
             _popupPtr.Items.Add(kiteItem);
+            _popupPtr.Items.Add(tvItem);
 
 
             pointItem.Click += new EventHandler(view.pointToolStripMenuItem_Click);
@@ -29,6 +31,7 @@ namespace XDrawer
             boxItem.Click += new EventHandler(view.boxToolStripMenuItem_Click);
             circleItem.Click += new EventHandler(view.circleToolStripMenuItem_Click);
             kiteItem.Click += new EventHandler(view.kiteToolStripMenuItem_Click);
+            tvItem.Click += new EventHandler(view.tVToolStripMenuItem_Click);
         }
     }
 }

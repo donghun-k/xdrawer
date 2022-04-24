@@ -6,10 +6,13 @@ using System.Threading.Tasks;
 
 namespace XDrawer
 {
+    [Serializable]
     public abstract class Figure
     {
         protected Color _color;
+        [NonSerialized]
         protected Popup _popup;
+        [NonSerialized]
         protected Region _region;
         public Figure(Popup popup)
         {
@@ -30,6 +33,10 @@ namespace XDrawer
             {
                 return false;
             }
+        }
+        public void setPopup(Popup popup)
+        {
+            _popup = popup;
         }
         public virtual void setColor(Color color)
         {

@@ -7,6 +7,7 @@ using System.Drawing.Drawing2D;
 
 namespace XDrawer
 {
+    [Serializable]
     public class Line : TwoPointFigure
     {
         public Line(Popup popup, int x, int y)

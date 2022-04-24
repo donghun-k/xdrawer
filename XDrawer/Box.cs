@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace XDrawer
 {
+    [Serializable]
     public class Box : TwoPointFigure
     {
         private bool _fillFlag;

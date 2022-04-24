@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace XDrawer
 {
+    [Serializable]
     public class Point : OnePointFigure
     {
         public Point(Popup popup, int x, int y)
