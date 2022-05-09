@@ -5,6 +5,9 @@
 #pragma once
 
 class Box;
+class Line;
+class Circle;
+
 
 class CXDrawerView : public CView
 {
@@ -12,6 +15,8 @@ protected: // serialization에서만 만들어집니다.
 	CXDrawerView();
 	DECLARE_DYNCREATE(CXDrawerView)
 
+private:
+	int whatToDraw;
 // 특성입니다.
 public:
 	CXDrawerDoc* GetDocument() const;
@@ -19,6 +24,9 @@ public:
 // 작업입니다.
 public:
 	Box *currentBox;
+	Line *currentLine;
+	Circle *currentCircle;
+
 // 재정의입니다.
 public:
 	virtual void OnDraw(CDC* pDC);  // 이 뷰를 그리기 위해 재정의되었습니다.
@@ -48,6 +56,9 @@ public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnMouseMove(UINT nFlags, CPoint point);
+	afx_msg void OnObjectBox();
+	afx_msg void OnObjectLine();
+	afx_msg void OnObjectCircle();
 };
 
 #ifndef _DEBUG  // XDrawerView.cpp의 디버그 버전

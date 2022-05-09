@@ -6,6 +6,8 @@
 #pragma once
 
 class Box;
+class Line;
+class Circle;
 
 class CXDrawerDoc : public CDocument
 {
@@ -15,14 +17,24 @@ protected: // serialization에서만 만들어집니다.
 
 	Box *boxes[100];
 	int nBox;
+	Line *lines[100];
+	int nLine;
+	Circle *circles[100];
+	int nCircle;
 // 특성입니다.
 public:	
 
 // 작업입니다.
 public:
 	void add(Box *pBox);
+	void add(Line *pLine);
+	void add(Circle *pCircle);
 	inline int boxCount() { return nBox; }
 	inline Box *getBox(int i) { return boxes[i]; }
+	inline int lineCount() { return nLine; }
+	inline Line *getLine(int i) { return lines[i]; }
+	inline int circleCount() { return nCircle; }
+	inline Circle *getCircle(int i) { return circles[i]; }
 // 재정의입니다.
 public:
 	virtual BOOL OnNewDocument();

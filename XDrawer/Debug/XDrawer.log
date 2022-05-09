@@ -1,17 +1,15 @@
-﻿빌드 시작: 2022-05-02 오전 11:11:37
+﻿빌드 시작: 2022-05-09 오전 11:00:50
      1>2 노드의 "C:\Users\User\Desktop\DM\XDrawer\XDrawer\XDrawer.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XDrawer.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt XDrawer.cpp XDrawerDoc.cpp XDrawerView.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XDrawer.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt XDrawerView.cpp
          XDrawerView.cpp
-         코드를 생성하고 있습니다...
-         건너뛰고 있습니다... (관련된 변경 내용 없음)
-         XDrawerDoc.cpp
-         XDrawer.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Desktop\DM\XDrawer\Debug\XDrawer.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"C:\Users\User\Desktop\DM\XDrawer\Debug\XDrawer.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Desktop\DM\XDrawer\Debug\XDrawer.lib" /MACHINE:X86 Debug\XDrawer.res
          Debug\Box.obj
+         Debug\Circle.obj
          Debug\ClassView.obj
          Debug\FileView.obj
+         Debug\Line.obj
          Debug\MainFrm.obj
          Debug\OutputWnd.obj
          Debug\PropertiesWnd.obj

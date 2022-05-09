@@ -11,6 +11,7 @@
 
 #include "XDrawerDoc.h"
 #include "Box.h"
+#include "Line.h"
 #include <propkey.h>
 
 #ifdef _DEBUG
@@ -33,8 +34,12 @@ CXDrawerDoc::CXDrawerDoc()
 	for(int i=0; i<100; i++)
 	{
 		boxes[i] = NULL;
+		lines[i] = NULL;
+		circles[i] = NULL;
 	}
 	nBox = 0;
+	nLine = 0;
+	nCircle = 0;
 }
 
 CXDrawerDoc::~CXDrawerDoc()
@@ -143,4 +148,12 @@ void CXDrawerDoc::Dump(CDumpContext& dc) const
 void CXDrawerDoc::add(Box *pBox)
 {
 	boxes[nBox++] = pBox;
+}
+void CXDrawerDoc::add(Line *pLine)
+{
+	lines[nLine++] = pLine;
+}
+void CXDrawerDoc::add(Circle *pCircle)
+{
+	circles[nCircle++] = pCircle;
 }
