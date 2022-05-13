@@ -15,15 +15,18 @@
 #include "Box.h"
 #include "Line.h"
 #include "Circle.h"
+#include "Figure.h"
+#include "Diamond.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
 
-#define DRAW_BOX	(1)
-#define DRAW_LINE	(2)
-#define DRAW_CIRCLE	(3)
+#define DRAW_BOX		(1)
+#define DRAW_LINE		(2)
+#define DRAW_CIRCLE		(3)
+#define DRAW_DIAMOND	(4)
 
 // CXDrawerView
 
@@ -42,6 +45,7 @@ BEGIN_MESSAGE_MAP(CXDrawerView, CView)
 	ON_COMMAND(ID_OBJECT_BOX, &CXDrawerView::OnObjectBox)
 	ON_COMMAND(ID_OBJECT_LINE, &CXDrawerView::OnObjectLine)
 	ON_COMMAND(ID_OBJECT_CIRCLE, &CXDrawerView::OnObjectCircle)
+	ON_COMMAND(ID_OBJECT_DIAMOND, &CXDrawerView::OnObjectDiamond)
 END_MESSAGE_MAP()
 
 // CXDrawerView 생성/소멸
@@ -49,9 +53,7 @@ END_MESSAGE_MAP()
 CXDrawerView::CXDrawerView()
 {
 	// TODO: 여기에 생성 코드를 추가합니다.
-	currentBox = NULL;	
-	currentLine = NULL;
-	currentCircle = NULL;
+	currentFigure = NULL;
 	whatToDraw = DRAW_BOX;
 }
 
@@ -100,22 +102,16 @@ void CXDrawerView::OnDraw(CDC* pDC)
 	CBrush br(RGB(255, 0, 0));
 	pDC->FillRect(&rect, &br);
 	*/
+	CGdiObject *oldBrush =pDC->SelectStockObject(NULL_BRUSH);
 
-	for(int i = 0; i < pDoc->boxCount(); i++)
-	{
-		pDoc->getBox(i)->draw(pDC);
+	CObList *list = pDoc->getFigures();
+	POSITION pos = list->GetHeadPosition();
+	while (pos != NULL) {
+		Figure *ptr = (Figure *)list->GetNext(pos);
+		// referenc type 설명 필요
+		ptr->draw(pDC);
 	}
-	/*
-	for(int i=0; i < pDoc->lineCount(); i++)
-	{
-		pDoc->getLine(i)->draw(pDC);
-	}
-	*/
-	for(int i = 0; i < pDoc->circleCount(); i++)
-	{
-		pDoc->getCircle(i)->draw(pDC);
-	}
-	
+	pDC->SelectObject(oldBrush);
 }
 
 
@@ -189,15 +185,15 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 	CDC *pDC = GetDC();
 
 	if(whatToDraw == DRAW_BOX) {
-		currentBox = new Box(point.x, point.y);	
-		currentBox->draw(pDC);
+		currentFigure = new Box(point.x, point.y);			
 	} else if(whatToDraw == DRAW_LINE) {
-		currentLine = new Line(point.x, point.y);	
-		currentLine->draw(pDC);
+		currentFigure = new Line(point.x, point.y);	
 	} else if(whatToDraw == DRAW_CIRCLE) {
-		currentCircle = new Circle(point.x, point.y);	
-		currentCircle->draw(pDC);
+		currentFigure = new Circle(point.x, point.y);	
+	} else if(whatToDraw == DRAW_DIAMOND) {
+		currentFigure = new Diamond(point.x, point.y);	
 	}
+	currentFigure->draw(pDC);
 	
 	CView::OnLButtonDown(nFlags, point);
 }
@@ -206,44 +202,20 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if(currentBox != NULL)
+	if(currentFigure != NULL)
 	{
 		CDC *pDC = GetDC();
 		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
 
-		currentBox->setXY2(point.x, point.y);
-		currentBox->draw(pDC);
+		currentFigure->setXY2(point.x, point.y);
+		currentFigure->draw(pDC);
 
 		pDC->SelectObject(oldBrush);
 
 		CXDrawerDoc *pDoc = GetDocument();
-		pDoc->add(currentBox);
-	} else if(currentLine != NULL){
-		CDC *pDC = GetDC();
-		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
-
-		currentLine->setXY2(point.x, point.y);
-		currentLine->draw(pDC);
-
-		pDC->SelectObject(oldBrush);
-
-		CXDrawerDoc *pDoc = GetDocument();
-		pDoc->add(currentLine);
-	} else if(currentCircle != NULL){
-		CDC *pDC = GetDC();
-		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
-
-		currentCircle->setXY2(point.x, point.y);
-		currentCircle->draw(pDC);
-
-		pDC->SelectObject(oldBrush);
-
-		CXDrawerDoc *pDoc = GetDocument();
-		pDoc->add(currentCircle);
+		pDoc->add(currentFigure);
 	}
-	currentBox = NULL;
-	currentLine = NULL;
-	currentCircle = NULL;
+	currentFigure = NULL;
 
 	CView::OnLButtonUp(nFlags, point);
 }
@@ -252,42 +224,19 @@ void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 void CXDrawerView::OnMouseMove(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if(currentBox != NULL)
+	if(currentFigure != NULL)
 	{
 		CDC *pDC = GetDC();
 		int oldMode = pDC->SetROP2(R2_NOTXORPEN);
 		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
 
-		currentBox->draw(pDC);
-		currentBox->setXY2(point.x, point.y);
-		currentBox->draw(pDC);
-
-		pDC->SelectObject(oldBrush);
-		pDC->SetROP2(oldMode);
-	} else if(currentLine != NULL) {
-		CDC *pDC = GetDC();
-		int oldMode = pDC->SetROP2(R2_NOTXORPEN);
-		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
-
-		currentLine->draw(pDC);
-		currentLine->setXY2(point.x, point.y);
-		currentLine->draw(pDC);
-
-		pDC->SelectObject(oldBrush);
-		pDC->SetROP2(oldMode);
-	} else if(currentCircle != NULL) {
-		CDC *pDC = GetDC();
-		int oldMode = pDC->SetROP2(R2_NOTXORPEN);
-		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
-
-		currentCircle->draw(pDC);
-		currentCircle->setXY2(point.x, point.y);
-		currentCircle->draw(pDC);
+		currentFigure->draw(pDC);
+		currentFigure->setXY2(point.x, point.y);
+		currentFigure->draw(pDC);
 
 		pDC->SelectObject(oldBrush);
 		pDC->SetROP2(oldMode);
 	}
-
 	CView::OnMouseMove(nFlags, point);
 }
 
@@ -310,4 +259,11 @@ void CXDrawerView::OnObjectCircle()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	whatToDraw = DRAW_CIRCLE;
+}
+
+
+void CXDrawerView::OnObjectDiamond()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	whatToDraw = DRAW_DIAMOND;
 }

@@ -1,18 +1,15 @@
 #pragma once
 #include "afx.h"
+#include "Figure.h"
+
 class Line :
-	public CObject
+	public Figure
 {
-	int m_x1;
-	int m_y1;
-	int m_x2;
-	int m_y2;
 public:
-	Line(void);
+	Line();
 	Line(int x1, int y1);
 	Line(int x1, int y1, int x2, int y2);
-	void draw(CDC* pDC);
-	void setXY2(int x, int y);
-	~Line(void);
+	virtual void draw(CDC* pDC);
+	~Line();
 };
 

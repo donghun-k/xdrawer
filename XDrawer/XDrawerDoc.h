@@ -8,33 +8,20 @@
 class Box;
 class Line;
 class Circle;
+class Figure;
 
 class CXDrawerDoc : public CDocument
 {
+	CObList *figures;
 protected: // serialization에서만 만들어집니다.
 	CXDrawerDoc();
-	DECLARE_DYNCREATE(CXDrawerDoc)
-
-	Box *boxes[100];
-	int nBox;
-	Line *lines[100];
-	int nLine;
-	Circle *circles[100];
-	int nCircle;
+	DECLARE_DYNCREATE(CXDrawerDoc)		
 // 특성입니다.
 public:	
-
+	inline CObList *getFigures() { return figures; }
 // 작업입니다.
 public:
-	void add(Box *pBox);
-	void add(Line *pLine);
-	void add(Circle *pCircle);
-	inline int boxCount() { return nBox; }
-	inline Box *getBox(int i) { return boxes[i]; }
-	inline int lineCount() { return nLine; }
-	inline Line *getLine(int i) { return lines[i]; }
-	inline int circleCount() { return nCircle; }
-	inline Circle *getCircle(int i) { return circles[i]; }
+	void add(Figure *pFigure);
 // 재정의입니다.
 public:
 	virtual BOOL OnNewDocument();

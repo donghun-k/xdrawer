@@ -31,15 +31,7 @@ END_MESSAGE_MAP()
 CXDrawerDoc::CXDrawerDoc()
 {
 	// TODO: 여기에 일회성 생성 코드를 추가합니다.
-	for(int i=0; i<100; i++)
-	{
-		boxes[i] = NULL;
-		lines[i] = NULL;
-		circles[i] = NULL;
-	}
-	nBox = 0;
-	nLine = 0;
-	nCircle = 0;
+	figures = new CObList();
 }
 
 CXDrawerDoc::~CXDrawerDoc()
@@ -145,15 +137,7 @@ void CXDrawerDoc::Dump(CDumpContext& dc) const
 
 // CXDrawerDoc 명령
 
-void CXDrawerDoc::add(Box *pBox)
+void CXDrawerDoc::add(Figure *pFigure)
 {
-	boxes[nBox++] = pBox;
-}
-void CXDrawerDoc::add(Line *pLine)
-{
-	lines[nLine++] = pLine;
-}
-void CXDrawerDoc::add(Circle *pCircle)
-{
-	circles[nCircle++] = pCircle;
+	figures->AddTail(pFigure);
 }

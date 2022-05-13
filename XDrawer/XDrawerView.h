@@ -4,9 +4,7 @@
 
 #pragma once
 
-class Box;
-class Line;
-class Circle;
+class Figure;
 
 
 class CXDrawerView : public CView
@@ -23,9 +21,7 @@ public:
 
 // 작업입니다.
 public:
-	Box *currentBox;
-	Line *currentLine;
-	Circle *currentCircle;
+	Figure *currentFigure;
 
 // 재정의입니다.
 public:
@@ -59,6 +55,7 @@ public:
 	afx_msg void OnObjectBox();
 	afx_msg void OnObjectLine();
 	afx_msg void OnObjectCircle();
+	afx_msg void OnObjectDiamond();
 };
 
 #ifndef _DEBUG  // XDrawerView.cpp의 디버그 버전

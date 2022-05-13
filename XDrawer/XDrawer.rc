@@ -228,6 +228,7 @@ BEGIN
         MENUITEM "사각형(&B)",                     ID_OBJECT_BOX
         MENUITEM "선(&L)",                       ID_OBJECT_LINE
         MENUITEM "원(C)",                        ID_OBJECT_CIRCLE
+        MENUITEM "다이아몬드(&D)",                   ID_OBJECT_DIAMOND
     END
     POPUP "도움말(&H)"
     BEGIN
