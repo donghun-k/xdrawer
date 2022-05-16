@@ -5,20 +5,18 @@
 
 #pragma once
 
-class Box;
-class Line;
-class Circle;
 class Figure;
+class FigureList;
 
 class CXDrawerDoc : public CDocument
 {
-	CObList *figures;
+	FigureList *figures;
 protected: // serialization에서만 만들어집니다.
 	CXDrawerDoc();
 	DECLARE_DYNCREATE(CXDrawerDoc)		
 // 특성입니다.
 public:	
-	inline CObList *getFigures() { return figures; }
+	inline FigureList *getFigures() { return figures; }
 // 작업입니다.
 public:
 	void add(Figure *pFigure);

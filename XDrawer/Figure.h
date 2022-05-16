@@ -15,7 +15,7 @@ public:
 	Figure(int x1, int y1, int x2, int y2);	
 	// pure virtual function
 	virtual void draw(CDC* pDC) = 0;
-	void setXY2(int x, int y);
+	virtual void setXY2(int x, int y);
 	~Figure();
 };
 

@@ -12,21 +12,25 @@
 #include "XDrawerDoc.h"
 #include "XDrawerView.h"
 
+#include "X.h"
+#include "Bubble.h"
 #include "Box.h"
 #include "Line.h"
 #include "Circle.h"
-#include "Figure.h"
 #include "Diamond.h"
+#include "Figure.h"
+#include "FigureList.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
 
-
-#define DRAW_BOX		(1)
-#define DRAW_LINE		(2)
-#define DRAW_CIRCLE		(3)
-#define DRAW_DIAMOND	(4)
+#define DRAW_X			(1)
+#define DRAW_BUBBLE		(2)
+#define DRAW_BOX		(3)
+#define DRAW_LINE		(4)
+#define DRAW_CIRCLE		(5)
+#define DRAW_DIAMOND	(6)
 
 // CXDrawerView
 
@@ -46,6 +50,8 @@ BEGIN_MESSAGE_MAP(CXDrawerView, CView)
 	ON_COMMAND(ID_OBJECT_LINE, &CXDrawerView::OnObjectLine)
 	ON_COMMAND(ID_OBJECT_CIRCLE, &CXDrawerView::OnObjectCircle)
 	ON_COMMAND(ID_OBJECT_DIAMOND, &CXDrawerView::OnObjectDiamond)
+	ON_COMMAND(ID_OBJECT_X, &CXDrawerView::OnObjectX)
+	ON_COMMAND(ID_OBJECT_BUBBLE, &CXDrawerView::OnObjectBubble)
 END_MESSAGE_MAP()
 
 // CXDrawerView 생성/소멸
@@ -104,10 +110,10 @@ void CXDrawerView::OnDraw(CDC* pDC)
 	*/
 	CGdiObject *oldBrush =pDC->SelectStockObject(NULL_BRUSH);
 
-	CObList *list = pDoc->getFigures();
+	FigureList *list = pDoc->getFigures();
 	POSITION pos = list->GetHeadPosition();
 	while (pos != NULL) {
-		Figure *ptr = (Figure *)list->GetNext(pos);
+		Figure *ptr = list->GetNext(pos);
 		// referenc type 설명 필요
 		ptr->draw(pDC);
 	}
@@ -184,7 +190,11 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CDC *pDC = GetDC();
 
-	if(whatToDraw == DRAW_BOX) {
+	if(whatToDraw == DRAW_X) {
+		currentFigure = new X(point.x, point.y);
+	} else if(whatToDraw == DRAW_BUBBLE) {
+		currentFigure = new Bubble(point.x, point.y);			
+	} else if(whatToDraw == DRAW_BOX) {
 		currentFigure = new Box(point.x, point.y);			
 	} else if(whatToDraw == DRAW_LINE) {
 		currentFigure = new Line(point.x, point.y);	
@@ -216,6 +226,7 @@ void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 		pDoc->add(currentFigure);
 	}
 	currentFigure = NULL;
+	Invalidate();
 
 	CView::OnLButtonUp(nFlags, point);
 }
@@ -266,4 +277,18 @@ void CXDrawerView::OnObjectDiamond()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	whatToDraw = DRAW_DIAMOND;
+}
+
+
+void CXDrawerView::OnObjectX()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	whatToDraw = DRAW_X;
+}
+
+
+void CXDrawerView::OnObjectBubble()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	whatToDraw = DRAW_BUBBLE;
 }

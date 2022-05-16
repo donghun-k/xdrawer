@@ -69,6 +69,15 @@
     <ClInclude Include="Diamond.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="FigureList.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="X.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="Bubble.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XDrawer.cpp">
@@ -114,6 +123,15 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="Diamond.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="FigureList.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="X.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Bubble.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

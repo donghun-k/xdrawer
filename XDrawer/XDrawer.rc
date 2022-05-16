@@ -225,6 +225,8 @@ BEGIN
     END
     POPUP "그림(&O)"
     BEGIN
+        MENUITEM "엑스(&X)",                      ID_OBJECT_X
+        MENUITEM "버블(&U)",                      ID_OBJECT_BUBBLE
         MENUITEM "사각형(&B)",                     ID_OBJECT_BOX
         MENUITEM "선(&L)",                       ID_OBJECT_LINE
         MENUITEM "원(C)",                        ID_OBJECT_CIRCLE

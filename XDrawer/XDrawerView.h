@@ -56,6 +56,8 @@ public:
 	afx_msg void OnObjectLine();
 	afx_msg void OnObjectCircle();
 	afx_msg void OnObjectDiamond();
+	afx_msg void OnObjectX();
+	afx_msg void OnObjectBubble();
 };
 
 #ifndef _DEBUG  // XDrawerView.cpp의 디버그 버전

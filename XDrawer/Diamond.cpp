@@ -21,5 +21,13 @@ Diamond::~Diamond()
 //Scope resolution operator
 void Diamond::draw(CDC* pDC)
 {
-	pDC->RoundRect(m_x1, m_y1, m_x2, m_y2, 10, 10);
+	int dx, dy;
+	dx = m_x1 + (m_x2 - m_x1) / 2;
+	dy = m_y1 + (m_y2 - m_y1) / 2;
+
+	pDC->MoveTo(dx, m_y1); // 좌표 먼저 이동
+	pDC->LineTo(m_x2, dy); // 현 좌표에서 다음 좌표까지 선을 그리기
+	pDC->LineTo(dx, m_y2);
+	pDC->LineTo(m_x1, dy);
+	pDC->LineTo(dx, m_y1);
 }

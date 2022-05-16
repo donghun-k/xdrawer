@@ -102,10 +102,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Box.h" />
+    <ClInclude Include="Bubble.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="ClassView.h" />
     <ClInclude Include="Diamond.h" />
     <ClInclude Include="Figure.h" />
+    <ClInclude Include="FigureList.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="MainFrm.h" />
@@ -115,16 +117,19 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="ViewTree.h" />
+    <ClInclude Include="X.h" />
     <ClInclude Include="XDrawer.h" />
     <ClInclude Include="XDrawerDoc.h" />
     <ClInclude Include="XDrawerView.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Box.cpp" />
+    <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="ClassView.cpp" />
     <ClCompile Include="Diamond.cpp" />
     <ClCompile Include="Figure.cpp" />
+    <ClCompile Include="FigureList.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="MainFrm.cpp" />
@@ -135,6 +140,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="ViewTree.cpp" />
+    <ClCompile Include="X.cpp" />
     <ClCompile Include="XDrawer.cpp" />
     <ClCompile Include="XDrawerDoc.cpp" />
     <ClCompile Include="XDrawerView.cpp" />

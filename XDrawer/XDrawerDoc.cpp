@@ -10,9 +10,10 @@
 #endif
 
 #include "XDrawerDoc.h"
-#include "Box.h"
-#include "Line.h"
 #include <propkey.h>
+
+#include "Figure.h"
+#include "FigureList.h"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -31,7 +32,7 @@ END_MESSAGE_MAP()
 CXDrawerDoc::CXDrawerDoc()
 {
 	// TODO: 여기에 일회성 생성 코드를 추가합니다.
-	figures = new CObList();
+	figures = new FigureList();
 }
 
 CXDrawerDoc::~CXDrawerDoc()
