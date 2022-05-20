@@ -1,15 +1,15 @@
 #pragma once
-#include "figure.h"
+#include "OnePointFigure.h"
 
 class Bubble :
-	public Figure
+	public OnePointFigure
 {
-	
+	DECLARE_SERIAL(Bubble)
 public:	
 	Bubble();
 	Bubble(int x1, int y1);
 	virtual void draw(CDC* pDC);
-	virtual void setXY2(int x, int y);
+	virtual void Serialize(CArchive& ar);
 	~Bubble();
 };
 

@@ -111,11 +111,13 @@
     <ClInclude Include="FileView.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="OnePointFigure.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PropertiesWnd.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
+    <ClInclude Include="TwoPointFigure.h" />
     <ClInclude Include="ViewTree.h" />
     <ClInclude Include="X.h" />
     <ClInclude Include="XDrawer.h" />
@@ -133,12 +135,14 @@
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="OnePointFigure.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
+    <ClCompile Include="TwoPointFigure.cpp" />
     <ClCompile Include="ViewTree.cpp" />
     <ClCompile Include="X.cpp" />
     <ClCompile Include="XDrawer.cpp" />

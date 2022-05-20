@@ -1,21 +1,25 @@
 #include "stdafx.h"
 #include "Diamond.h"
 
-
+IMPLEMENT_SERIAL(Diamond, TwoPointFigure, 1)
 Diamond::Diamond()
-	:Figure()
+	:TwoPointFigure()
 {	
 }
 Diamond::Diamond(int x1, int y1)
-	:Figure(x1, y1)
+	:TwoPointFigure(x1, y1)
 {	
 }
 Diamond::Diamond(int x1, int y1, int x2, int y2)
-	:Figure(x1, y1, x2, y2)
+	:TwoPointFigure(x1, y1, x2, y2)
 {
 }
 Diamond::~Diamond()
 {
+}
+void Diamond::Serialize(CArchive& ar)
+{
+	TwoPointFigure::Serialize(ar);
 }
 
 //Scope resolution operator

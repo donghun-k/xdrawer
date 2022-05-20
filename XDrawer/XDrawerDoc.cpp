@@ -60,10 +60,12 @@ void CXDrawerDoc::Serialize(CArchive& ar)
 	if (ar.IsStoring())
 	{
 		// TODO: 여기에 저장 코드를 추가합니다.
+		ar << figures;
 	}
 	else
 	{
 		// TODO: 여기에 로딩 코드를 추가합니다.
+		ar >> figures;
 	}
 }
 

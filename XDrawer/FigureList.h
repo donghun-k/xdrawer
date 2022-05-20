@@ -6,6 +6,7 @@ class Figure;
 class FigureList :
 	public CObList
 {
+	DECLARE_SERIAL(FigureList)
 public:
 	FigureList();
 	~FigureList();
