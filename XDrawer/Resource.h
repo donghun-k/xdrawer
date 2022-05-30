@@ -84,6 +84,13 @@
 #define IDS_FIND_TAB                    302
 #define IDS_EXPLORER                    305
 #define IDS_EDIT_MENU                   306
+#define IDD_MODAL_DIALOG                310
+#define IDC_EDIT_X1                     1000
+#define IDC_EDIT_Y1                     1001
+#define IDC_EDIT_X2                     1002
+#define IDC_EDIT_Y2                     1003
+#define IDC_COMBO1                      1004
+#define IDC_COMBO_FIGURE                1004
 #define ID_32771                        32771
 #define ID_32772                        32772
 #define ID_OBJECT_BOX                   32773
@@ -96,14 +103,18 @@
 #define ID_OBJECT_X                     32780
 #define ID_32781                        32781
 #define ID_OBJECT_BUBBLE                32782
+#define ID_32783                        32783
+#define ID_32784                        32784
+#define ID_MODAL_DIALOG                 32785
+#define ID_MODALESS_DIALOG              32786
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        310
-#define _APS_NEXT_COMMAND_VALUE         32783
-#define _APS_NEXT_CONTROL_VALUE         1000
+#define _APS_NEXT_RESOURCE_VALUE        311
+#define _APS_NEXT_COMMAND_VALUE         32787
+#define _APS_NEXT_CONTROL_VALUE         1005
 #define _APS_NEXT_SYMED_VALUE           310
 #endif
 #endif

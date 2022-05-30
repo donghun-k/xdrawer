@@ -9,6 +9,8 @@
 #include "XDrawer.h"
 #endif
 
+#include "ModalDialog.h"
+
 #include "XDrawerDoc.h"
 #include "XDrawerView.h"
 
@@ -20,6 +22,7 @@
 #include "Diamond.h"
 #include "Figure.h"
 #include "FigureList.h"
+
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -52,19 +55,25 @@ BEGIN_MESSAGE_MAP(CXDrawerView, CView)
 	ON_COMMAND(ID_OBJECT_DIAMOND, &CXDrawerView::OnObjectDiamond)
 	ON_COMMAND(ID_OBJECT_X, &CXDrawerView::OnObjectX)
 	ON_COMMAND(ID_OBJECT_BUBBLE, &CXDrawerView::OnObjectBubble)
+	ON_COMMAND(ID_MODAL_DIALOG, &CXDrawerView::OnModalDialog)
+	ON_COMMAND(ID_MODALESS_DIALOG, &CXDrawerView::OnModalessDialog)
 END_MESSAGE_MAP()
 
 // CXDrawerView 생성/소멸
 
 CXDrawerView::CXDrawerView()
 {
+	//::MessageBox(NULL, _T("CXDrawerView"), _T("CXDrawerView"), 0);
 	// TODO: 여기에 생성 코드를 추가합니다.
 	currentFigure = NULL;
-	whatToDraw = DRAW_BOX;
+	whatToDraw = DRAW_BOX;	
+	pDlg = new ModalDialog(this);	
 }
 
 CXDrawerView::~CXDrawerView()
 {
+	if (pDlg != NULL) delete pDlg;
+	//::MessageBox(NULL, _T("~CXDrawerView"), _T("~CXDrawerView"), 0);
 }
 
 BOOL CXDrawerView::PreCreateWindow(CREATESTRUCT& cs)
@@ -155,9 +164,30 @@ void CXDrawerView::OnRButtonUp(UINT /* nFlags */, CPoint point)
 
 void CXDrawerView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 {
+	/*
 #ifndef SHARED_HANDLERS
-	theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
+	// theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
+	theApp.GetContextMenuManager()->ShowPopupMenu(IDR_MAINFRAME, point.x, point.y, this, TRUE);
 #endif
+	*/
+
+	/*
+	CMenu mainMenu;
+	mainMenu.LoadMenuW(IDR_MAINFRAME);
+	CMenu *subMenu = mainMenu.GetSubMenu(3);
+	subMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this, NULL);
+	*/
+
+	CMenu mainMenu;
+	mainMenu.CreatePopupMenu();
+	mainMenu.AppendMenuW(MF_STRING, 0, _T("그림"));
+	mainMenu.AppendMenuW(MF_SEPARATOR);
+	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_BOX, _T("사각형"));
+	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_LINE, _T("선"));
+	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_CIRCLE, _T("원"));
+	mainMenu.TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this, NULL);
+
+
 }
 
 
@@ -224,6 +254,7 @@ void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 
 		CXDrawerDoc *pDoc = GetDocument();
 		pDoc->add(currentFigure);
+		pDoc->SetModifiedFlag(TRUE);
 	}
 	currentFigure = NULL;
 	Invalidate();
@@ -291,4 +322,27 @@ void CXDrawerView::OnObjectBubble()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	whatToDraw = DRAW_BUBBLE;
+}
+
+
+void CXDrawerView::OnModalDialog()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	ModalDialog aDlg(this);
+	aDlg.DoModal();
+}
+
+
+void CXDrawerView::OnModalessDialog()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.	
+	pDlg->ShowWindow(SW_SHOW);
+}
+
+
+BOOL CXDrawerView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext)
+{
+	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
+	pDlg->Create(ModalDialog::IDD);
+	return CView::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext);
 }

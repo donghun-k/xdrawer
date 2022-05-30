@@ -5,6 +5,8 @@
 #pragma once
 
 class Figure;
+class CXDrawerDoc;
+class ModalDialog;
 
 
 class CXDrawerView : public CView
@@ -15,6 +17,7 @@ protected: // serialization에서만 만들어집니다.
 
 private:
 	int whatToDraw;
+	ModalDialog *pDlg;
 // 특성입니다.
 public:
 	CXDrawerDoc* GetDocument() const;
@@ -58,6 +61,9 @@ public:
 	afx_msg void OnObjectDiamond();
 	afx_msg void OnObjectX();
 	afx_msg void OnObjectBubble();
+	afx_msg void OnModalDialog();
+	afx_msg void OnModalessDialog();
+	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
 };
 
 #ifndef _DEBUG  // XDrawerView.cpp의 디버그 버전

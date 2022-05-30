@@ -29,9 +29,14 @@ END_MESSAGE_MAP()
 
 
 // CXDrawerApp 생성
+CXDrawerApp::~CXDrawerApp()
+{
+	//::MessageBox(NULL, _T("~CApp"), _T("~CApp"), 0);
+}
 
 CXDrawerApp::CXDrawerApp()
 {
+	//::MessageBox(NULL, _T("CApp"), _T("CApp"), 0);
 	m_bHiColorIcons = TRUE;
 
 	// 다시 시작 관리자 지원
@@ -48,7 +53,7 @@ CXDrawerApp::CXDrawerApp()
 	SetAppID(_T("XDrawer.AppID.NoVersion"));
 
 	// TODO: 여기에 생성 코드를 추가합니다.
-	// InitInstance에 모든 중요한 초기화 작업을 배치합니다.
+	// InitInstance에 모든 중요한 초기화 작업을 배치합니다.	
 }
 
 // 유일한 CXDrawerApp 개체입니다.

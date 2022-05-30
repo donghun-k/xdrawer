@@ -9,9 +9,20 @@ FigureList::FigureList()
 
 FigureList::~FigureList()
 {
+	RemoveAllFigures();
 }
 
 Figure *FigureList::GetNext(POSITION &pos)
 {
 	return (Figure *)CObList::GetNext(pos);
+}
+
+void FigureList::RemoveAllFigures()
+{
+	POSITION pos = GetHeadPosition();
+	while (pos != NULL) {
+		Figure* fig = (Figure*)GetNext(pos);
+		delete fig;
+	}
+	RemoveAll();
 }

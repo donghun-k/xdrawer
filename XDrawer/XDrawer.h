@@ -18,6 +18,7 @@ class CXDrawerApp : public CWinAppEx
 {
 public:
 	CXDrawerApp();
+	~CXDrawerApp();
 
 
 // 재정의입니다.

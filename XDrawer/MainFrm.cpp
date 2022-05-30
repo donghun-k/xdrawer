@@ -40,12 +40,14 @@ static UINT indicators[] =
 
 CMainFrame::CMainFrame()
 {
+	//::MessageBox(NULL, _T("CMainFrame"), _T("CMainFrame"), 0);
 	// TODO: 여기에 멤버 초기화 코드를 추가합니다.
-	theApp.m_nAppLook = theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_VS_2008);
+	theApp.m_nAppLook = theApp.GetInt(_T("ApplicationLook"), ID_VIEW_APPLOOK_VS_2008);	
 }
 
 CMainFrame::~CMainFrame()
 {
+	//::MessageBox(NULL, _T("~CMainFrame"), _T("~CMainFrame"), 0);
 }
 
 int CMainFrame::OnCreate(LPCREATESTRUCT lpCreateStruct)

@@ -12,5 +12,6 @@ public:
 	~FigureList();
 
 	Figure  *FigureList::GetNext(POSITION &pos);
+	void RemoveAllFigures();
 };
 

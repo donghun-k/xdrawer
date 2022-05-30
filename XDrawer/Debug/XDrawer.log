@@ -1,18 +1,8 @@
-﻿빌드 시작: 2022-05-20 오후 4:12:54
+﻿빌드 시작: 2022-05-30 오전 11:25:38
      1>2 노드의 "C:\Users\User\Desktop\DM\XDrawer\XDrawer\XDrawer.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XDrawer.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Box.cpp Bubble.cpp Circle.cpp Diamond.cpp Figure.cpp FigureList.cpp Line.cpp OnePointFigure.cpp TwoPointFigure.cpp X.cpp XDrawerDoc.cpp XDrawerView.cpp
-         XDrawerDoc.cpp
-         X.cpp
-         TwoPointFigure.cpp
-         OnePointFigure.cpp
-         Line.cpp
-         FigureList.cpp
-         Figure.cpp
-         Diamond.cpp
-         Circle.cpp
-         Bubble.cpp
-         Box.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XDrawer.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt ModalDialog.cpp XDrawerView.cpp
+         ModalDialog.cpp
          코드를 생성하고 있습니다...
          컴파일하고 있습니다...
          XDrawerView.cpp
@@ -29,6 +19,7 @@
          Debug\FileView.obj
          Debug\Line.obj
          Debug\MainFrm.obj
+         Debug\ModalDialog.obj
          Debug\OnePointFigure.obj
          Debug\OutputWnd.obj
          Debug\PropertiesWnd.obj
@@ -44,4 +35,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:01.48
+경과 시간: 00:00:00.52

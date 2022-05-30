@@ -111,6 +111,7 @@
     <ClInclude Include="FileView.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="ModalDialog.h" />
     <ClInclude Include="OnePointFigure.h" />
     <ClInclude Include="OutputWnd.h" />
     <ClInclude Include="PropertiesWnd.h" />
@@ -135,6 +136,7 @@
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="ModalDialog.cpp" />
     <ClCompile Include="OnePointFigure.cpp" />
     <ClCompile Include="OutputWnd.cpp" />
     <ClCompile Include="PropertiesWnd.cpp" />

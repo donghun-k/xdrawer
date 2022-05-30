@@ -31,12 +31,18 @@ END_MESSAGE_MAP()
 
 CXDrawerDoc::CXDrawerDoc()
 {
+	//::MessageBox(NULL, _T("CXDrawerDoc"), _T("CXDrawerDoc"), 0);
 	// TODO: 여기에 일회성 생성 코드를 추가합니다.
-	figures = new FigureList();
+	figures = new FigureList();	
 }
 
 CXDrawerDoc::~CXDrawerDoc()
 {
+	//::MessageBox(NULL, _T("~CXDrawerDoc"), _T("~CXDrawerDoc"), 0);
+	if (figures) {
+		delete figures;
+		figures = NULL;
+	}
 }
 
 BOOL CXDrawerDoc::OnNewDocument()
@@ -46,6 +52,7 @@ BOOL CXDrawerDoc::OnNewDocument()
 
 	// TODO: 여기에 재초기화 코드를 추가합니다.
 	// SDI 문서는 이 문서를 다시 사용합니다.
+	figures->RemoveAllFigures();	
 
 	return TRUE;
 }
@@ -65,7 +72,9 @@ void CXDrawerDoc::Serialize(CArchive& ar)
 	else
 	{
 		// TODO: 여기에 로딩 코드를 추가합니다.
+		delete figures;
 		ar >> figures;
+		// POSITION pos = GetFirstViewPosition();
 	}
 }
 
@@ -144,3 +153,4 @@ void CXDrawerDoc::add(Figure *pFigure)
 {
 	figures->AddTail(pFigure);
 }
+
