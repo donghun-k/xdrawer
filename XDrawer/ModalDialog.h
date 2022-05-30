@@ -27,5 +27,4 @@ public:
 	CString m_y2;
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
-	CString figure;
 };

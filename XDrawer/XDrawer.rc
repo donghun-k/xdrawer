@@ -187,7 +187,7 @@ BEGIN
         MENUITEM "인쇄 미리 보기(&V)",                ID_FILE_PRINT_PREVIEW
         MENUITEM "인쇄 설정(&R)...",                ID_FILE_PRINT_SETUP
         MENUITEM SEPARATOR
-        MENUITEM "최근에 사용한 파일",                  ID_FILE_MRU_FILE1, GRAYED
+        MENUITEM "최근에 사용한 파일",                  ID_FILE_MRU_FILE1
         MENUITEM SEPARATOR
         MENUITEM "끝내기(&X)",                     ID_APP_EXIT
     END
@@ -304,6 +304,19 @@ BEGIN
     MENUITEM "Office 2007(은색 스타일)(&S)",     ID_VIEW_APPLOOK_OFF_2007_SILVER
     MENUITEM "Office 2007(바다색 스타일)(&A)",    ID_VIEW_APPLOOK_OFF_2007_AQUA
     MENUITEM "Windows 7(&D)",               ID_VIEW_APPLOOK_WINDOWS_7
+END
+
+IDR_MENU1 MENU
+BEGIN
+    POPUP "그림(&O)"
+    BEGIN
+        MENUITEM "엑스(&X)",                      ID_OBJECT_X
+        MENUITEM "버블(&U)",                      ID_OBJECT_BUBBLE
+        MENUITEM "사각형(&B)",                     ID_OBJECT_BOX
+        MENUITEM "선(&L)",                       ID_OBJECT_LINE
+        MENUITEM "원(C)",                        ID_OBJECT_CIRCLE
+        MENUITEM "다이아몬드(&D)",                   ID_OBJECT_DIAMOND
+    END
 END
 
 

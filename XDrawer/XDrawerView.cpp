@@ -170,22 +170,29 @@ void CXDrawerView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 	theApp.GetContextMenuManager()->ShowPopupMenu(IDR_MAINFRAME, point.x, point.y, this, TRUE);
 #endif
 	*/
-
-	/*
+	
+	// 리소스 이용	
 	CMenu mainMenu;
-	mainMenu.LoadMenuW(IDR_MAINFRAME);
-	CMenu *subMenu = mainMenu.GetSubMenu(3);
-	subMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this, NULL);
-	*/
+	mainMenu.LoadMenuW(IDR_MENU1);
+	CMenu *subMenu = mainMenu.GetSubMenu(0);
+	subMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this, NULL);	
 
+
+	// 직접 코딩
+	/*
 	CMenu mainMenu;
 	mainMenu.CreatePopupMenu();
 	mainMenu.AppendMenuW(MF_STRING, 0, _T("그림"));
 	mainMenu.AppendMenuW(MF_SEPARATOR);
+	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_X, _T("엑스"));
+	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_BUBBLE, _T("버블"));
 	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_BOX, _T("사각형"));
 	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_LINE, _T("선"));
 	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_CIRCLE, _T("원"));
+	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_DIAMOND, _T("다이아몬드"));
+	
 	mainMenu.TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this, NULL);
+	*/
 
 
 }

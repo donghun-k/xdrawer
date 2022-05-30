@@ -23,9 +23,7 @@ ModalDialog::ModalDialog(CXDrawerView *const pView, CWnd* pParent /*=NULL*/)
 	, m_x2(_T(""))
 	, m_y2(_T(""))
 	, m_pView(pView)
-	, figure(_T(""))
 {
-	// m_pView = pView;
 }
 
 ModalDialog::~ModalDialog()
@@ -39,7 +37,6 @@ void ModalDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_Y1, m_y1);
 	DDX_Text(pDX, IDC_EDIT_X2, m_x2);
 	DDX_Text(pDX, IDC_EDIT_Y2, m_y2);
-	DDX_CBString(pDX, IDC_COMBO_FIGURE, figure);
 }
 
 
@@ -59,9 +56,10 @@ void ModalDialog::OnBnClickedOk()
 	UpdateData();
 	int x1 = m_x1;
 	int y1 = m_y1;
-
 	int x2 = _ttoi(m_x2);
 	int y2 = _ttoi(m_y2);
+
+	int whatToDraw = 0;
 	
 	Box *pBox = new Box(x1, y1, x2, y2);
 
