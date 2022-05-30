@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "Figure.h"
 #include "FigureList.h"
 
 IMPLEMENT_SERIAL(FigureList, CObList, 1)
