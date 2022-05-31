@@ -1,4 +1,5 @@
 #pragma once
+#include "afxwin.h"
 
 
 // ModalDialog 대화 상자입니다.
@@ -27,4 +28,6 @@ public:
 	CString m_y2;
 	afx_msg void OnBnClickedOk();
 	afx_msg void OnBnClickedCancel();
+	CComboBox m_combo;
+	virtual BOOL OnInitDialog();
 };

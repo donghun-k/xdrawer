@@ -10,6 +10,11 @@
 #include "XDrawerDoc.h"
 
 #include "Box.h"
+#include "X.h"
+#include "Bubble.h"
+#include "Circle.h"
+#include "Line.h"
+#include "Diamond.h"
 
 
 // ModalDialog 대화 상자입니다.
@@ -24,6 +29,7 @@ ModalDialog::ModalDialog(CXDrawerView *const pView, CWnd* pParent /*=NULL*/)
 	, m_y2(_T(""))
 	, m_pView(pView)
 {
+	// m_combo.AddString(_T("엑스")); 
 }
 
 ModalDialog::~ModalDialog()
@@ -37,6 +43,7 @@ void ModalDialog::DoDataExchange(CDataExchange* pDX)
 	DDX_Text(pDX, IDC_EDIT_Y1, m_y1);
 	DDX_Text(pDX, IDC_EDIT_X2, m_x2);
 	DDX_Text(pDX, IDC_EDIT_Y2, m_y2);
+	DDX_Control(pDX, IDC_COMBO_FIGURE, m_combo);
 }
 
 
@@ -56,14 +63,29 @@ void ModalDialog::OnBnClickedOk()
 	UpdateData();
 	int x1 = m_x1;
 	int y1 = m_y1;
+
 	int x2 = _ttoi(m_x2);
 	int y2 = _ttoi(m_y2);
 
-	int whatToDraw = 0;
-	
-	Box *pBox = new Box(x1, y1, x2, y2);
+	CString name;
+	m_combo.GetWindowTextW(name);
+	Figure *fig = NULL;
 
-	m_pView->GetDocument()->add(pBox);
+	if (name == _T("엑스")) {
+		fig = new X(x1, y1);
+	} else if (name == _T("버블")) {
+		fig = new Bubble(x1, y1);
+	} else if (name == _T("사각형")) {
+		fig = new Box(x1, y1, x2, y2);
+	} else if (name == _T("선")) {
+		fig = new Line(x1, y1, x2, y2);
+	} else if (name == _T("원")) {
+		fig = new Circle(x1, y1, x2, y2);
+	} else if (name == _T("다이아몬드")) {
+		fig = new Diamond(x1, y1, x2, y2);
+	}	
+
+	m_pView->GetDocument()->add(fig);
 	m_pView->Invalidate();
 
 	m_x1 = 0;
@@ -79,4 +101,21 @@ void ModalDialog::OnBnClickedCancel()
 {
 	// TODO: 여기에 컨트롤 알림 처리기 코드를 추가합니다.
 	CDialogEx::OnCancel();
+}
+
+
+BOOL ModalDialog::OnInitDialog()
+{
+	CDialogEx::OnInitDialog();
+
+	m_combo.AddString(_T("엑스"));
+	m_combo.AddString(_T("버블"));
+	m_combo.AddString(_T("사각형"));
+	m_combo.AddString(_T("선"));
+	m_combo.AddString(_T("원"));
+	m_combo.AddString(_T("다이아몬드"));
+
+	m_combo.SetCurSel(2);
+
+	return TRUE;  // return TRUE unless you set the focus to a control
 }
