@@ -27,3 +27,16 @@ void FigureList::RemoveAllFigures()
 	}
 	RemoveAll();
 }
+
+void FigureList::removeFigure(Figure *ptr) {
+	POSITION found = NULL;
+	POSITION pos = GetHeadPosition();
+	while (pos != NULL) {
+		found = pos;
+		Figure* fig = (Figure*)GetNext(pos);
+		if (ptr == fig) {
+			break;
+		}
+	}
+	RemoveAt(found);
+}

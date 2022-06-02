@@ -20,6 +20,7 @@ public:
 // 작업입니다.
 public:
 	void add(Figure *pFigure);
+	void removeFigure(Figure *pFigure);
 // 재정의입니다.
 public:
 	virtual BOOL OnNewDocument();

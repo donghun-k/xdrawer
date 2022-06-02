@@ -30,3 +30,11 @@ void OnePointFigure::setXY2(int x, int y)
 OnePointFigure::~OnePointFigure()
 {
 }
+
+void OnePointFigure::makeRegion()
+{
+	if(region != NULL) delete region;
+
+	region = new CRgn();
+	region->CreateRectRgn(m_x1-DELTA, m_y1-DELTA, m_x1+DELTA, m_y1+DELTA);
+}

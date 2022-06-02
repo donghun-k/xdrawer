@@ -15,6 +15,7 @@ public:
 	TwoPointFigure(int x1, int y1, int x2, int y2);	
 	virtual void setXY2(int x, int y);
 	virtual void Serialize(CArchive& ar);
+	virtual void makeRegion();
 	~TwoPointFigure();
 };
 

@@ -13,5 +13,6 @@ public:
 
 	Figure  *FigureList::GetNext(POSITION &pos);
 	void RemoveAllFigures();
+	void removeFigure(Figure *ptr);
 };
 

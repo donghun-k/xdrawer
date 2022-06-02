@@ -7,6 +7,8 @@
 class Figure;
 class CXDrawerDoc;
 class ModalDialog;
+class MainPopup;
+class FigurePopup;
 
 
 class CXDrawerView : public CView
@@ -18,6 +20,13 @@ protected: // serialization에서만 만들어집니다.
 private:
 	int whatToDraw;
 	ModalDialog *pDlg;
+	MainPopup *mainPopup;
+	FigurePopup *xPopup;
+	FigurePopup *bubblePopup;
+	FigurePopup *linePopup;
+	FigurePopup *boxPopup;
+	FigurePopup *circlePopup;
+	FigurePopup *diamondPopup;
 // 특성입니다.
 public:
 	CXDrawerDoc* GetDocument() const;
@@ -44,7 +53,7 @@ public:
 #endif
 
 protected:
-
+	afx_msg void OnDeleteFigure();
 // 생성된 메시지 맵 함수
 protected:
 	afx_msg void OnFilePrintPreview();

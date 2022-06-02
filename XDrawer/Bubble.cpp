@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Bubble.h"
-#define DELTA	(4)
 
 IMPLEMENT_SERIAL(Bubble, OnePointFigure, 1)
 Bubble::Bubble()

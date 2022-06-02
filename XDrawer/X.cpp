@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "X.h"
-#define DELTA	(4)
 
 IMPLEMENT_SERIAL(X, OnePointFigure, 1)
 X::X()

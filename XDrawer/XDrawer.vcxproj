@@ -108,9 +108,11 @@
     <ClInclude Include="Diamond.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="FigureList.h" />
+    <ClInclude Include="FigurePopup.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="MainFrm.h" />
+    <ClInclude Include="MainPopup.h" />
     <ClInclude Include="ModalDialog.h" />
     <ClInclude Include="OnePointFigure.h" />
     <ClInclude Include="OutputWnd.h" />
@@ -133,9 +135,11 @@
     <ClCompile Include="Diamond.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="FigureList.cpp" />
+    <ClCompile Include="FigurePopup.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="MainFrm.cpp" />
+    <ClCompile Include="MainPopup.cpp" />
     <ClCompile Include="ModalDialog.cpp" />
     <ClCompile Include="OnePointFigure.cpp" />
     <ClCompile Include="OutputWnd.cpp" />

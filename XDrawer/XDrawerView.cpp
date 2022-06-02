@@ -10,6 +10,8 @@
 #endif
 
 #include "ModalDialog.h"
+#include "MainPopup.h"
+#include "FigurePopup.h"
 
 #include "XDrawerDoc.h"
 #include "XDrawerView.h"
@@ -40,6 +42,7 @@
 IMPLEMENT_DYNCREATE(CXDrawerView, CView)
 
 BEGIN_MESSAGE_MAP(CXDrawerView, CView)
+	ON_COMMAND(ID_DELETE_FIGURE, &CXDrawerView::OnDeleteFigure)
 	// 표준 인쇄 명령입니다.
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
@@ -68,11 +71,20 @@ CXDrawerView::CXDrawerView()
 	currentFigure = NULL;
 	whatToDraw = DRAW_BOX;	
 	pDlg = new ModalDialog(this);	
+	mainPopup = new MainPopup(this, _T("그림들"));
+	xPopup = new FigurePopup(this, _T("엑스"));
+	bubblePopup = new FigurePopup(this, _T("버블"));
+	linePopup = new FigurePopup(this, _T("선"));
+	boxPopup = new FigurePopup(this, _T("사각형"));
+	circlePopup = new FigurePopup(this, _T("원"));
+	diamondPopup = new FigurePopup(this, _T("다이아몬드"));
+	// 디스트럭터에 추가
 }
 
 CXDrawerView::~CXDrawerView()
 {
 	if (pDlg != NULL) delete pDlg;
+	if (mainPopup != NULL) delete mainPopup;
 	//::MessageBox(NULL, _T("~CXDrawerView"), _T("~CXDrawerView"), 0);
 }
 
@@ -164,37 +176,39 @@ void CXDrawerView::OnRButtonUp(UINT /* nFlags */, CPoint point)
 
 void CXDrawerView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 {
+	CPoint testPoint(point);
+	ScreenToClient(&testPoint);
+
+	currentFigure = NULL;
+
+	CXDrawerDoc* pDoc = GetDocument();
+
+	FigureList *list = pDoc->getFigures();
+	POSITION pos = list->GetHeadPosition();
+	while (pos != NULL) {
+		Figure *ptr = list->GetNext(pos);
+		if (ptr->region->PtInRegion(testPoint.x, testPoint.y)) {
+			currentFigure = ptr;
+			break;
+		}
+	}
+	if (currentFigure == NULL) {
+		mainPopup->popup(point.x, point.y);
+	} else {
+		currentFigure->popup(point.x, point.y);
+	}
 	/*
-#ifndef SHARED_HANDLERS
-	// theApp.GetContextMenuManager()->ShowPopupMenu(IDR_POPUP_EDIT, point.x, point.y, this, TRUE);
-	theApp.GetContextMenuManager()->ShowPopupMenu(IDR_MAINFRAME, point.x, point.y, this, TRUE);
-#endif
+	//RTTI
+	if (found == NULL) {
+		mainPopup->popup(point.x, point.y);
+	} else if (found->IsKindOf(RUNTIME_CLASS(X))) {
+		xPopup->popup(point.x, point.y);
+	} else if (found->IsKindOf(RUNTIME_CLASS(Box))) {
+		boxPopup->popup(point.x, point.y);
+	} else if (found->IsKindOf(RUNTIME_CLASS(Line))) {
+		linePopup->popup(point.x, point.y);
+	}
 	*/
-	
-	// 리소스 이용	
-	CMenu mainMenu;
-	mainMenu.LoadMenuW(IDR_MENU1);
-	CMenu *subMenu = mainMenu.GetSubMenu(0);
-	subMenu->TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this, NULL);	
-
-
-	// 직접 코딩
-	/*
-	CMenu mainMenu;
-	mainMenu.CreatePopupMenu();
-	mainMenu.AppendMenuW(MF_STRING, 0, _T("그림"));
-	mainMenu.AppendMenuW(MF_SEPARATOR);
-	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_X, _T("엑스"));
-	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_BUBBLE, _T("버블"));
-	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_BOX, _T("사각형"));
-	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_LINE, _T("선"));
-	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_CIRCLE, _T("원"));
-	mainMenu.AppendMenuW(MF_STRING, ID_OBJECT_DIAMOND, _T("다이아몬드"));
-	
-	mainMenu.TrackPopupMenu(TPM_LEFTALIGN|TPM_RIGHTBUTTON, point.x, point.y, this, NULL);
-	*/
-
-
 }
 
 
@@ -229,16 +243,22 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 
 	if(whatToDraw == DRAW_X) {
 		currentFigure = new X(point.x, point.y);
+		currentFigure->setPopup(xPopup);
 	} else if(whatToDraw == DRAW_BUBBLE) {
-		currentFigure = new Bubble(point.x, point.y);			
+		currentFigure = new Bubble(point.x, point.y);
+		currentFigure->setPopup(bubblePopup);
 	} else if(whatToDraw == DRAW_BOX) {
-		currentFigure = new Box(point.x, point.y);			
+		currentFigure = new Box(point.x, point.y);	
+		currentFigure->setPopup(boxPopup);
 	} else if(whatToDraw == DRAW_LINE) {
 		currentFigure = new Line(point.x, point.y);	
+		currentFigure->setPopup(linePopup);
 	} else if(whatToDraw == DRAW_CIRCLE) {
 		currentFigure = new Circle(point.x, point.y);	
+		currentFigure->setPopup(circlePopup);
 	} else if(whatToDraw == DRAW_DIAMOND) {
 		currentFigure = new Diamond(point.x, point.y);	
+		currentFigure->setPopup(diamondPopup);
 	}
 	currentFigure->draw(pDC);
 	
@@ -260,6 +280,8 @@ void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 		pDC->SelectObject(oldBrush);
 
 		CXDrawerDoc *pDoc = GetDocument();
+		currentFigure->makeRegion();
+
 		pDoc->add(currentFigure);
 		pDoc->SetModifiedFlag(TRUE);
 	}
@@ -352,4 +374,12 @@ BOOL CXDrawerView::Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD d
 	// TODO: 여기에 특수화된 코드를 추가 및/또는 기본 클래스를 호출합니다.
 	pDlg->Create(ModalDialog::IDD);
 	return CView::Create(lpszClassName, lpszWindowName, dwStyle, rect, pParentWnd, nID, pContext);
+}
+
+void CXDrawerView::OnDeleteFigure() {
+	if (currentFigure == NULL) return;
+	GetDocument()->removeFigure(currentFigure);
+	delete currentFigure;
+	currentFigure = NULL;
+	Invalidate();
 }

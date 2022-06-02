@@ -1,5 +1,8 @@
 #pragma once
 #include "figure.h"
+
+#define DELTA	(4)
+
 class OnePointFigure :
 	public Figure
 {
@@ -12,6 +15,7 @@ public:
 	OnePointFigure(int x1, int y1);
 	virtual void setXY2(int x, int y);
 	virtual void Serialize(CArchive& ar);
+	virtual void makeRegion();
 	~OnePointFigure();
 };
 

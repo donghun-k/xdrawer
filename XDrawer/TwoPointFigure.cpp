@@ -35,6 +35,13 @@ void TwoPointFigure::setXY2(int x, int y)
 	m_x2 = x;
 	m_y2 = y;
 }
+void TwoPointFigure::makeRegion()
+{
+	if(region != NULL) delete region;
+
+	region = new CRgn();
+	region->CreateRectRgn(m_x1, m_y1, m_x2, m_y2);
+}
 TwoPointFigure::~TwoPointFigure()
 {
 }

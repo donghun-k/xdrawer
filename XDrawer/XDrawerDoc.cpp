@@ -154,3 +154,8 @@ void CXDrawerDoc::add(Figure *pFigure)
 	figures->AddTail(pFigure);
 }
 
+void CXDrawerDoc::removeFigure(Figure *pFigure)
+{
+	figures->removeFigure(pFigure);
+}
+

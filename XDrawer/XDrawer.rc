@@ -453,6 +453,7 @@ END
 STRINGTABLE
 BEGIN
     IDP_OLE_INIT_FAILED     "OLE를 초기화할 수 없습니다. OLE 라이브러리 버전이 올바른지 확인하십시오."
+    ID_DELETE_FIGURE        "그림 지우기"
 END
 
 STRINGTABLE
