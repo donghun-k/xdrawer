@@ -93,6 +93,9 @@
     <ClInclude Include="FigurePopup.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
+    <ClInclude Include="Popup.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="XDrawer.cpp">
@@ -162,6 +165,9 @@
       <Filter>소스 파일</Filter>
     </ClCompile>
     <ClCompile Include="FigurePopup.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="Popup.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

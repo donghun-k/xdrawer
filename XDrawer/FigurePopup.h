@@ -1,14 +1,12 @@
 #pragma once
+#include "Popup.h"
 
-class CXDrawerView;
+//class CXDrawerView;
 class FigurePopup
-{
-	CMenu *popupPtr;
-	CXDrawerView *viewPtr;
+	:public Popup
+{	
 public:
 	FigurePopup(CXDrawerView *view, CString title);
 	~FigurePopup();
-
-	void popup(int x, int y);
 };
 

@@ -78,14 +78,18 @@ CXDrawerView::CXDrawerView()
 	boxPopup = new FigurePopup(this, _T("사각형"));
 	circlePopup = new FigurePopup(this, _T("원"));
 	diamondPopup = new FigurePopup(this, _T("다이아몬드"));
-	// 디스트럭터에 추가
 }
 
 CXDrawerView::~CXDrawerView()
 {
 	if (pDlg != NULL) delete pDlg;
 	if (mainPopup != NULL) delete mainPopup;
-	//::MessageBox(NULL, _T("~CXDrawerView"), _T("~CXDrawerView"), 0);
+	if (xPopup != NULL) delete xPopup;
+	if (bubblePopup != NULL) delete bubblePopup;
+	if (linePopup != NULL) delete linePopup;
+	if (boxPopup != NULL) delete boxPopup;
+	if (circlePopup != NULL) delete circlePopup;
+	if (diamondPopup != NULL) delete diamondPopup;
 }
 
 BOOL CXDrawerView::PreCreateWindow(CREATESTRUCT& cs)
