@@ -73,6 +73,8 @@ public:
 	afx_msg void OnModalDialog();
 	afx_msg void OnModalessDialog();
 	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
+	afx_msg void OnObjectKite1();
+	afx_msg void OnObjectKite2();
 };
 
 #ifndef _DEBUG  // XDrawerView.cpp의 디버그 버전

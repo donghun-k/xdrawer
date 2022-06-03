@@ -22,6 +22,8 @@
 #include "Line.h"
 #include "Circle.h"
 #include "Diamond.h"
+#include "Kite1.h"
+
 #include "Figure.h"
 #include "FigureList.h"
 
@@ -36,6 +38,8 @@
 #define DRAW_LINE		(4)
 #define DRAW_CIRCLE		(5)
 #define DRAW_DIAMOND	(6)
+#define DRAW_KITE1		(7)
+#define DRAW_KITE2		(8)
 
 // CXDrawerView
 
@@ -60,6 +64,8 @@ BEGIN_MESSAGE_MAP(CXDrawerView, CView)
 	ON_COMMAND(ID_OBJECT_BUBBLE, &CXDrawerView::OnObjectBubble)
 	ON_COMMAND(ID_MODAL_DIALOG, &CXDrawerView::OnModalDialog)
 	ON_COMMAND(ID_MODALESS_DIALOG, &CXDrawerView::OnModalessDialog)
+	ON_COMMAND(ID_OBJECT_KITE1, &CXDrawerView::OnObjectKite1)
+	ON_COMMAND(ID_OBJECT_KITE2, &CXDrawerView::OnObjectKite2)
 END_MESSAGE_MAP()
 
 // CXDrawerView 생성/소멸
@@ -263,6 +269,9 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 	} else if(whatToDraw == DRAW_DIAMOND) {
 		currentFigure = new Diamond(point.x, point.y);	
 		currentFigure->setPopup(diamondPopup);
+	} else if(whatToDraw == DRAW_KITE1) {
+		currentFigure = new Kite1(point.x, point.y);	
+		currentFigure->setPopup(diamondPopup);
 	}
 	currentFigure->draw(pDC);
 	
@@ -386,4 +395,17 @@ void CXDrawerView::OnDeleteFigure() {
 	delete currentFigure;
 	currentFigure = NULL;
 	Invalidate();
+}
+
+void CXDrawerView::OnObjectKite1()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	whatToDraw = DRAW_KITE1;
+}
+
+
+void CXDrawerView::OnObjectKite2()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	whatToDraw = DRAW_KITE2;
 }
