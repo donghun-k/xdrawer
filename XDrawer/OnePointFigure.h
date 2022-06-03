@@ -16,6 +16,8 @@ public:
 	virtual void setXY2(int x, int y);
 	virtual void Serialize(CArchive& ar);
 	virtual void makeRegion();
+	virtual int getX1(){ return m_x1; }
+	virtual int getY1(){ return m_y1; }
 	~OnePointFigure();
 };
 

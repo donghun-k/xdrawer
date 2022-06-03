@@ -27,6 +27,8 @@ private:
 	FigurePopup *boxPopup;
 	FigurePopup *circlePopup;
 	FigurePopup *diamondPopup;
+	FigurePopup *kite1Popup;
+	FigurePopup *kite2Popup;
 // 특성입니다.
 public:
 	CXDrawerDoc* GetDocument() const;
@@ -75,6 +77,8 @@ public:
 	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
 	afx_msg void OnObjectKite1();
 	afx_msg void OnObjectKite2();
+	afx_msg void OnObjectKite3();
+	afx_msg void OnObjectUfo();
 };
 
 #ifndef _DEBUG  // XDrawerView.cpp의 디버그 버전

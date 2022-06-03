@@ -15,6 +15,7 @@
 #include "Circle.h"
 #include "Line.h"
 #include "Diamond.h"
+#include "Kite1.h"
 
 
 // ModalDialog 대화 상자입니다.
@@ -83,7 +84,9 @@ void ModalDialog::OnBnClickedOk()
 		fig = new Circle(x1, y1, x2, y2);
 	} else if (name == _T("다이아몬드")) {
 		fig = new Diamond(x1, y1, x2, y2);
-	}	
+	} else if (name == _T("연1")) {
+		fig = new Kite1(x1, y1, x2, y2);
+	}
 
 	m_pView->GetDocument()->add(fig);
 	m_pView->Invalidate();
@@ -114,6 +117,7 @@ BOOL ModalDialog::OnInitDialog()
 	m_combo.AddString(_T("선"));
 	m_combo.AddString(_T("원"));
 	m_combo.AddString(_T("다이아몬드"));
+	m_combo.AddString(_T("연1"));
 
 	m_combo.SetCurSel(2);
 

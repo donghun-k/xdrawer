@@ -21,3 +21,8 @@ Figure::~Figure()
 {
 	if (region != NULL) delete region;
 }
+BOOL Figure::ptInRgn(int x, int y) 
+{
+	if (region == NULL) return FALSE;
+	return region->PtInRegion(x, y);
+}

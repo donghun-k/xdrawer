@@ -23,6 +23,9 @@
 #include "Circle.h"
 #include "Diamond.h"
 #include "Kite1.h"
+#include "Kite2.h"
+#include "Kite3.h"
+#include "UFO.h"
 
 #include "Figure.h"
 #include "FigureList.h"
@@ -40,6 +43,8 @@
 #define DRAW_DIAMOND	(6)
 #define DRAW_KITE1		(7)
 #define DRAW_KITE2		(8)
+#define DRAW_KITE3		(9)
+#define DRAW_UFO		(10)
 
 // CXDrawerView
 
@@ -66,6 +71,8 @@ BEGIN_MESSAGE_MAP(CXDrawerView, CView)
 	ON_COMMAND(ID_MODALESS_DIALOG, &CXDrawerView::OnModalessDialog)
 	ON_COMMAND(ID_OBJECT_KITE1, &CXDrawerView::OnObjectKite1)
 	ON_COMMAND(ID_OBJECT_KITE2, &CXDrawerView::OnObjectKite2)
+	ON_COMMAND(ID_OBJECT_KITE3, &CXDrawerView::OnObjectKite3)
+	ON_COMMAND(ID_OBJECT_UFO, &CXDrawerView::OnObjectUfo)
 END_MESSAGE_MAP()
 
 // CXDrawerView 생성/소멸
@@ -84,6 +91,7 @@ CXDrawerView::CXDrawerView()
 	boxPopup = new FigurePopup(this, _T("사각형"));
 	circlePopup = new FigurePopup(this, _T("원"));
 	diamondPopup = new FigurePopup(this, _T("다이아몬드"));
+	kite1Popup = new FigurePopup(this, _T("연1"));
 }
 
 CXDrawerView::~CXDrawerView()
@@ -96,6 +104,7 @@ CXDrawerView::~CXDrawerView()
 	if (boxPopup != NULL) delete boxPopup;
 	if (circlePopup != NULL) delete circlePopup;
 	if (diamondPopup != NULL) delete diamondPopup;
+	if (kite1Popup != NULL) delete kite1Popup;
 }
 
 BOOL CXDrawerView::PreCreateWindow(CREATESTRUCT& cs)
@@ -197,7 +206,8 @@ void CXDrawerView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 	POSITION pos = list->GetHeadPosition();
 	while (pos != NULL) {
 		Figure *ptr = list->GetNext(pos);
-		if (ptr->region->PtInRegion(testPoint.x, testPoint.y)) {
+		//if (ptr->region->PtInRegion(testPoint.x, testPoint.y)) {
+		if (ptr->ptInRgn(testPoint.x, testPoint.y)) {
 			currentFigure = ptr;
 			break;
 		}
@@ -272,6 +282,15 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 	} else if(whatToDraw == DRAW_KITE1) {
 		currentFigure = new Kite1(point.x, point.y);	
 		currentFigure->setPopup(diamondPopup);
+	} else if(whatToDraw == DRAW_KITE2) {
+		currentFigure = new Kite2(point.x, point.y);	
+		currentFigure->setPopup(diamondPopup);
+	} else if(whatToDraw == DRAW_KITE3) {
+		currentFigure = new Kite3(point.x, point.y);	
+		currentFigure->setPopup(xPopup);
+	} else if(whatToDraw == DRAW_UFO) {
+		currentFigure = new UFO(point.x, point.y);	
+		currentFigure->setPopup(xPopup);
 	}
 	currentFigure->draw(pDC);
 	
@@ -408,4 +427,18 @@ void CXDrawerView::OnObjectKite2()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	whatToDraw = DRAW_KITE2;
+}
+
+
+void CXDrawerView::OnObjectKite3()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	whatToDraw = DRAW_KITE3;
+}
+
+
+void CXDrawerView::OnObjectUfo()
+{
+	// TODO: 여기에 명령 처리기 코드를 추가합니다.
+	whatToDraw = DRAW_UFO;
 }

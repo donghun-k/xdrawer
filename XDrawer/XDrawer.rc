@@ -233,6 +233,8 @@ BEGIN
         MENUITEM "다이아몬드(&D)",                   ID_OBJECT_DIAMOND
         MENUITEM "연1",                          ID_OBJECT_KITE1
         MENUITEM "연2",                          ID_OBJECT_KITE2
+        MENUITEM "연3",                          ID_OBJECT_KITE3
+        MENUITEM "UFO",                         ID_OBJECT_UFO
     END
     POPUP "도움말(&H)"
     BEGIN

@@ -105,12 +105,15 @@
     <ClInclude Include="Bubble.h" />
     <ClInclude Include="Circle.h" />
     <ClInclude Include="ClassView.h" />
+    <ClInclude Include="CompositeFigure.h" />
     <ClInclude Include="Diamond.h" />
     <ClInclude Include="Figure.h" />
     <ClInclude Include="FigureList.h" />
     <ClInclude Include="FigurePopup.h" />
     <ClInclude Include="FileView.h" />
     <ClInclude Include="Kite1.h" />
+    <ClInclude Include="Kite2.h" />
+    <ClInclude Include="KIte3.h" />
     <ClInclude Include="Line.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="MainPopup.h" />
@@ -123,6 +126,7 @@
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
     <ClInclude Include="TwoPointFigure.h" />
+    <ClInclude Include="UFO.h" />
     <ClInclude Include="ViewTree.h" />
     <ClInclude Include="X.h" />
     <ClInclude Include="XDrawer.h" />
@@ -134,12 +138,15 @@
     <ClCompile Include="Bubble.cpp" />
     <ClCompile Include="Circle.cpp" />
     <ClCompile Include="ClassView.cpp" />
+    <ClCompile Include="CompositeFigure.cpp" />
     <ClCompile Include="Diamond.cpp" />
     <ClCompile Include="Figure.cpp" />
     <ClCompile Include="FigureList.cpp" />
     <ClCompile Include="FigurePopup.cpp" />
     <ClCompile Include="FileView.cpp" />
     <ClCompile Include="Kite1.cpp" />
+    <ClCompile Include="Kite2.cpp" />
+    <ClCompile Include="KIte3.cpp" />
     <ClCompile Include="Line.cpp" />
     <ClCompile Include="MainFrm.cpp" />
     <ClCompile Include="MainPopup.cpp" />
@@ -153,6 +160,7 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="TwoPointFigure.cpp" />
+    <ClCompile Include="UFO.cpp" />
     <ClCompile Include="ViewTree.cpp" />
     <ClCompile Include="X.cpp" />
     <ClCompile Include="XDrawer.cpp" />

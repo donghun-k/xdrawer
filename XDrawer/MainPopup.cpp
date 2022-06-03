@@ -13,6 +13,7 @@ MainPopup::MainPopup(CXDrawerView *view, CString title)
 	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_LINE, _T("선"));
 	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_CIRCLE, _T("원"));
 	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_DIAMOND, _T("다이아몬드"));
+	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_KITE1, _T("연1"));
 }
 
 
