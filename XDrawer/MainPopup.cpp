@@ -14,6 +14,9 @@ MainPopup::MainPopup(CXDrawerView *view, CString title)
 	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_CIRCLE, _T("원"));
 	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_DIAMOND, _T("다이아몬드"));
 	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_KITE1, _T("연1"));
+	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_KITE2, _T("연2"));
+	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_KITE3, _T("연3"));
+	popupPtr->AppendMenuW(MF_STRING, ID_OBJECT_UFO, _T("UFO"));
 }
 
 

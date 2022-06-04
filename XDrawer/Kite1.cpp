@@ -28,10 +28,10 @@ Kite1::Kite1(int x1, int y1, int x2, int y2)
 	int w = x2 - x1;
 	int h = y2 - y1;
 	l1 = new Line(x1, y1, x2, y2);
-	l2 = new Line(x1, y1, x2, y2);
-	l3 = new Line(x1, y1, x2, y2);
-	l4 = new Line(x1, y1, x2, y2);
-	center = new Circle(x1, y1, x2, y2);
+	l2 = new Line(m_x1+w/2, m_y1, m_x1+w/2, y2);
+	l3 = new Line(x2, m_y1, m_x1, y2);
+	l4 = new Line(m_x1, m_y1+h/2, x2, y2-h/2);
+	center = new Circle(m_x1+w/4, m_y1+h/4,x2-w/4, y2-h/4);
 }
 Kite1::~Kite1()
 {

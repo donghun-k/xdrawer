@@ -48,10 +48,10 @@ Kite3::Kite3(int x1, int y1, int x2, int y2)
 	int h = y2 - y1;
 	frame = new Box(x1, y1, x2, y2);
 	l1 = new Line(x1, y1, x2, y2);
-	l2 = new Line(x1, y1, x2, y2);
-	l3 = new Line(x1, y1, x2, y2);
-	l4 = new Line(x1, y1, x2, y2);
-	center = new Circle(x1, y1, x2, y2);
+	l2 = new Line(x1+w/2, y1, x1+w/2, y2);
+	l3 = new Line(x2, y1, x1, y2);
+	l4 = new Line(x1, y1+h/2, x2, y2-h/2);
+	center = new Circle(x1+w/4, y1+h/4,x2-w/4, y2-h/4);
 
 	parts->AddTail(frame);
 	parts->AddTail(l1);

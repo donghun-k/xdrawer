@@ -92,6 +92,9 @@ CXDrawerView::CXDrawerView()
 	circlePopup = new FigurePopup(this, _T("원"));
 	diamondPopup = new FigurePopup(this, _T("다이아몬드"));
 	kite1Popup = new FigurePopup(this, _T("연1"));
+	kite2Popup = new FigurePopup(this, _T("연2"));
+	kite3Popup = new FigurePopup(this, _T("연3"));
+	ufoPopup = new FigurePopup(this, _T("UFO"));
 }
 
 CXDrawerView::~CXDrawerView()
@@ -105,6 +108,9 @@ CXDrawerView::~CXDrawerView()
 	if (circlePopup != NULL) delete circlePopup;
 	if (diamondPopup != NULL) delete diamondPopup;
 	if (kite1Popup != NULL) delete kite1Popup;
+	if (kite2Popup != NULL) delete kite2Popup;
+	if (kite3Popup != NULL) delete kite3Popup;
+	if (ufoPopup != NULL) delete ufoPopup;
 }
 
 BOOL CXDrawerView::PreCreateWindow(CREATESTRUCT& cs)
@@ -154,7 +160,6 @@ void CXDrawerView::OnDraw(CDC* pDC)
 	POSITION pos = list->GetHeadPosition();
 	while (pos != NULL) {
 		Figure *ptr = list->GetNext(pos);
-		// referenc type 설명 필요
 		ptr->draw(pDC);
 	}
 	pDC->SelectObject(oldBrush);
@@ -217,18 +222,6 @@ void CXDrawerView::OnContextMenu(CWnd* /* pWnd */, CPoint point)
 	} else {
 		currentFigure->popup(point.x, point.y);
 	}
-	/*
-	//RTTI
-	if (found == NULL) {
-		mainPopup->popup(point.x, point.y);
-	} else if (found->IsKindOf(RUNTIME_CLASS(X))) {
-		xPopup->popup(point.x, point.y);
-	} else if (found->IsKindOf(RUNTIME_CLASS(Box))) {
-		boxPopup->popup(point.x, point.y);
-	} else if (found->IsKindOf(RUNTIME_CLASS(Line))) {
-		linePopup->popup(point.x, point.y);
-	}
-	*/
 }
 
 
@@ -281,16 +274,16 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 		currentFigure->setPopup(diamondPopup);
 	} else if(whatToDraw == DRAW_KITE1) {
 		currentFigure = new Kite1(point.x, point.y);	
-		currentFigure->setPopup(diamondPopup);
+		currentFigure->setPopup(kite1Popup);
 	} else if(whatToDraw == DRAW_KITE2) {
 		currentFigure = new Kite2(point.x, point.y);	
-		currentFigure->setPopup(diamondPopup);
+		currentFigure->setPopup(kite2Popup);
 	} else if(whatToDraw == DRAW_KITE3) {
 		currentFigure = new Kite3(point.x, point.y);	
-		currentFigure->setPopup(xPopup);
+		currentFigure->setPopup(kite3Popup);
 	} else if(whatToDraw == DRAW_UFO) {
 		currentFigure = new UFO(point.x, point.y);	
-		currentFigure->setPopup(xPopup);
+		currentFigure->setPopup(ufoPopup);
 	}
 	currentFigure->draw(pDC);
 	

@@ -16,6 +16,9 @@
 #include "Line.h"
 #include "Diamond.h"
 #include "Kite1.h"
+#include "Kite2.h"
+#include "Kite3.h"
+#include "UFO.h"
 
 
 // ModalDialog 대화 상자입니다.
@@ -30,7 +33,6 @@ ModalDialog::ModalDialog(CXDrawerView *const pView, CWnd* pParent /*=NULL*/)
 	, m_y2(_T(""))
 	, m_pView(pView)
 {
-	// m_combo.AddString(_T("엑스")); 
 }
 
 ModalDialog::~ModalDialog()
@@ -74,20 +76,36 @@ void ModalDialog::OnBnClickedOk()
 
 	if (name == _T("엑스")) {
 		fig = new X(x1, y1);
+		fig->setPopup(m_pView->xPopup);
 	} else if (name == _T("버블")) {
 		fig = new Bubble(x1, y1);
+		fig->setPopup(m_pView->bubblePopup);
 	} else if (name == _T("사각형")) {
 		fig = new Box(x1, y1, x2, y2);
+		fig->setPopup(m_pView->boxPopup);
 	} else if (name == _T("선")) {
 		fig = new Line(x1, y1, x2, y2);
+		fig->setPopup(m_pView->linePopup);
 	} else if (name == _T("원")) {
 		fig = new Circle(x1, y1, x2, y2);
+		fig->setPopup(m_pView->circlePopup);
 	} else if (name == _T("다이아몬드")) {
 		fig = new Diamond(x1, y1, x2, y2);
+		fig->setPopup(m_pView->diamondPopup);
 	} else if (name == _T("연1")) {
 		fig = new Kite1(x1, y1, x2, y2);
+		fig->setPopup(m_pView->kite1Popup);
+	} else if (name == _T("연2")) {
+		fig = new Kite2(x1, y1, x2, y2);
+		fig->setPopup(m_pView->kite2Popup);
+	} else if (name == _T("연3")) {
+		fig = new Kite3(x1, y1, x2, y2);
+		fig->setPopup(m_pView->kite3Popup);
+	} else if (name == _T("UFO")) {
+		fig = new UFO(x1, y1, x2, y2);
+		fig->setPopup(m_pView->ufoPopup);
 	}
-
+	fig->makeRegion();
 	m_pView->GetDocument()->add(fig);
 	m_pView->Invalidate();
 
@@ -118,6 +136,9 @@ BOOL ModalDialog::OnInitDialog()
 	m_combo.AddString(_T("원"));
 	m_combo.AddString(_T("다이아몬드"));
 	m_combo.AddString(_T("연1"));
+	m_combo.AddString(_T("연2"));
+	m_combo.AddString(_T("연3"));
+	m_combo.AddString(_T("UFO"));
 
 	m_combo.SetCurSel(2);
 

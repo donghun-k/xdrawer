@@ -21,6 +21,14 @@ private:
 	int whatToDraw;
 	ModalDialog *pDlg;
 	MainPopup *mainPopup;
+	
+// 특성입니다.
+public:
+	CXDrawerDoc* GetDocument() const;
+
+// 작업입니다.
+public:
+	Figure *currentFigure;
 	FigurePopup *xPopup;
 	FigurePopup *bubblePopup;
 	FigurePopup *linePopup;
@@ -29,13 +37,8 @@ private:
 	FigurePopup *diamondPopup;
 	FigurePopup *kite1Popup;
 	FigurePopup *kite2Popup;
-// 특성입니다.
-public:
-	CXDrawerDoc* GetDocument() const;
-
-// 작업입니다.
-public:
-	Figure *currentFigure;
+	FigurePopup *kite3Popup;
+	FigurePopup *ufoPopup;
 
 // 재정의입니다.
 public:
