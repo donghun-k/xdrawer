@@ -5,7 +5,7 @@
 #include "FigureList.h"
 
 
-#define DELTA	(6)
+#define DELTA	(10)
 IMPLEMENT_SERIAL(UFO, TwoPointFigure, 1)
 UFO::UFO()
 	:CompositeFigure()
@@ -42,8 +42,15 @@ void UFO::Serialize(CArchive& ar)
 {
 	CompositeFigure::Serialize(ar);
 }
-//Scope resolution operator
 void UFO::setXY2(int x, int y)
 {
 	c2->setXY12(x-DELTA, y-DELTA, x+DELTA, y+DELTA);
+}
+void UFO::drawDots(CDC* pDC) 
+{
+	POSITION pos = parts->GetHeadPosition();
+	while (pos != NULL) {
+		Figure *ptr = parts->GetNext(pos);
+		ptr->drawDots(pDC);
+	}
 }

@@ -15,5 +15,6 @@ public:
 	virtual void draw(CDC* pDC);
 	virtual void makeRegion();
 	virtual BOOL ptInRgn(int x, int y);
+	virtual void move(int dx,int dy);
 };
 

@@ -19,7 +19,8 @@ public:
 	Kite3(int x1, int y1);
 	Kite3(int x1, int y1, int x2, int y2);
 	virtual void setXY2(int x, int y);
-	virtual void Serialize(CArchive& ar);
+	virtual void Serialize(CArchive& ar);	
+	virtual void drawDots(CDC* pDC);
 	~Kite3();
 };
 

@@ -170,6 +170,8 @@ void CXDrawerView::OnDraw(CDC* pDC)
 		ptr->draw(pDC);
 	}
 	pDC->SelectObject(oldBrush);
+	if (currentFigure != NULL && actionMode == DEFAULT)
+		currentFigure->drawDots(pDC);
 }
 
 
@@ -264,8 +266,10 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 	if (whatToDraw == 0) {
 		if (currentFigure != NULL) {
 			if (currentFigure->ptInRgn(point.x, point.y)) {
+				currentX = point.x;
+				currentY = point.y;
 				actionMode = MOVING;
-				GetDocument()->removeFigure(currentFigure);
+				//GetDocument()->removeFigure(currentFigure);
 				GetDocument()->SetModifiedFlag();
 				CView::OnLButtonDown(nFlags, point);
 			}
@@ -340,14 +344,13 @@ void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 
 		pDC->SelectObject(oldBrush);
 
-		CXDrawerDoc *pDoc = GetDocument();
-		currentFigure->makeRegion();
+		CXDrawerDoc *pDoc = GetDocument();		
 
 		pDoc->add(currentFigure);
 		pDoc->SetModifiedFlag(TRUE);
 	}
+	currentFigure->makeRegion();
 	actionMode = DEFAULT;
-	currentFigure = NULL;
 	Invalidate();
 
 	CView::OnLButtonUp(nFlags, point);

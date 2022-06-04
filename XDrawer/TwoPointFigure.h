@@ -21,6 +21,8 @@ public:
 	virtual int getY1(){ return m_y1; }
 	virtual int getX2(){ return m_x2; }
 	virtual int getY2(){ return m_y2; }
+	virtual void move(int dx,int dy);
+	virtual void drawDots(CDC* pDC);
 	~TwoPointFigure();
 };
 

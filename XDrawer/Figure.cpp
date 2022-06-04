@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Figure.h"
 #include "FigurePopup.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Figure, CObject, 1)
 Figure::Figure()
@@ -31,4 +32,9 @@ void Figure::move(CDC* pDC,int dx,int dy)
 	draw(pDC);
 	move(dx,dy);
 	draw(pDC);
+}
+void Figure::eraseDots(CXDrawerView* view) 
+{ 
+	dotedFlag = FALSE; 
+	view->Invalidate();
 }

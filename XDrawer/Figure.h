@@ -1,6 +1,14 @@
 #pragma once
 #include "afx.h"
 
+#define BLACK_COLOR		(RGB(0,0,0))
+#define RED_COLOR		(RGB(255,0,0))
+#define GREEN_COLOR		(RGB(0,255,0))
+#define BLUE_COLOR		(RGB(0,0,255))
+
+#define DOTSIZE		(4)
+
+class CXDrawerView;
 class FigurePopup;
 class Figure :
 	public CObject
@@ -9,6 +17,8 @@ class Figure :
 public:
 	CRgn *region;
 	FigurePopup *popupPtr;
+	BOOL dotedFlag;
+	COLORREF color;
 	Figure();
 	// pure virtual function
 	void setPopup(FigurePopup *popup) {
@@ -27,6 +37,8 @@ public:
 	virtual BOOL ptInRgn(int x, int y);
 	virtual void move(CDC* pDC,int dx,int dy);
 	virtual void move(int dx,int dy) {}
+	virtual void drawDots(CDC* pDC) {}
+	virtual void eraseDots(CXDrawerView* view);
 	~Figure();
 };
 

@@ -73,3 +73,12 @@ void Kite1::setXY2(int x, int y)
 	l4->setXY12(m_x1, m_y1+h/2, x, y-h/2);
 	center->setXY12(m_x1+w/4, m_y1+h/4,x-w/4, y-h/4);
 }
+void Kite1::move(int dx,int dy)
+{
+	Box::move(dx,dy);
+	l1->move(dx,dy);
+	l2->move(dx,dy);
+	l3->move(dx,dy);
+	l4->move(dx,dy);
+	center->move(dx,dy);
+}

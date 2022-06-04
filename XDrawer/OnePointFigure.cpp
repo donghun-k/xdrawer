@@ -38,3 +38,22 @@ void OnePointFigure::makeRegion()
 	region = new CRgn();
 	region->CreateRectRgn(m_x1-DELTA, m_y1-DELTA, m_x1+DELTA, m_y1+DELTA);
 }
+void OnePointFigure::move(int dx,int dy)
+{
+	m_x1 = m_x1 + dx; m_y1 = m_y1 + dy;
+}
+void OnePointFigure::drawDots(CDC* pDC)
+{
+	dotedFlag = TRUE;
+	int x1 = m_x1;
+	int y1 = m_y1;
+	CRect rect1(m_x1-DELTA-DOTSIZE, m_y1-DELTA-DOTSIZE, m_x1-DELTA, m_y1-DELTA);
+	CRect rect2(m_x1+DELTA, m_y1-DELTA-DOTSIZE, m_x1+DELTA+DOTSIZE, m_y1-DELTA);
+	CRect rect3(m_x1-DELTA-DOTSIZE, m_y1+DELTA+DOTSIZE, m_x1-DELTA, m_y1+DELTA);
+	CRect rect4(m_x1+DELTA, m_y1+DELTA+DOTSIZE, m_x1+DELTA+DOTSIZE, m_y1+DELTA);
+	CBrush brush(BLACK_COLOR);
+	pDC->FillRect(&rect1,&brush);
+	pDC->FillRect(&rect2,&brush);
+	pDC->FillRect(&rect3,&brush);
+	pDC->FillRect(&rect4,&brush);
+}

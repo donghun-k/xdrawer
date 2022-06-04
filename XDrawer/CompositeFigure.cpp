@@ -51,3 +51,11 @@ BOOL CompositeFigure::ptInRgn(int x, int y)
 	}
 	return FALSE;
 }
+void CompositeFigure::move(int dx,int dy)
+{
+	POSITION pos = parts->GetHeadPosition();
+	while (pos != NULL) {
+		Figure *ptr = parts->GetNext(pos);
+		ptr->move(dx,dy);
+	}
+}

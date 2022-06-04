@@ -21,6 +21,7 @@ public:
 	virtual void draw(CDC* pDC);
 	virtual void setXY2(int x, int y);
 	virtual void Serialize(CArchive& ar);
+	virtual void move(int dx,int dy);
 	~Kite2();
 };
 

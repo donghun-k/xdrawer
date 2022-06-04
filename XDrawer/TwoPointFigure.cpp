@@ -49,6 +49,38 @@ void TwoPointFigure::makeRegion()
 	region = new CRgn();
 	region->CreateRectRgn(m_x1, m_y1, m_x2, m_y2);
 }
+void TwoPointFigure::move(int dx,int dy)
+{
+	m_x1 = m_x1 + dx; m_y1 = m_y1 + dy;
+	m_x2 = m_x2 + dx; m_y2 = m_y2 + dy;
+}
+void TwoPointFigure::drawDots(CDC* pDC)
+{
+	dotedFlag = TRUE;
+	if (m_x1 > m_x2) {
+		int tmp = m_x1;
+		m_x1 = m_x2;
+		m_x2 = tmp;
+	} 
+	if (m_y1 > m_y2) {
+		int tmp = m_y1;
+		m_y1 = m_y2;
+		m_y2 = tmp;
+	}
+	int x1 = m_x1;
+	int y1 = m_y1;
+	int x2 = m_x2;
+	int y2 = m_y2;
+	CRect rect1(x1-DOTSIZE,y1-DOTSIZE,x1,y1);
+	CRect rect2(x2,y1-DOTSIZE,x2+DOTSIZE,y1);
+	CRect rect3(x2,y2,x2+DOTSIZE,y2+DOTSIZE);
+	CRect rect4(x1-DOTSIZE,y2,x1,y2+DOTSIZE);
+	CBrush brush(BLACK_COLOR);
+	pDC->FillRect(&rect1,&brush);
+	pDC->FillRect(&rect2,&brush);
+	pDC->FillRect(&rect3,&brush);
+	pDC->FillRect(&rect4,&brush);
+}
 TwoPointFigure::~TwoPointFigure()
 {
 }
