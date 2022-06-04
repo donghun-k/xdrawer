@@ -26,3 +26,9 @@ BOOL Figure::ptInRgn(int x, int y)
 	if (region == NULL) return FALSE;
 	return region->PtInRegion(x, y);
 }
+void Figure::move(CDC* pDC,int dx,int dy) 
+{
+	draw(pDC);
+	move(dx,dy);
+	draw(pDC);
+}

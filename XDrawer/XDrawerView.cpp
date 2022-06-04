@@ -35,6 +35,10 @@
 #define new DEBUG_NEW
 #endif
 
+#define DEFAULT		(0)
+#define DRAWING		(1)
+#define MOVING		(2)
+
 #define DRAW_X			(1)
 #define DRAW_BUBBLE		(2)
 #define DRAW_BOX		(3)
@@ -82,7 +86,10 @@ CXDrawerView::CXDrawerView()
 	//::MessageBox(NULL, _T("CXDrawerView"), _T("CXDrawerView"), 0);
 	// TODO: 여기에 생성 코드를 추가합니다.
 	currentFigure = NULL;
-	whatToDraw = DRAW_BOX;	
+	whatToDraw = 0;	
+	actionMode = DEFAULT;
+	currentX = 0;
+	currentY = 0;
 	pDlg = new ModalDialog(this);	
 	mainPopup = new MainPopup(this, _T("그림들"));
 	xPopup = new FigurePopup(this, _T("엑스"));
@@ -254,7 +261,29 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
 	CDC *pDC = GetDC();
 
-	if(whatToDraw == DRAW_X) {
+	if (whatToDraw == 0) {
+		if (currentFigure != NULL) {
+			if (currentFigure->ptInRgn(point.x, point.y)) {
+				actionMode = MOVING;
+				GetDocument()->removeFigure(currentFigure);
+				GetDocument()->SetModifiedFlag();
+				CView::OnLButtonDown(nFlags, point);
+			}
+			currentFigure = NULL;
+		}				
+		FigureList *figures = GetDocument()->getFigures();
+		POSITION pos = figures->GetHeadPosition();
+		while(pos != NULL) {
+			Figure *ptr = figures->GetNext(pos);
+			if (ptr->ptInRgn(point.x,point.y)) {
+				currentFigure = ptr;
+				break;
+			}
+		}
+		Invalidate();
+		CView::OnLButtonDown(nFlags, point);
+		return;
+	} else if(whatToDraw == DRAW_X) {
 		currentFigure = new X(point.x, point.y);
 		currentFigure->setPopup(xPopup);
 	} else if(whatToDraw == DRAW_BUBBLE) {
@@ -285,6 +314,8 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 		currentFigure = new UFO(point.x, point.y);	
 		currentFigure->setPopup(ufoPopup);
 	}
+	whatToDraw = 0;
+	actionMode = DRAWING;
 	currentFigure->draw(pDC);
 	
 	CView::OnLButtonDown(nFlags, point);
@@ -294,8 +325,13 @@ void CXDrawerView::OnLButtonDown(UINT nFlags, CPoint point)
 void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 {
 	// TODO: 여기에 메시지 처리기 코드를 추가 및/또는 기본값을 호출합니다.
-	if(currentFigure != NULL)
-	{
+
+	if (currentFigure == NULL || actionMode == DEFAULT) {
+		CView::OnLButtonUp(nFlags, point);
+		return;
+	}
+	CDC *pDC = GetDC();
+	if (actionMode == DRAWING) {
 		CDC *pDC = GetDC();
 		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
 
@@ -310,6 +346,7 @@ void CXDrawerView::OnLButtonUp(UINT nFlags, CPoint point)
 		pDoc->add(currentFigure);
 		pDoc->SetModifiedFlag(TRUE);
 	}
+	actionMode = DEFAULT;
 	currentFigure = NULL;
 	Invalidate();
 
@@ -323,15 +360,24 @@ void CXDrawerView::OnMouseMove(UINT nFlags, CPoint point)
 	if(currentFigure != NULL)
 	{
 		CDC *pDC = GetDC();
-		int oldMode = pDC->SetROP2(R2_NOTXORPEN);
-		CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
 
-		currentFigure->draw(pDC);
-		currentFigure->setXY2(point.x, point.y);
-		currentFigure->draw(pDC);
+		if (actionMode == DRAWING) {
+			int oldMode = pDC->SetROP2(R2_NOTXORPEN);
+			CGdiObject *oldBrush = pDC->SelectStockObject(NULL_BRUSH);
 
-		pDC->SelectObject(oldBrush);
-		pDC->SetROP2(oldMode);
+			currentFigure->draw(pDC);
+			currentFigure->setXY2(point.x, point.y);
+			currentFigure->draw(pDC);
+
+			pDC->SelectObject(oldBrush);
+			pDC->SetROP2(oldMode);
+		} else if (actionMode == MOVING) {
+			int oldMode = pDC->SetROP2(R2_NOTXORPEN);
+			currentFigure->move(pDC,point.x-currentX,point.y-currentY);
+			pDC->SetROP2(oldMode);
+			currentX = point.x;
+			currentY = point.y;
+		}		
 	}
 	CView::OnMouseMove(nFlags, point);
 }

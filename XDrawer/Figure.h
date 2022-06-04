@@ -25,6 +25,8 @@ public:
 	virtual int getX2(){ return -1; }
 	virtual int getY2(){ return -1; }
 	virtual BOOL ptInRgn(int x, int y);
+	virtual void move(CDC* pDC,int dx,int dy);
+	virtual void move(int dx,int dy) {}
 	~Figure();
 };
 

@@ -19,6 +19,9 @@ protected: // serialization에서만 만들어집니다.
 
 private:
 	int whatToDraw;
+	int actionMode;
+	int currentX;
+	int currentY;
 	ModalDialog *pDlg;
 	MainPopup *mainPopup;
 	
