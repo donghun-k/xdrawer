@@ -4,10 +4,10 @@
 class Circle;
 class UFO :
 	public CompositeFigure
-{	
+{		
+	DECLARE_SERIAL(UFO)
 	Circle *c1;
 	Circle *c2;
-	DECLARE_SERIAL(UFO)
 public:	
 	UFO();
 	UFO(int x1, int y1);
@@ -15,6 +15,7 @@ public:
 	virtual void setXY2(int x, int y);
 	virtual void Serialize(CArchive& ar);
 	virtual void drawDots(CDC* pDC);
+	virtual void setFill();	
 	~UFO();
 };
 

@@ -18,7 +18,7 @@ UFO::UFO()
 }
 UFO::UFO(int x1, int y1)
 	:CompositeFigure()
-{	
+{
 	c1 = new Circle(x1-DELTA, y1-DELTA, x1+DELTA, y1+DELTA);
 	c2 = new Circle(x1-DELTA, y1-DELTA, x1+DELTA, y1+DELTA);
 
@@ -52,5 +52,13 @@ void UFO::drawDots(CDC* pDC)
 	while (pos != NULL) {
 		Figure *ptr = parts->GetNext(pos);
 		ptr->drawDots(pDC);
+	}
+}
+void UFO::setFill()
+{
+	POSITION pos = parts->GetHeadPosition();
+	while (pos != NULL) {
+		Figure *ptr = parts->GetNext(pos);
+		ptr->setFill();
 	}
 }

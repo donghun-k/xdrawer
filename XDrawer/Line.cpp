@@ -34,8 +34,11 @@ void Line::Serialize(CArchive& ar)
 //Scope resolution operator
 void Line::draw(CDC* pDC)
 {
+	CPen pen(PS_SOLID,1,_color);
+	CPen *oldPen = pDC->SelectObject(&pen);
 	pDC->MoveTo(m_x1, m_y1);
 	pDC->LineTo(m_x2, m_y2);
+	pDC->SelectObject(oldPen);
 }
 void Line::calcPoint()
 {

@@ -77,6 +77,11 @@ BEGIN_MESSAGE_MAP(CXDrawerView, CView)
 	ON_COMMAND(ID_OBJECT_KITE2, &CXDrawerView::OnObjectKite2)
 	ON_COMMAND(ID_OBJECT_KITE3, &CXDrawerView::OnObjectKite3)
 	ON_COMMAND(ID_OBJECT_UFO, &CXDrawerView::OnObjectUfo)
+	ON_COMMAND(ID_BLACK_COLOR, OnBlackColor)
+	ON_COMMAND(ID_RED_COLOR, OnRedColor)
+	ON_COMMAND(ID_GREEN_COLOR, OnGreenColor)
+	ON_COMMAND(ID_BLUE_COLOR, OnBlueColor)
+	ON_COMMAND(ID_FILL_FIGURE, OnFillFigure)
 END_MESSAGE_MAP()
 
 // CXDrawerView 생성/소멸
@@ -93,15 +98,15 @@ CXDrawerView::CXDrawerView()
 	pDlg = new ModalDialog(this);	
 	mainPopup = new MainPopup(this, _T("그림들"));
 	xPopup = new FigurePopup(this, _T("엑스"));
-	bubblePopup = new FigurePopup(this, _T("버블"));
+	bubblePopup = new FigurePopup(this, _T("버블"), TRUE);
 	linePopup = new FigurePopup(this, _T("선"));
-	boxPopup = new FigurePopup(this, _T("사각형"));
-	circlePopup = new FigurePopup(this, _T("원"));
-	diamondPopup = new FigurePopup(this, _T("다이아몬드"));
+	boxPopup = new FigurePopup(this, _T("사각형"), TRUE);
+	circlePopup = new FigurePopup(this, _T("원"), TRUE);
+	diamondPopup = new FigurePopup(this, _T("다이아몬드"), TRUE);
 	kite1Popup = new FigurePopup(this, _T("연1"));
 	kite2Popup = new FigurePopup(this, _T("연2"));
 	kite3Popup = new FigurePopup(this, _T("연3"));
-	ufoPopup = new FigurePopup(this, _T("UFO"));
+	ufoPopup = new FigurePopup(this, _T("UFO"), TRUE);
 }
 
 CXDrawerView::~CXDrawerView()
@@ -483,4 +488,38 @@ void CXDrawerView::OnObjectUfo()
 {
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	whatToDraw = DRAW_UFO;
+}
+void CXDrawerView::setColorForSelectedFigure(COLORREF color)
+{
+	if (currentFigure == NULL) return;
+	currentFigure->setColor(color);
+	GetDocument()->SetModifiedFlag();
+	Invalidate();
+}
+
+void CXDrawerView::OnBlackColor()
+{
+	setColorForSelectedFigure(BLACK_COLOR);
+}
+
+void CXDrawerView::OnRedColor()
+{
+	setColorForSelectedFigure(RED_COLOR);
+}
+
+void CXDrawerView::OnGreenColor()
+{
+	setColorForSelectedFigure(GREEN_COLOR);
+}
+
+void CXDrawerView::OnBlueColor()
+{
+	setColorForSelectedFigure(BLUE_COLOR);
+}
+void CXDrawerView::OnFillFigure()
+{
+	if (currentFigure == NULL) return;
+	currentFigure->setFill();
+	GetDocument()->SetModifiedFlag();
+	Invalidate();
 }

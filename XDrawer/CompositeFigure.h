@@ -16,5 +16,6 @@ public:
 	virtual void makeRegion();
 	virtual BOOL ptInRgn(int x, int y);
 	virtual void move(int dx,int dy);
+	virtual void setColor(COLORREF color);
 };
 

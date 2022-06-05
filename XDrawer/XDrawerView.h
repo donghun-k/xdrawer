@@ -64,10 +64,16 @@ protected:
 	afx_msg void OnDeleteFigure();
 // 생성된 메시지 맵 함수
 protected:
+	DECLARE_MESSAGE_MAP()
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
 	afx_msg void OnContextMenu(CWnd* pWnd, CPoint point);
-	DECLARE_MESSAGE_MAP()
+	afx_msg void OnBlackColor();
+	afx_msg void OnRedColor();
+	afx_msg void OnGreenColor();
+	afx_msg void OnBlueColor();	
+	void OnFillFigure();
+	void setColorForSelectedFigure(COLORREF color);
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 	afx_msg void OnLButtonUp(UINT nFlags, CPoint point);
@@ -78,13 +84,14 @@ public:
 	afx_msg void OnObjectDiamond();
 	afx_msg void OnObjectX();
 	afx_msg void OnObjectBubble();
-	afx_msg void OnModalDialog();
-	afx_msg void OnModalessDialog();
-	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
 	afx_msg void OnObjectKite1();
 	afx_msg void OnObjectKite2();
 	afx_msg void OnObjectKite3();
 	afx_msg void OnObjectUfo();
+	afx_msg void OnModalDialog();
+	afx_msg void OnModalessDialog();
+	virtual BOOL Create(LPCTSTR lpszClassName, LPCTSTR lpszWindowName, DWORD dwStyle, const RECT& rect, CWnd* pParentWnd, UINT nID, CCreateContext* pContext = NULL);
+
 };
 
 #ifndef _DEBUG  // XDrawerView.cpp의 디버그 버전

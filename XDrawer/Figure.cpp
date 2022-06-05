@@ -7,7 +7,10 @@ IMPLEMENT_SERIAL(Figure, CObject, 1)
 Figure::Figure()
 	:CObject()
 {
+	_color = 0;
 	region = NULL;
+	region = NULL;
+	dotedFlag = FALSE;
 }
 void Figure::Serialize(CArchive& ar)
 {
@@ -37,4 +40,8 @@ void Figure::eraseDots(CXDrawerView* view)
 { 
 	dotedFlag = FALSE; 
 	view->Invalidate();
+}
+void Figure::setColor(COLORREF color)
+{
+	_color = color;
 }

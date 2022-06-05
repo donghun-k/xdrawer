@@ -59,3 +59,11 @@ void CompositeFigure::move(int dx,int dy)
 		ptr->move(dx,dy);
 	}
 }
+void CompositeFigure::setColor(COLORREF color)
+{
+	POSITION pos = parts->GetHeadPosition();
+	while (pos != NULL) {
+		Figure *ptr = parts->GetNext(pos);
+		ptr->setColor(color);
+	}
+}

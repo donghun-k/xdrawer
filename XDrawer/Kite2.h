@@ -22,6 +22,7 @@ public:
 	virtual void setXY2(int x, int y);
 	virtual void Serialize(CArchive& ar);
 	virtual void move(int dx,int dy);
+	virtual void setColor(COLORREF color);
 	~Kite2();
 };
 

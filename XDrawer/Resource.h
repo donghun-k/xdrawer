@@ -125,7 +125,11 @@
 #define ID_OBJECT_KITE3                 32799
 #define ID_32800                        32800
 #define ID_OBJECT_UFO                   32801
-
+#define ID_BLACK_COLOR					110
+#define ID_RED_COLOR					111
+#define ID_GREEN_COLOR					112
+#define ID_BLUE_COLOR					113
+#define ID_FILL_FIGURE					114
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

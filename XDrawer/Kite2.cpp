@@ -89,4 +89,12 @@ void Kite2::move(int dx,int dy)
 	l4->move(dx,dy);
 	center->move(dx,dy);
 }
-
+void Kite2::setColor(COLORREF color)
+{
+	frame->setColor(color);
+	l1->setColor(color);
+	l2->setColor(color);
+	l3->setColor(color);
+	l4->setColor(color);
+	center->setColor(color);
+}

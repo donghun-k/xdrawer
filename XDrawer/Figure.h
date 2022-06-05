@@ -14,11 +14,12 @@ class Figure :
 	public CObject
 {
 	DECLARE_SERIAL(Figure)	
+protected:
+	BOOL dotedFlag;
+	COLORREF _color;
 public:
 	CRgn *region;
-	FigurePopup *popupPtr;
-	BOOL dotedFlag;
-	COLORREF color;
+	FigurePopup *popupPtr;	
 	Figure();
 	// pure virtual function
 	void setPopup(FigurePopup *popup) {
@@ -39,6 +40,11 @@ public:
 	virtual void move(int dx,int dy) {}
 	virtual void drawDots(CDC* pDC) {}
 	virtual void eraseDots(CXDrawerView* view);
+	virtual void setColor(COLORREF color);
+	virtual void setFill() {}
+	virtual Figure* copy() { 
+		return NULL; 
+	}
 	~Figure();
 };
 

@@ -21,8 +21,11 @@ void X::Serialize(CArchive& ar)
 //Scope resolution operator
 void X::draw(CDC* pDC)
 {
+	CPen pen(PS_SOLID,1,_color);
+	CPen *oldPen = pDC->SelectObject(&pen);
 	pDC->MoveTo(m_x1-DELTA, m_y1-DELTA);
 	pDC->LineTo(m_x1+DELTA, m_y1+DELTA);
 	pDC->MoveTo(m_x1+DELTA, m_y1-DELTA);
 	pDC->LineTo(m_x1-DELTA, m_y1+DELTA);
+	pDC->SelectObject(oldPen);
 }
