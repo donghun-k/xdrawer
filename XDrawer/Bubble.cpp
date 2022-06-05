@@ -19,6 +19,12 @@ Bubble::~Bubble()
 void Bubble::Serialize(CArchive& ar)
 {
 	OnePointFigure::Serialize(ar);
+	CObject::Serialize(ar);
+	if (ar.IsStoring()) {
+		ar << _fillFlag;
+	} else {
+		ar >> _fillFlag;
+	}
 }
 //Scope resolution operator
 void Bubble::draw(CDC* pDC)

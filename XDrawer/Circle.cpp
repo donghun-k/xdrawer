@@ -24,6 +24,12 @@ Circle::~Circle()
 void Circle::Serialize(CArchive& ar)
 {
 	TwoPointFigure::Serialize(ar);
+	CObject::Serialize(ar);
+	if (ar.IsStoring()) {
+		ar << _fillFlag;
+	} else {
+		ar >> _fillFlag;
+	}
 }
 
 //Scope resolution operator

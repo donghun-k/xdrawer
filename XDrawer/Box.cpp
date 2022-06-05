@@ -24,6 +24,12 @@ Box::~Box()
 void Box::Serialize(CArchive& ar)
 {
 	TwoPointFigure::Serialize(ar);
+	CObject::Serialize(ar);
+	if (ar.IsStoring()) {
+		ar << _fillFlag;
+	} else {
+		ar >> _fillFlag;
+	}
 }
 void Box::draw(CDC* pDC)
 {

@@ -85,6 +85,7 @@ void Kite1::move(int dx,int dy)
 }
 void Kite1::setColor(COLORREF color)
 {
+	_color = color;
 	Box::setColor(color);
 	l1->setColor(color);
 	l2->setColor(color);

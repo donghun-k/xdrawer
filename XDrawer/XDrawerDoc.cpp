@@ -10,6 +10,7 @@
 #endif
 
 #include "XDrawerDoc.h"
+#include "XDrawerView.h"
 #include <propkey.h>
 
 #include "Figure.h"
@@ -53,11 +54,12 @@ BOOL CXDrawerDoc::OnNewDocument()
 	// TODO: 여기에 재초기화 코드를 추가합니다.
 	// SDI 문서는 이 문서를 다시 사용합니다.
 	figures->RemoveAllFigures();	
+	POSITION pos = GetFirstViewPosition();
+	CXDrawerView *view = (CXDrawerView *)GetNextView(pos);
+	view->currentFigure = NULL;
 
 	return TRUE;
 }
-
-
 
 
 // CXDrawerDoc serialization
@@ -74,7 +76,12 @@ void CXDrawerDoc::Serialize(CArchive& ar)
 		// TODO: 여기에 로딩 코드를 추가합니다.
 		delete figures;
 		ar >> figures;
-		// POSITION pos = GetFirstViewPosition();
+
+		POSITION pos = figures->GetHeadPosition();
+		while(pos != NULL) {
+			Figure *ptr = figures->GetNext(pos);
+			ptr->makeRegion();
+		}
 	}
 }
 

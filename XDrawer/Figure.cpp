@@ -9,12 +9,17 @@ Figure::Figure()
 {
 	_color = 0;
 	region = NULL;
-	region = NULL;
 	dotedFlag = FALSE;
+	popupPtr = NULL;
 }
 void Figure::Serialize(CArchive& ar)
 {
 	CObject::Serialize(ar);
+	if (ar.IsStoring()) {
+		ar << _color;
+	} else {
+		ar >> _color;
+	}
 }
 
 void Figure::popup(int x, int y)

@@ -92,6 +92,7 @@ void Kite2::move(int dx,int dy)
 }
 void Kite2::setColor(COLORREF color)
 {
+	_color = color;
 	frame->setColor(color);
 	l1->setColor(color);
 	l2->setColor(color);

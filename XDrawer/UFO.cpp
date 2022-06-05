@@ -48,6 +48,12 @@ UFO::~UFO()
 void UFO::Serialize(CArchive& ar)
 {
 	CompositeFigure::Serialize(ar);
+	CObject::Serialize(ar);
+	if (ar.IsStoring()) {
+		ar << _fillFlag;
+	} else {
+		ar >> _fillFlag;
+	}
 }
 void UFO::setXY2(int x, int y)
 {
