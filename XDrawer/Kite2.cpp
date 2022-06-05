@@ -3,6 +3,7 @@
 #include "Line.h"
 #include "Circle.h"
 #include "Box.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Kite2, TwoPointFigure, 1)
 Kite2::Kite2()
@@ -97,4 +98,12 @@ void Kite2::setColor(COLORREF color)
 	l3->setColor(color);
 	l4->setColor(color);
 	center->setColor(color);
+}
+Figure* Kite2::copy(CXDrawerView* view)
+{
+	Kite2 *newKite = new Kite2(m_x1,m_y1,m_x2,m_y2);
+	newKite->setColor(_color);
+	newKite->setPopup(view->kite2Popup);
+	newKite->move(30,20);
+	return newKite;
 }

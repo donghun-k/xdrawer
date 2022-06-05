@@ -11,6 +11,7 @@ public:
 	Bubble(int x1, int y1);
 	virtual void draw(CDC* pDC);
 	virtual void setFill();
+	virtual Figure* copy(CXDrawerView* view);
 	virtual void Serialize(CArchive& ar);
 	~Bubble();
 };

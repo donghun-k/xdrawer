@@ -9,19 +9,18 @@ class ModalDialog : public CDialogEx
 {
 	DECLARE_DYNAMIC(ModalDialog)
 
-public:
+public:	
 	ModalDialog(CXDrawerView *const pView, CWnd* pParent = NULL);   // 표준 생성자입니다.
-	virtual ~ModalDialog();
-	CXDrawerView *m_pView;
+	virtual ~ModalDialog();	
 
 // 대화 상자 데이터입니다.
 	enum { IDD = IDD_MODAL_DIALOG };
 
 protected:
 	virtual void DoDataExchange(CDataExchange* pDX);    // DDX/DDV 지원입니다.
-
 	DECLARE_MESSAGE_MAP()
 public:
+	CXDrawerView *m_pView;
 	int m_x1;
 	int m_y1;
 	CString m_x2;

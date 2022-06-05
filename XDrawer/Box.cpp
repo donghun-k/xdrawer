@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Box.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Box, TwoPointFigure, 1)
 Box::Box()
@@ -24,7 +25,6 @@ void Box::Serialize(CArchive& ar)
 {
 	TwoPointFigure::Serialize(ar);
 }
-//Scope resolution operator
 void Box::draw(CDC* pDC)
 {
 	if (_fillFlag == FALSE) {
@@ -45,4 +45,13 @@ void Box::draw(CDC* pDC)
 void Box::setFill()
 {
 	_fillFlag = !_fillFlag;
+}
+Figure* Box::copy(CXDrawerView* view)
+{
+	Box *newBox = new Box(m_x1,m_y1,m_x2,m_y2);
+	newBox->_fillFlag = _fillFlag;
+	newBox->setColor(_color);
+	newBox->setPopup(view->boxPopup);
+	newBox->move(30,20);
+	return newBox;
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Diamond.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Diamond, TwoPointFigure, 1)
 Diamond::Diamond()
@@ -59,4 +60,13 @@ void Diamond::draw(CDC* pDC)
 void Diamond::setFill()
 {
 	_fillFlag = !_fillFlag;
+}
+Figure* Diamond::copy(CXDrawerView* view)
+{
+	Diamond *newDiamond = new Diamond(m_x1,m_y1,m_x2,m_y2);
+	newDiamond->_fillFlag = _fillFlag;
+	newDiamond->setColor(_color);
+	newDiamond->setPopup(view->diamondPopup);
+	newDiamond->move(30,20);
+	return newDiamond;
 }

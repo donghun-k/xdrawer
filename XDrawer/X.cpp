@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "X.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(X, OnePointFigure, 1)
 X::X()
@@ -28,4 +29,12 @@ void X::draw(CDC* pDC)
 	pDC->MoveTo(m_x1+DELTA, m_y1-DELTA);
 	pDC->LineTo(m_x1-DELTA, m_y1+DELTA);
 	pDC->SelectObject(oldPen);
+}
+Figure* X::copy(CXDrawerView* view)
+{
+	X *newX = new X(m_x1,m_y1);
+	newX->setColor(_color);
+	newX->setPopup(view->xPopup);
+	newX->move(30,20);	
+	return newX;
 }

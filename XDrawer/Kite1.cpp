@@ -2,6 +2,7 @@
 #include "Kite1.h"
 #include "Line.h"
 #include "Circle.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Kite1, Box, 1)
 Kite1::Kite1()
@@ -90,4 +91,12 @@ void Kite1::setColor(COLORREF color)
 	l3->setColor(color);
 	l4->setColor(color);
 	center->setColor(color);
+}
+Figure* Kite1::copy(CXDrawerView* view)
+{
+	Kite1 *newKite = new Kite1(m_x1,m_y1,m_x2,m_y2);
+	newKite->setColor(_color);
+	newKite->setPopup(view->kite1Popup);
+	newKite->move(30,20);
+	return newKite;
 }

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Circle.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Circle, TwoPointFigure, 1)
 Circle::Circle()
@@ -46,4 +47,13 @@ void Circle::draw(CDC* pDC)
 void Circle::setFill()
 {
 	_fillFlag = !_fillFlag;
+}
+Figure* Circle::copy(CXDrawerView* view)
+{
+	Circle *newCircle = new Circle(m_x1,m_y1,m_x2,m_y2);
+	newCircle->_fillFlag = _fillFlag;
+	newCircle->setColor(_color);
+	newCircle->setPopup(view->circlePopup);
+	newCircle->move(30,20);
+	return newCircle;
 }

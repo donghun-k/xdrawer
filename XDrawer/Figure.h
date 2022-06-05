@@ -30,7 +30,6 @@ public:
 	virtual void setXY2(int x, int y) {};
 	virtual void setXY12(int x1, int y1, int x2, int y2) {};
 	virtual void makeRegion() {};
-	virtual void Serialize(CArchive& ar);
 	virtual int getX1(){ return -1; }
 	virtual int getY1(){ return -1; }
 	virtual int getX2(){ return -1; }
@@ -42,9 +41,13 @@ public:
 	virtual void eraseDots(CXDrawerView* view);
 	virtual void setColor(COLORREF color);
 	virtual void setFill() {}
-	virtual Figure* copy() { 
+	virtual Figure* copy(CXDrawerView* view) { 
 		return NULL; 
 	}
+	virtual COLORREF getColor() {
+		return _color;
+	}
+	virtual void Serialize(CArchive& ar);
 	~Figure();
 };
 

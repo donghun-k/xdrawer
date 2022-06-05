@@ -54,8 +54,7 @@
 
 IMPLEMENT_DYNCREATE(CXDrawerView, CView)
 
-BEGIN_MESSAGE_MAP(CXDrawerView, CView)
-	ON_COMMAND(ID_DELETE_FIGURE, &CXDrawerView::OnDeleteFigure)
+BEGIN_MESSAGE_MAP(CXDrawerView, CView)	
 	// 표준 인쇄 명령입니다.
 	ON_COMMAND(ID_FILE_PRINT, &CView::OnFilePrint)
 	ON_COMMAND(ID_FILE_PRINT_DIRECT, &CView::OnFilePrint)
@@ -81,7 +80,9 @@ BEGIN_MESSAGE_MAP(CXDrawerView, CView)
 	ON_COMMAND(ID_RED_COLOR, OnRedColor)
 	ON_COMMAND(ID_GREEN_COLOR, OnGreenColor)
 	ON_COMMAND(ID_BLUE_COLOR, OnBlueColor)
+	ON_COMMAND(ID_DELETE_FIGURE, &CXDrawerView::OnDeleteFigure)
 	ON_COMMAND(ID_FILL_FIGURE, OnFillFigure)
+	ON_COMMAND(ID_COPY_FIGURE, OnCopyFigure)
 END_MESSAGE_MAP()
 
 // CXDrawerView 생성/소멸
@@ -489,6 +490,16 @@ void CXDrawerView::OnObjectUfo()
 	// TODO: 여기에 명령 처리기 코드를 추가합니다.
 	whatToDraw = DRAW_UFO;
 }
+void CXDrawerView::OnCopyFigure()
+{
+	if (currentFigure == NULL) return;
+	Figure *newFigure = currentFigure->copy(this);
+	newFigure->makeRegion();
+	GetDocument()->add(newFigure);
+	currentFigure = newFigure;
+	GetDocument()->SetModifiedFlag();
+	Invalidate();
+}
 void CXDrawerView::setColorForSelectedFigure(COLORREF color)
 {
 	if (currentFigure == NULL) return;
@@ -496,7 +507,6 @@ void CXDrawerView::setColorForSelectedFigure(COLORREF color)
 	GetDocument()->SetModifiedFlag();
 	Invalidate();
 }
-
 void CXDrawerView::OnBlackColor()
 {
 	setColorForSelectedFigure(BLACK_COLOR);

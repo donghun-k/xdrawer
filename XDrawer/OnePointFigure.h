@@ -13,13 +13,13 @@ protected:
 public:
 	OnePointFigure();
 	OnePointFigure(int x1, int y1);
-	virtual void setXY2(int x, int y);
-	virtual void Serialize(CArchive& ar);
+	virtual void setXY2(int x, int y);	
 	virtual void makeRegion();
 	virtual int getX1(){ return m_x1; }
 	virtual int getY1(){ return m_y1; }
 	virtual void drawDots(CDC* pDC);
 	virtual void move(int dx,int dy);
+	virtual void Serialize(CArchive& ar);
 	~OnePointFigure();
 };
 

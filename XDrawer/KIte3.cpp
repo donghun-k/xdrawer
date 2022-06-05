@@ -5,6 +5,7 @@
 #include "Circle.h"
 #include "Box.h"
 #include "FigureList.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Kite3, CompositeFigure, 1)
 Kite3::Kite3()
@@ -115,3 +116,15 @@ void Kite3::drawDots(CDC* pDC)
 	pDC->FillRect(&rect4,&brush);
 }
 
+Figure* Kite3::copy(CXDrawerView* view)
+{
+	int x1 = frame->getX1();
+	int y1 = frame->getY1();
+	int x2 = frame->getX2();
+	int y2 = frame->getY2();
+	Kite3 *newKite = new Kite3(x1, y1, x2, y2);
+	newKite->setColor(_color);
+	newKite->setPopup(view->kite3Popup);
+	newKite->move(30,20);	
+	return newKite;
+}

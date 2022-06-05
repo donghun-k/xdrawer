@@ -21,10 +21,11 @@ public:
 	Line(int x1, int y1);
 	Line(int x1, int y1, int x2, int y2);
 	void calcPoint();
-	virtual void draw(CDC* pDC);
-	virtual void Serialize(CArchive& ar);
+	virtual void draw(CDC* pDC);	
 	virtual void makeRegion();
 	virtual void drawDots(CDC* pDC);
+	virtual Figure* copy(CXDrawerView* view);
+	virtual void Serialize(CArchive& ar);
 	~Line();
 };
 

@@ -61,9 +61,8 @@ public:
 #endif
 
 protected:
-	afx_msg void OnDeleteFigure();
+	
 // 생성된 메시지 맵 함수
-protected:
 	DECLARE_MESSAGE_MAP()
 	afx_msg void OnFilePrintPreview();
 	afx_msg void OnRButtonUp(UINT nFlags, CPoint point);
@@ -72,7 +71,9 @@ protected:
 	afx_msg void OnRedColor();
 	afx_msg void OnGreenColor();
 	afx_msg void OnBlueColor();	
-	void OnFillFigure();
+	afx_msg void OnDeleteFigure();
+	afx_msg void OnCopyFigure();
+	afx_msg void OnFillFigure();
 	void setColorForSelectedFigure(COLORREF color);
 public:
 	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);

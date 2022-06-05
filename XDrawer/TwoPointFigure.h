@@ -15,7 +15,6 @@ public:
 	TwoPointFigure(int x1, int y1, int x2, int y2);	
 	void virtual setXY2(int x, int y);
 	void virtual setXY12(int x1, int y1, int x2, int y2);
-	virtual void Serialize(CArchive& ar);
 	virtual void makeRegion();
 	virtual int getX1(){ return m_x1; }
 	virtual int getY1(){ return m_y1; }
@@ -23,6 +22,7 @@ public:
 	virtual int getY2(){ return m_y2; }
 	virtual void move(int dx,int dy);
 	virtual void drawDots(CDC* pDC);
+	virtual void Serialize(CArchive& ar);
 	~TwoPointFigure();
 };
 

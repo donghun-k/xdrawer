@@ -20,9 +20,10 @@ public:
 	Kite2(int x1, int y1, int x2, int y2);
 	virtual void draw(CDC* pDC);
 	virtual void setXY2(int x, int y);
-	virtual void Serialize(CArchive& ar);
 	virtual void move(int dx,int dy);
 	virtual void setColor(COLORREF color);
+	virtual Figure* copy(CXDrawerView* view);	
+	virtual void Serialize(CArchive& ar);
 	~Kite2();
 };
 

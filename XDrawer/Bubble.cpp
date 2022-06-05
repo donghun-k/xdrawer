@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Bubble.h"
+#include "XDrawerView.h"
 
 IMPLEMENT_SERIAL(Bubble, OnePointFigure, 1)
 Bubble::Bubble()
@@ -40,5 +41,13 @@ void Bubble::draw(CDC* pDC)
 void Bubble::setFill()
 {
 	_fillFlag = !_fillFlag;
+}
+Figure* Bubble::copy(CXDrawerView* view)
+{
+	Bubble *newBubble = new Bubble(m_x1,m_y1);
+	newBubble->setColor(_color);
+	newBubble->setPopup(view->bubblePopup);
+	newBubble->move(30,20);
+	return newBubble;
 }
 

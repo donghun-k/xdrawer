@@ -9,10 +9,9 @@ class FigureList :
 	DECLARE_SERIAL(FigureList)
 public:
 	FigureList();
-	~FigureList();
-
 	Figure  *FigureList::GetNext(POSITION &pos);
 	void RemoveAllFigures();
 	void removeFigure(Figure *ptr);
+	~FigureList();	
 };
 

@@ -2,6 +2,7 @@
 #include <math.h>
 
 #include "Line.h"
+#include "XDrawerView.h"
 
 
 #ifndef M_PI
@@ -81,4 +82,12 @@ void Line::drawDots(CDC* pDC)
 	pDC->FillRect(&rect2,&brush);
 	pDC->FillRect(&rect3,&brush);
 	pDC->FillRect(&rect4,&brush);
+}
+Figure* Line::copy(CXDrawerView* view)
+{
+	Line *newLine = new Line(m_x1,m_y1,m_x2,m_y2);
+	newLine->setColor(_color);
+	newLine->setPopup(view->linePopup);
+	newLine->move(30,20);
+	return newLine;
 }

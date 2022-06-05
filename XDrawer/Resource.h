@@ -130,6 +130,7 @@
 #define ID_GREEN_COLOR					112
 #define ID_BLUE_COLOR					113
 #define ID_FILL_FIGURE					114
+#define ID_COPY_FIGURE					115
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED

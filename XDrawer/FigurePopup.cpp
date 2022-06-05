@@ -8,6 +8,7 @@ FigurePopup::FigurePopup(CXDrawerView *view, CString title, BOOL fillButtonFlag)
 	: Popup(view, title)
 {	
 	popupPtr->AppendMenuW(MF_STRING, ID_DELETE_FIGURE, _T("지우기"));
+	popupPtr->AppendMenu(MF_STRING,ID_COPY_FIGURE, _T("복사하기"));
 
 	colorPopup = new CMenu();
 	colorPopup->CreatePopupMenu();

@@ -1,8 +1,44 @@
-﻿빌드 시작: 2022-06-05 오후 2:44:19
+﻿빌드 시작: 2022-06-05 오후 4:54:14
      1>2 노드의 "C:\Users\geyd6\Desktop\xdrawer-cpp\XDrawer\XDrawer.vcxproj" 프로젝트(Build 대상)입니다.
      1>ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XDrawer.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Kite1.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _WINDOWS /D _DEBUG /D _UNICODE /D UNICODE /D _AFXDLL /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\XDrawer.pch" /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt Box.cpp Bubble.cpp Circle.cpp CompositeFigure.cpp Diamond.cpp Figure.cpp FigureList.cpp FigurePopup.cpp KIte3.cpp Kite1.cpp Kite2.cpp Line.cpp MainPopup.cpp ModalDialog.cpp OnePointFigure.cpp Popup.cpp TwoPointFigure.cpp UFO.cpp X.cpp XDrawerDoc.cpp XDrawerView.cpp
+         Box.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
+         Bubble.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
+         CompositeFigure.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
+         Figure.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
+         KIte3.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
          Kite1.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
+         Kite2.cpp
+         코드를 생성하고 있습니다...
+         컴파일하고 있습니다...
+         ModalDialog.cpp
+         코드를 생성하고 있습니다...
+         건너뛰고 있습니다... (관련된 변경 내용 없음)
+         TwoPointFigure.cpp
+         Diamond.cpp
+         Circle.cpp
+         OnePointFigure.cpp
+         XDrawerDoc.cpp
+         FigureList.cpp
+         Popup.cpp
+         MainPopup.cpp
+         FigurePopup.cpp
+         Line.cpp
+         XDrawerView.cpp
+         X.cpp
+         UFO.cpp
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\geyd6\Desktop\xdrawer-cpp\Debug\XDrawer.exe" /INCREMENTAL /NOLOGO /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /manifestinput:"C:\Program Files (x86)\Microsoft Visual Studio 11.0\VC\Include\Manifest\dpiaware.manifest" /DEBUG /PDB:"C:\Users\geyd6\Desktop\xdrawer-cpp\Debug\XDrawer.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /ENTRY:"wWinMainCRTStartup" /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\geyd6\Desktop\xdrawer-cpp\Debug\XDrawer.lib" /MACHINE:X86 Debug\XDrawer.res
          Debug\Box.obj
@@ -39,4 +75,4 @@
 
 빌드했습니다.
 
-경과 시간: 00:00:01.11
+경과 시간: 00:00:02.16
