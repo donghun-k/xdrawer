@@ -4,6 +4,8 @@ import java.awt.event.*;
 
 class DrawerFrame extends JFrame {
 
+  DrawerView view;
+
   DrawerFrame() {
     setTitle("Drawer");
 
@@ -70,6 +72,12 @@ class DrawerFrame extends JFrame {
           "XDrawer with Java",
           JOptionPane.INFORMATION_MESSAGE);
     });
+
+//    Content panel 생성
+    Container container = this.getContentPane();
+    container.setBackground(Color.red);
+    view = new DrawerView();
+    container.add(view);
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
