@@ -17,10 +17,12 @@ class DrawerFrame extends JFrame {
 //    아이콘 추가
     Image img = tk.getImage("img/ball.gif");
     setIconImage(img);
+
 //    메뉴바 생성
     JMenuBar menus = new JMenuBar();
     setJMenuBar(menus);
 
+//    파일 메뉴
     JMenu fileMenu = new JMenu("파일(F)");
     menus.add(fileMenu);
 
@@ -29,10 +31,8 @@ class DrawerFrame extends JFrame {
     newFile.setMnemonic('N');
     newFile.setIcon(new ImageIcon("img/new.gif"));
     newFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
-    newFile.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        System.out.println("test");
-      }
+    newFile.addActionListener((e) -> {
+      System.out.println("test");
     });
 
     JMenuItem openFile = new JMenuItem("열기(O)");
@@ -50,16 +50,20 @@ class DrawerFrame extends JFrame {
     JMenuItem anotherFile = new JMenuItem("다른 이름으로 저장(A)");
     fileMenu.add(anotherFile);
 
-    fileMenu.add()
-
-    JMenuItem exit = new JMenuItem("종료(X)");
     fileMenu.addSeparator();
 
-    exit.addActionListener(new ActionListener() {
-      public void actionPerformed(ActionEvent e) {
-        System.exit(0);
-      }
+    JMenuItem exit = new JMenuItem("종료(X)");
+    fileMenu.add(exit);
+    exit.addActionListener((e) -> {
+      System.exit(0);
     });
+
+//    도움말 메뉴
+    JMenu helpMenu = new JMenu("도움말(H)");
+    menus.add(helpMenu);
+
+    JMenuItem infoHelp = new JMenuItem("Drawer 정보(I)");
+    helpMenu.add(infoHelp);
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
