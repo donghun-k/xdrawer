@@ -64,6 +64,12 @@ class DrawerFrame extends JFrame {
 
     JMenuItem infoHelp = new JMenuItem("Drawer 정보(I)");
     helpMenu.add(infoHelp);
+    infoHelp.addActionListener((e) -> {
+      JOptionPane.showMessageDialog(null,
+          "Java Swing GUI Programming practice.\r\nThanks to Prof. Tae Gyun Kim",
+          "XDrawer with Java",
+          JOptionPane.INFORMATION_MESSAGE);
+    });
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
