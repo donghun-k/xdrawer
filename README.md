@@ -1,11 +1,5 @@
 # XDrawer with C#
-부산외국어대학교 Visual C# Programming 실습 프로젝트입니다.
 
-## 지도교수님
- - Prof. Tae Gyun Kim
-
-## Language
- - C#
-
-## Development Environment
- - Visual Studio 2022
+부산외국어대학교 컴퓨터공학과 김태균 교수님의 Visual C# Programming 강의 실습 프로젝트입니다.
+ 
+## 소개
