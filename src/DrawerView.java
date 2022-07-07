@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
@@ -5,14 +6,10 @@ import java.awt.event.*;
 public class DrawerView extends JPanel implements MouseListener, MouseMotionListener {
 
   static int MAX = 100;
-  Box pBox;
-  Box boxes[];
-  int nBox;
+  private Box pBox;
+  private ArrayList<Box> boxes = new ArrayList<Box>();
 
   DrawerView() {
-    pBox = null;
-    boxes = new Box[MAX];
-    nBox = 0;
     addMouseListener(this);
     addMouseMotionListener(this);
   }
@@ -22,8 +19,9 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
     super.paintComponent(g);
 
-    for (int i = 0; i < nBox; i++) {
-      boxes[i].draw(g);
+    for (int i = 0; i < boxes.size(); i++) {
+      Box tBox = boxes.get(i);
+      tBox.draw(g);
     }
   }
 
@@ -34,7 +32,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   public void mousePressed(MouseEvent e) {
     pBox = new Box(e.getX(), e.getY());
-    boxes[nBox++] = pBox;
+
+    boxes.add(pBox);
   }
 
   public void mouseReleased(MouseEvent e) {
