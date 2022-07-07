@@ -7,6 +7,8 @@ class DrawerFrame extends JFrame {
   DrawerView view;
 
   DrawerFrame() {
+    view = new DrawerView();
+
     setTitle("Drawer");
 
 //    화면 2/3의 크기의 프레임 만들어서 가운데 위치 시키기
@@ -71,7 +73,7 @@ class DrawerFrame extends JFrame {
     });
     JMenuItem figureLine = new JMenuItem("Line(L)");
     figureMenu.add(figureLine);
-    figureBox.addActionListener((e) -> {
+    figureLine.addActionListener((e) -> {
       view.setWhatToDraw(DrawerView.DRAW_LINE);
     });
 
@@ -91,7 +93,6 @@ class DrawerFrame extends JFrame {
 //    Content panel 생성
     Container container = this.getContentPane();
     container.setBackground(Color.red);
-    view = new DrawerView();
     container.add(view);
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);

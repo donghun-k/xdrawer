@@ -9,11 +9,13 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   public static int DRAW_LINE = 2;
 
   private int whatToDraw;
-  private Box pBox;
-  private ArrayList<Box> boxes = new ArrayList<Box>();
+  private Figure currentFigure;
+  // polymorphic collection or polymorphic container
+  private ArrayList<Figure> figures = new ArrayList<Figure>();
 
   DrawerView() {
-    whatToDraw = 0;
+    whatToDraw = 1;
+    currentFigure = null;
     addMouseListener(this);
     addMouseMotionListener(this);
   }
@@ -28,8 +30,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     super.paintComponent(g);
 
     // Collection에 담긴 그림 객체 순회하면서 그리기
-    for (Box p : boxes) {
-      pBox.draw(g);
+    for (Figure pFigure : figures) {
+      pFigure.draw(g);
     }
   }
 
@@ -40,17 +42,18 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   public void mousePressed(MouseEvent e) {
     if (whatToDraw == DRAW_BOX) {
-      pBox = new Box(e.getX(), e.getY());
-      boxes.add(pBox);
+      currentFigure = new Box(e.getX(), e.getY());
+    } else if (whatToDraw == DRAW_LINE) {
+      currentFigure = new Line(e.getX(), e.getY());
     }
-
+    figures.add(currentFigure);
   }
 
   public void mouseReleased(MouseEvent e) {
     Graphics g = getGraphics();
 
-    pBox.setXY2(e.getX(), e.getY());
-    pBox.draw(g);
+    currentFigure.setXY2(e.getX(), e.getY());
+    currentFigure.draw(g);
   }
 
   public void mouseEntered(MouseEvent e) {
@@ -68,7 +71,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   public void mouseDragged(MouseEvent e) {
     Graphics g = getGraphics();
     g.setXORMode(getBackground());
-    pBox.drawing(g, e.getX(), e.getY());
-    pBox.drawing(g, e.getX(), e.getY());
+    currentFigure.drawing(g, e.getX(), e.getY());
+    currentFigure.drawing(g, e.getX(), e.getY());
   }
 }
