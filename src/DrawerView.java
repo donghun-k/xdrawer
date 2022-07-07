@@ -19,9 +19,9 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
     super.paintComponent(g);
 
-    for (int i = 0; i < boxes.size(); i++) {
-      Box tBox = boxes.get(i);
-      tBox.draw(g);
+    // Collection에 담긴 그림 객체 순회하면서 그리기
+    for (Box p : boxes) {
+      pBox.draw(g);
     }
   }
 
