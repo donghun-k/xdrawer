@@ -5,13 +5,21 @@ import java.awt.event.*;
 
 public class DrawerView extends JPanel implements MouseListener, MouseMotionListener {
 
-  static int MAX = 100;
+  public static int DRAW_BOX = 1;
+  public static int DRAW_LINE = 2;
+
+  private int whatToDraw;
   private Box pBox;
   private ArrayList<Box> boxes = new ArrayList<Box>();
 
   DrawerView() {
+    whatToDraw = 0;
     addMouseListener(this);
     addMouseMotionListener(this);
+  }
+
+  void setWhatToDraw(int figureType) {
+    whatToDraw = figureType;
   }
 
   //  paint event 시 자동 호출
@@ -31,9 +39,11 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   public void mousePressed(MouseEvent e) {
-    pBox = new Box(e.getX(), e.getY());
+    if (whatToDraw == DRAW_BOX) {
+      pBox = new Box(e.getX(), e.getY());
+      boxes.add(pBox);
+    }
 
-    boxes.add(pBox);
   }
 
   public void mouseReleased(MouseEvent e) {
