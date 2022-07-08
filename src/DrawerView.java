@@ -46,7 +46,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     } else if (whatToDraw == DRAW_LINE) {
       currentFigure = new Line(e.getX(), e.getY());
     }
-    figures.add(currentFigure);
+
   }
 
   public void mouseReleased(MouseEvent e) {
@@ -54,6 +54,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
     currentFigure.setXY2(e.getX(), e.getY());
     currentFigure.draw(g);
+    figures.add(currentFigure);
+    currentFigure = null;
   }
 
   public void mouseEntered(MouseEvent e) {
