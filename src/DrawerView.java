@@ -59,6 +59,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
     currentFigure.setXY2(e.getX(), e.getY());
     currentFigure.draw(g);
+    currentFigure.makeRegion();
     figures.add(currentFigure);
     currentFigure = null;
   }
@@ -71,8 +72,26 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   }
 
-  public void mouseMoved(MouseEvent e) {
+  private Figure find(int x, int y) {
+    for (int i = 0; i < figures.size(); i++) {
+      Figure pFigure = figures.get(i);
+      if (pFigure.contains(x, y)) {
+        return pFigure;
+      }
+    }
+    return (Figure) null;
+  }
 
+  public void mouseMoved(MouseEvent e) {
+    int x = e.getX();
+    int y = e.getY();
+
+    currentFigure = find(x, y);
+    if (currentFigure != null) {
+      setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+    } else {
+      setCursor(Cursor.getDefaultCursor());
+    }
   }
 
   public void mouseDragged(MouseEvent e) {
