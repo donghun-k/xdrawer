@@ -8,12 +8,21 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   public static int DRAW_BOX = 1;
   public static int DRAW_LINE = 2;
 
+  public static int NOTHING = 0;
+  public static int DRAWING = 1;
+  public static int MOVING = 2;
+
+  private int actionMode;
   private int whatToDraw;
   private Figure currentFigure;
   // polymorphic collection or polymorphic container
   private ArrayList<Figure> figures = new ArrayList<Figure>();
 
+  private int currentX;
+  private int currentY;
+
   DrawerView() {
+    actionMode = 0;
     whatToDraw = 1;
     currentFigure = null;
     addMouseListener(this);
@@ -36,40 +45,9 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   public void addFigure(Figure newFigure) {
+    newFigure.makeRegion();
     figures.add(newFigure);
     repaint();
-  }
-
-  //  마우스 이벤트 리스너
-  public void mouseClicked(MouseEvent e) {
-
-  }
-
-  public void mousePressed(MouseEvent e) {
-    if (whatToDraw == DRAW_BOX) {
-      currentFigure = new Box(e.getX(), e.getY());
-    } else if (whatToDraw == DRAW_LINE) {
-      currentFigure = new Line(e.getX(), e.getY());
-    }
-
-  }
-
-  public void mouseReleased(MouseEvent e) {
-    Graphics g = getGraphics();
-
-    currentFigure.setXY2(e.getX(), e.getY());
-    currentFigure.draw(g);
-    currentFigure.makeRegion();
-    figures.add(currentFigure);
-    currentFigure = null;
-  }
-
-  public void mouseEntered(MouseEvent e) {
-
-  }
-
-  public void mouseExited(MouseEvent e) {
-
   }
 
   private Figure find(int x, int y) {
@@ -80,6 +58,35 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
       }
     }
     return (Figure) null;
+  }
+
+  //  마우스 이벤트 리스너
+
+  public void mousePressed(MouseEvent e) {
+    int x = e.getX();
+    int y = e.getY();
+//    마우스 우클릭
+    if (e.isPopupTrigger()) {
+      return;
+    }
+
+    currentFigure = find(x, y);
+    if (currentFigure != null) {
+      actionMode = MOVING;
+      currentX = x;
+      currentY = y;
+      figures.remove(currentFigure);
+      repaint();
+      return;
+    }
+
+    if (whatToDraw == DRAW_BOX) {
+      currentFigure = new Box(x, y);
+    } else if (whatToDraw == DRAW_LINE) {
+      currentFigure = new Line(x, y);
+    }
+    actionMode = DRAWING;
+
   }
 
   public void mouseMoved(MouseEvent e) {
@@ -95,9 +102,42 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   public void mouseDragged(MouseEvent e) {
+    int x = e.getX();
+    int y = e.getY();
+
     Graphics g = getGraphics();
     g.setXORMode(getBackground());
-    currentFigure.drawing(g, e.getX(), e.getY());
-    currentFigure.drawing(g, e.getX(), e.getY());
+    if (actionMode == DRAWING) {
+      currentFigure.drawing(g, x, y);
+    } else if (actionMode == MOVING) {
+      currentFigure.move(g, x - currentX, y - currentY);
+      currentX = x;
+      currentY = y;
+    }
+  }
+
+  public void mouseReleased(MouseEvent e) {
+    int x = e.getX();
+    int y = e.getY();
+
+    Graphics g = getGraphics();
+    if (actionMode == DRAWING) {
+      currentFigure.setXY2(x, y);
+    }
+    currentFigure.draw(g);
+    addFigure(currentFigure);
+    currentFigure = null;
+  }
+
+  public void mouseClicked(MouseEvent e) {
+
+  }
+
+  public void mouseEntered(MouseEvent e) {
+
+  }
+
+  public void mouseExited(MouseEvent e) {
+
   }
 }

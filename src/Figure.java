@@ -22,6 +22,14 @@ public abstract class Figure {
     return region.contains(x, y);
   }
 
+  abstract void move(int dx, int dy);
+
+  void move(Graphics g, int dx, int dy) {
+    draw(g);
+    move(dx, dy);
+    draw(g);
+  }
+
   void drawing(Graphics g, int newX, int newY) {
 //    이전 그림 지우기
     draw(g);

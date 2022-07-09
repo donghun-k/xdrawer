@@ -89,4 +89,11 @@ public abstract class TwoPointFigure extends Figure {
 
     region = new Polygon(xpoints, ypoints, 4);
   }
+
+  void move(int dx, int dy) {
+    x1 = x1 + dx;
+    y1 = y1 + dy;
+    x2 = x2 + dx;
+    y2 = y2 + dy;
+  }
 }
