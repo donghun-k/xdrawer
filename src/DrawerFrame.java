@@ -84,14 +84,16 @@ class DrawerFrame extends JFrame {
     JMenuItem modalTool = new JMenuItem("Modal(M)");
     toolMenu.add(modalTool);
     modalTool.addActionListener((e) -> {
-      FigureDialog dialog = new FigureDialog("Figure Dialog");
+      FigureDialog dialog = new FigureDialog("Figure Dialog", view);
       dialog.setModal(true);
       dialog.setVisible(true);
     });
     JMenuItem modalessTool = new JMenuItem("Modaless(S)");
     toolMenu.add(modalessTool);
-    modalTool.addActionListener((e) -> {
-
+    modalessTool.addActionListener((e) -> {
+      FigureDialog dialog = new FigureDialog("Figure Dialog ", view);
+      dialog.setModal(false);
+      dialog.setVisible(true);
     });
 
 //    도움말 메뉴

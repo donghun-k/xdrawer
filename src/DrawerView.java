@@ -35,6 +35,11 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     }
   }
 
+  public void addFigure(Figure newFigure) {
+    figures.add(newFigure);
+    repaint();
+  }
+
   //  마우스 이벤트 리스너
   public void mouseClicked(MouseEvent e) {
 

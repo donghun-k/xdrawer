@@ -17,6 +17,14 @@ public abstract class TwoPointFigure extends Figure {
     y1 = y2 = y;
   }
 
+  TwoPointFigure(int x1, int y1, int x2, int y2) {
+    super();
+    this.x1 = x1;
+    this.y1 = y1;
+    this.x2 = x2;
+    this.y2 = y2;
+  }
+
   int getX1() {
     return x1;
   }
