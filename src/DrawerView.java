@@ -1,7 +1,9 @@
 import java.util.ArrayList;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import java.awt.*;
 import java.awt.event.*;
+import javax.swing.JPopupMenu;
 
 public class DrawerView extends JPanel implements MouseListener, MouseMotionListener {
 
@@ -65,10 +67,6 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   public void mousePressed(MouseEvent e) {
     int x = e.getX();
     int y = e.getY();
-//    마우스 우클릭
-    if (e.isPopupTrigger()) {
-      return;
-    }
 
     currentFigure = find(x, y);
     if (currentFigure != null) {
@@ -119,6 +117,14 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   public void mouseReleased(MouseEvent e) {
     int x = e.getX();
     int y = e.getY();
+
+    //    마우스 우클릭
+    if (e.isPopupTrigger()) {
+      MainPopup popup = new MainPopup(this);
+      popup.popup(x, y);
+
+      return;
+    }
 
     Graphics g = getGraphics();
     if (actionMode == DRAWING) {
