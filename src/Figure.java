@@ -4,6 +4,7 @@ import java.awt.Polygon;
 public abstract class Figure {
 
   protected Polygon region;
+  protected Popup popup;
 
   Figure() {
 
@@ -36,5 +37,13 @@ public abstract class Figure {
 //    새 그림 그리기
     setXY2(newX, newY);
     draw(g);
+  }
+
+  void setPopup(Popup popup) {
+    this.popup = popup;
+  }
+
+  void popup(int x, int y) {
+    popup.popup(x, y);
   }
 }

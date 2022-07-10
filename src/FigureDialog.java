@@ -111,8 +111,10 @@ public class FigureDialog extends JDialog {
       }
       if (selection.equals("Box")) {
         newFigure = new Box(x1, y1, x2, y2);
+        newFigure.setPopup(view.getBoxPopup());
       } else if (selection.equals("Line")) {
         newFigure = new Line(x1, y1, x2, y2);
+        newFigure.setPopup(view.getLinePopup());
       }
       view.addFigure(newFigure);
       x1Field.setText("0");

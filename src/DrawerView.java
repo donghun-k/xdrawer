@@ -16,19 +16,34 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   private int actionMode;
   private int whatToDraw;
-  private Figure currentFigure;
+  private Figure selectedFigure;
   // polymorphic collection or polymorphic container
   private ArrayList<Figure> figures = new ArrayList<Figure>();
 
   private int currentX;
   private int currentY;
 
+  Popup mainPopup;
+  Popup boxPopup;
+  Popup linePopup;
+
   DrawerView() {
     actionMode = 0;
     whatToDraw = 1;
-    currentFigure = null;
+    selectedFigure = null;
+    mainPopup = new MainPopup(this);
+    boxPopup = new FigurePopup(this, "Box", true);
+    linePopup = new FigurePopup(this, "Line", true);
     addMouseListener(this);
     addMouseMotionListener(this);
+  }
+
+  public Popup getBoxPopup() {
+    return boxPopup;
+  }
+
+  public Popup getLinePopup() {
+    return linePopup;
   }
 
   void setWhatToDraw(int figureType) {
@@ -52,6 +67,15 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     repaint();
   }
 
+  public void deleteFigure() {
+    if (selectedFigure == null) {
+      return;
+    }
+    figures.remove(selectedFigure);
+    selectedFigure = null;
+    repaint();
+  }
+
   private Figure find(int x, int y) {
     for (int i = 0; i < figures.size(); i++) {
       Figure pFigure = figures.get(i);
@@ -68,20 +92,27 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     int x = e.getX();
     int y = e.getY();
 
-    currentFigure = find(x, y);
-    if (currentFigure != null) {
+    if (e.getButton() == MouseEvent.BUTTON3) {
+      actionMode = NOTHING;
+      return;
+    }
+
+    selectedFigure = find(x, y);
+    if (selectedFigure != null) {
       actionMode = MOVING;
       currentX = x;
       currentY = y;
-      figures.remove(currentFigure);
+      figures.remove(selectedFigure);
       repaint();
       return;
     }
 
     if (whatToDraw == DRAW_BOX) {
-      currentFigure = new Box(x, y);
+      selectedFigure = new Box(x, y);
+      selectedFigure.setPopup(boxPopup);
     } else if (whatToDraw == DRAW_LINE) {
-      currentFigure = new Line(x, y);
+      selectedFigure = new Line(x, y);
+      selectedFigure.setPopup(linePopup);
     }
     actionMode = DRAWING;
 
@@ -91,8 +122,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     int x = e.getX();
     int y = e.getY();
 
-    currentFigure = find(x, y);
-    if (currentFigure != null) {
+    selectedFigure = find(x, y);
+    if (selectedFigure != null) {
       setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
     } else {
       setCursor(Cursor.getDefaultCursor());
@@ -106,9 +137,9 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     Graphics g = getGraphics();
     g.setXORMode(getBackground());
     if (actionMode == DRAWING) {
-      currentFigure.drawing(g, x, y);
+      selectedFigure.drawing(g, x, y);
     } else if (actionMode == MOVING) {
-      currentFigure.move(g, x - currentX, y - currentY);
+      selectedFigure.move(g, x - currentX, y - currentY);
       currentX = x;
       currentY = y;
     }
@@ -120,19 +151,22 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
     //    마우스 우클릭
     if (e.isPopupTrigger()) {
-      MainPopup popup = new MainPopup(this);
-      popup.popup(x, y);
-
+      selectedFigure = find(x, y);
+      if (selectedFigure == null) {
+        mainPopup.popup(x, y);
+      } else {
+        selectedFigure.popup(x, y);
+      }
       return;
     }
 
     Graphics g = getGraphics();
     if (actionMode == DRAWING) {
-      currentFigure.setXY2(x, y);
+      selectedFigure.setXY2(x, y);
     }
-    currentFigure.draw(g);
-    addFigure(currentFigure);
-    currentFigure = null;
+    selectedFigure.draw(g);
+    addFigure(selectedFigure);
+    selectedFigure = null;
   }
 
   public void mouseClicked(MouseEvent e) {
