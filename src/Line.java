@@ -50,4 +50,11 @@ public class Line extends TwoPointFigure {
     ypoints[3] = y + h + dy;
     region = new Polygon(xpoints, ypoints, 4);
   }
+
+  Figure copy() {
+    Line newLine = new Line(x1, y1, x2, y2);
+    newLine.popup = popup;
+    newLine.move(MOVE_DX, MOVE_DY);
+    return newLine;
+  }
 }

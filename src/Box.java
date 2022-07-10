@@ -22,4 +22,11 @@ public class Box extends TwoPointFigure {
 
     g.drawRect(minX, minY, width, height);
   }
+
+  Figure copy() {
+    Box newBox = new Box(x1, y1, x2, y2);
+    newBox.popup = popup;
+    newBox.move(MOVE_DX, MOVE_DY);
+    return newBox;
+  }
 }

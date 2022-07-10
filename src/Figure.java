@@ -3,6 +3,8 @@ import java.awt.Polygon;
 
 public abstract class Figure {
 
+  protected static int MOVE_DX = 20;
+  protected static int MOVE_DY = 10;
   protected Polygon region;
   protected Popup popup;
 
@@ -25,11 +27,14 @@ public abstract class Figure {
 
   abstract void move(int dx, int dy);
 
+  abstract Figure copy();
+
   void move(Graphics g, int dx, int dy) {
     draw(g);
     move(dx, dy);
     draw(g);
   }
+
 
   void drawing(Graphics g, int newX, int newY) {
 //    이전 그림 지우기
