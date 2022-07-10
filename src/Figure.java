@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
 
@@ -5,11 +6,15 @@ public abstract class Figure {
 
   protected static int MOVE_DX = 20;
   protected static int MOVE_DY = 10;
+
   protected Polygon region;
   protected Popup popup;
+  protected Color color;
 
-  Figure() {
-
+  Figure(Color color) {
+    region = null;
+    popup = null;
+    this.color = color;
   }
 
   abstract void draw(Graphics g);
@@ -50,5 +55,9 @@ public abstract class Figure {
 
   void popup(int x, int y) {
     popup.popup(x, y);
+  }
+
+  void setColor(Color color) {
+    this.color = color;
   }
 }

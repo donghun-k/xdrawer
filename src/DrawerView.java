@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javax.swing.JColorChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import java.awt.*;
@@ -49,6 +50,37 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   void setWhatToDraw(int figureType) {
     whatToDraw = figureType;
   }
+
+  //  색 설정
+  void setFigureColor(Color color) {
+    if (selectedFigure == null) {
+      return;
+    }
+    selectedFigure.setColor(color);
+    repaint();
+  }
+
+  void setBlackColor() {
+    setFigureColor(Color.black);
+  }
+
+  void setRedColor() {
+    setFigureColor(Color.red);
+  }
+
+  void setGreenColor() {
+    setFigureColor(Color.green);
+  }
+
+  void setBlueColor() {
+    setFigureColor(Color.blue);
+  }
+
+  void showColorChooser() {
+    Color color = new JColorChooser().showDialog(null, "Color Choose", Color.black);
+    setFigureColor(color);
+  }
+
 
   //  paint event 시 자동 호출
   public void paintComponent(Graphics g) {
@@ -117,10 +149,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     }
 
     if (whatToDraw == DRAW_BOX) {
-      selectedFigure = new Box(x, y);
+      selectedFigure = new Box(Color.black, x, y);
       selectedFigure.setPopup(boxPopup);
     } else if (whatToDraw == DRAW_LINE) {
-      selectedFigure = new Line(x, y);
+      selectedFigure = new Line(Color.black, x, y);
       selectedFigure.setPopup(linePopup);
     }
     actionMode = DRAWING;
