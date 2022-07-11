@@ -17,5 +17,10 @@ public class MainPopup extends Popup {
     lineItem.addActionListener((event) -> {
       view.setWhatToDraw(DrawerView.DRAW_LINE);
     });
+    JMenuItem circleItem = new JMenuItem("Circle(C)");
+    popupPtr.add(circleItem);
+    circleItem.addActionListener((event) -> {
+      view.setWhatToDraw(DrawerView.DRAW_CIRCLE);
+    });
   }
 }

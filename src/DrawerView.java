@@ -10,6 +10,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   public static int DRAW_BOX = 1;
   public static int DRAW_LINE = 2;
+  public static int DRAW_CIRCLE = 3;
 
   public static int NOTHING = 0;
   public static int DRAWING = 1;
@@ -27,6 +28,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   Popup mainPopup;
   Popup boxPopup;
   Popup linePopup;
+  Popup circlePopup;
 
   DrawerView() {
     actionMode = 0;
@@ -34,7 +36,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     selectedFigure = null;
     mainPopup = new MainPopup(this);
     boxPopup = new FigurePopup(this, "Box", true);
-    linePopup = new FigurePopup(this, "Line", true);
+    linePopup = new FigurePopup(this, "Line", false);
+    circlePopup = new FigurePopup(this, "Circle", true);
     addMouseListener(this);
     addMouseMotionListener(this);
   }
@@ -50,6 +53,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   public Popup getLinePopup() {
     return linePopup;
+  }
+
+  public Popup getCirclePopup() {
+    return circlePopup;
   }
 
 
@@ -79,7 +86,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   void showColorChooser() {
-    Color color = new JColorChooser().showDialog(null, "Color Choose", Color.black);
+    new JColorChooser();
+    Color color = JColorChooser.showDialog(null, "Color Choose", Color.black);
     setFigureColor(color);
   }
 
@@ -128,8 +136,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   private Figure find(int x, int y) {
-    for (int i = 0; i < figures.size(); i++) {
-      Figure pFigure = figures.get(i);
+    for (Figure pFigure : figures) {
       if (pFigure.contains(x, y)) {
         return pFigure;
       }
@@ -163,6 +170,9 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     } else if (whatToDraw == DRAW_LINE) {
       selectedFigure = new Line(Color.black, x, y);
       selectedFigure.setPopup(linePopup);
+    } else if (whatToDraw == DRAW_CIRCLE) {
+      selectedFigure = new Circle(Color.black, x, y);
+      selectedFigure.setPopup(circlePopup);
     }
     actionMode = DRAWING;
 
@@ -174,7 +184,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
     selectedFigure = find(x, y);
     if (selectedFigure != null) {
-      setCursor(Cursor.getPredefinedCursor(Cursor.CROSSHAIR_CURSOR));
+      setCursor(Cursor.getPredefinedCursor(Cursor.MOVE_CURSOR));
     } else {
       setCursor(Cursor.getDefaultCursor());
     }
