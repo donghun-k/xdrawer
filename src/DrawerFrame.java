@@ -5,12 +5,10 @@ import java.awt.event.*;
 class DrawerFrame extends JFrame {
 
   DrawerView view;
+  StatusBar statusBar;
 
   DrawerFrame() {
-    view = new DrawerView();
-
     setTitle("Drawer");
-
 //    화면 2/3의 크기의 프레임 만들어서 가운데 위치 시키기
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
@@ -121,8 +119,10 @@ class DrawerFrame extends JFrame {
 
 //    Content panel 생성
     Container container = this.getContentPane();
-    container.setBackground(Color.red);
-    container.add(view);
+    view = new DrawerView();
+    container.add(view, "Center");
+    statusBar = new StatusBar();
+    container.add(statusBar, "South");
 
     setDefaultCloseOperation(EXIT_ON_CLOSE);
   }
