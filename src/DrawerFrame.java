@@ -66,6 +66,11 @@ class DrawerFrame extends JFrame {
     JMenu figureMenu = new JMenu("그림(F)");
     menus.add(figureMenu);
 
+    JMenuItem figurePoint = new JMenuItem("Point(P)");
+    figureMenu.add(figurePoint);
+    figurePoint.addActionListener((e) -> {
+      view.setWhatToDraw(DrawerView.DRAW_POINT);
+    });
     JMenuItem figureBox = new JMenuItem("Box(B)");
     figureMenu.add(figureBox);
     figureBox.addActionListener((e) -> {
@@ -75,6 +80,11 @@ class DrawerFrame extends JFrame {
     figureMenu.add(figureLine);
     figureLine.addActionListener((e) -> {
       view.setWhatToDraw(DrawerView.DRAW_LINE);
+    });
+    JMenuItem figureCircle = new JMenuItem("Circle(C)");
+    figureMenu.add(figureCircle);
+    figureCircle.addActionListener((e) -> {
+      view.setWhatToDraw(DrawerView.DRAW_CIRCLE);
     });
 
 //    Dialog 메뉴

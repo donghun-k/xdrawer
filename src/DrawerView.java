@@ -8,9 +8,10 @@ import javax.swing.JPopupMenu;
 
 public class DrawerView extends JPanel implements MouseListener, MouseMotionListener {
 
-  public static int DRAW_BOX = 1;
-  public static int DRAW_LINE = 2;
-  public static int DRAW_CIRCLE = 3;
+  public static int DRAW_POINT = 1;
+  public static int DRAW_BOX = 2;
+  public static int DRAW_LINE = 3;
+  public static int DRAW_CIRCLE = 4;
 
   public static int NOTHING = 0;
   public static int DRAWING = 1;
@@ -25,16 +26,19 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   private int currentX;
   private int currentY;
 
+
   Popup mainPopup;
+  Popup pointPopup;
   Popup boxPopup;
   Popup linePopup;
   Popup circlePopup;
 
   DrawerView() {
     actionMode = 0;
-    whatToDraw = 1;
+    whatToDraw = 2;
     selectedFigure = null;
     mainPopup = new MainPopup(this);
+    pointPopup = new FigurePopup(this, "Point", false);
     boxPopup = new FigurePopup(this, "Box", true);
     linePopup = new FigurePopup(this, "Line", false);
     circlePopup = new FigurePopup(this, "Circle", true);
@@ -47,6 +51,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   //  팝업 getter
+  public Popup getPointPopup() {
+    return pointPopup;
+  }
+
   public Popup getBoxPopup() {
     return boxPopup;
   }
@@ -164,7 +172,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
       return;
     }
 
-    if (whatToDraw == DRAW_BOX) {
+    if (whatToDraw == DRAW_POINT) {
+      selectedFigure = new Point(Color.black, x, y);
+      selectedFigure.setPopup(pointPopup);
+    } else if (whatToDraw == DRAW_BOX) {
       selectedFigure = new Box(Color.black, x, y);
       selectedFigure.setPopup(boxPopup);
     } else if (whatToDraw == DRAW_LINE) {

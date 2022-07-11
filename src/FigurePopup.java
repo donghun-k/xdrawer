@@ -5,7 +5,7 @@ import javax.swing.JPopupMenu;
 
 public class FigurePopup extends Popup {
 
-  FigurePopup(DrawerView view, String title, boolean fillFlag) {
+  FigurePopup(DrawerView view, String title, boolean isFillable) {
     super(view, title);
     JMenuItem deleteItem = new JMenuItem("Delete");
     deleteItem.addActionListener(e -> view.deleteFigure());
@@ -34,7 +34,7 @@ public class FigurePopup extends Popup {
     chooserItem.addActionListener(e -> view.showColorChooser());
     colorMenu.add(chooserItem);
 
-    if (fillFlag) {
+    if (isFillable) {
       JMenuItem fillItem = new JMenuItem("Fill");
       fillItem.addActionListener(e -> view.fillFigure());
       popupPtr.add(fillItem);

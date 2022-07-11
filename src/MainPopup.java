@@ -7,6 +7,11 @@ public class MainPopup extends Popup {
 
   MainPopup(DrawerView view) {
     super(view, "그림");
+    JMenuItem pointItem = new JMenuItem("Point(P)");
+    popupPtr.add(pointItem);
+    pointItem.addActionListener((event) -> {
+      view.setWhatToDraw(DrawerView.DRAW_POINT);
+    });
     JMenuItem boxItem = new JMenuItem("Box(B)");
     popupPtr.add(boxItem);
     boxItem.addActionListener((event) -> {

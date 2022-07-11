@@ -76,8 +76,8 @@ public abstract class TwoPointFigure extends Figure {
       y2 = tmp;
     }
 
-    int xpoints[] = new int[4];
-    int ypoints[] = new int[4];
+    int[] xpoints = new int[4];
+    int[] ypoints = new int[4];
 
     xpoints[0] = x1;
     ypoints[0] = y1;

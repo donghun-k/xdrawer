@@ -39,7 +39,7 @@ public class FigureDialog extends JDialog {
     JTextField y1Field;
     JTextField x2Field;
     JTextField y2Field;
-    String[] figures = {"Box", "Line", "Circle"};
+    String[] figures = {"Point", "Box", "Line", "Circle"};
     JComboBox<String> cBox;
 
     JDialog dialog;
@@ -110,15 +110,24 @@ public class FigureDialog extends JDialog {
         System.out.println("Invalid text field!");
         return;
       }
-      if (Objects.requireNonNull(selection).equals("Box")) {
-        newFigure = new Box(Color.black, x1, y1, x2, y2);
-        newFigure.setPopup(view.getBoxPopup());
-      } else if (selection.equals("Line")) {
-        newFigure = new Line(Color.black, x1, y1, x2, y2);
-        newFigure.setPopup(view.getLinePopup());
-      } else if (selection.equals("Circle")) {
-        newFigure = new Circle(Color.black, x1, y1, x2, y2);
-        newFigure.setPopup(view.getCirclePopup());
+
+      switch (Objects.requireNonNull(selection)) {
+        case "Point" -> {
+          newFigure = new Point(Color.black, x1, y1);
+          newFigure.setPopup(view.getPointPopup());
+        }
+        case "Box" -> {
+          newFigure = new Box(Color.black, x1, y1, x2, y2);
+          newFigure.setPopup(view.getBoxPopup());
+        }
+        case "Line" -> {
+          newFigure = new Line(Color.black, x1, y1, x2, y2);
+          newFigure.setPopup(view.getLinePopup());
+        }
+        case "Circle" -> {
+          newFigure = new Circle(Color.black, x1, y1, x2, y2);
+          newFigure.setPopup(view.getCirclePopup());
+        }
       }
       if (newFigure != null) {
         view.addFigure(newFigure);
