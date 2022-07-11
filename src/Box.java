@@ -3,8 +3,11 @@ import java.awt.Graphics;
 
 public class Box extends TwoPointFigure {
 
+  private boolean fillFlag;
+
   Box(Color color) {
     super(color);
+    fillFlag = false;
   }
 
   Box(Color color, int x, int y) {
@@ -23,12 +26,21 @@ public class Box extends TwoPointFigure {
 
     g.setColor(color);
     g.drawRect(minX, minY, width, height);
+
+    if (fillFlag) {
+      g.fillRect(minX, minY, width, height);
+    }
   }
 
   Figure copy() {
     Box newBox = new Box(color, x1, y1, x2, y2);
     newBox.popup = popup;
     newBox.move(MOVE_DX, MOVE_DY);
+    newBox.fillFlag = fillFlag;
     return newBox;
+  }
+
+  void setFill() {
+    fillFlag = !fillFlag;
   }
 }

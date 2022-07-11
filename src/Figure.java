@@ -60,4 +60,9 @@ public abstract class Figure {
   void setColor(Color color) {
     this.color = color;
   }
+
+  //  hook function
+  void setFill() {
+
+  }
 }

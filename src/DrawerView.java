@@ -39,6 +39,11 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     addMouseMotionListener(this);
   }
 
+  void setWhatToDraw(int figureType) {
+    whatToDraw = figureType;
+  }
+
+  //  팝업 getter
   public Popup getBoxPopup() {
     return boxPopup;
   }
@@ -47,9 +52,6 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     return linePopup;
   }
 
-  void setWhatToDraw(int figureType) {
-    whatToDraw = figureType;
-  }
 
   //  색 설정
   void setFigureColor(Color color) {
@@ -117,6 +119,14 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     selectedFigure = newFigure;
   }
 
+  public void fillFigure() {
+    if (selectedFigure == null) {
+      return;
+    }
+    selectedFigure.setFill();
+    repaint();
+  }
+
   private Figure find(int x, int y) {
     for (int i = 0; i < figures.size(); i++) {
       Figure pFigure = figures.get(i);
@@ -128,7 +138,6 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   //  마우스 이벤트 리스너
-
   public void mousePressed(MouseEvent e) {
     int x = e.getX();
     int y = e.getY();
