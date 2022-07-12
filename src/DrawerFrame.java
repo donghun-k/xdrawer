@@ -108,10 +108,18 @@ class DrawerFrame extends JFrame {
           JOptionPane.INFORMATION_MESSAGE);
     });
 
+//    Tool bar
+    JToolBar selectToolBar = new JToolBar();
+    selectToolBar.add(view.getPointAction());
+    selectToolBar.add(view.getBoxAction());
+    selectToolBar.add(view.getLineAction());
+    selectToolBar.add(view.getCircleAction());
+
 //    Content panel 생성
     Container container = this.getContentPane();
     container.add(view, "Center");
     container.add(statusBar, "South");
+    container.add(selectToolBar, "North");
 
     addComponentListener(new ComponentAdapter() {
       public void componentResized(ComponentEvent e) {
