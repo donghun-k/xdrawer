@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -8,14 +9,16 @@ import javax.swing.JPopupMenu;
 
 public class DrawerView extends JPanel implements MouseListener, MouseMotionListener {
 
-  public static int DRAW_POINT = 1;
-  public static int DRAW_BOX = 2;
-  public static int DRAW_LINE = 3;
-  public static int DRAW_CIRCLE = 4;
+  public static int ID_POINT = 0;
+  public static int ID_BOX = 1;
+  public static int ID_LINE = 2;
+  public static int ID_CIRCLE = 3;
 
   public static int NOTHING = 0;
   public static int DRAWING = 1;
   public static int MOVING = 2;
+
+  public static String[] figureTypes = {"Point", "Box", "Line", "Circle"};
 
   private int actionMode;
   private int whatToDraw;
@@ -27,27 +30,59 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   private int currentY;
 
 
-  Popup mainPopup;
-  Popup pointPopup;
-  Popup boxPopup;
-  Popup linePopup;
-  Popup circlePopup;
+  private Popup mainPopup;
+  private Popup pointPopup;
+  private Popup boxPopup;
+  private Popup linePopup;
+  private Popup circlePopup;
 
-  DrawerView() {
-    actionMode = 0;
-    whatToDraw = 2;
+  private SelectAction pointAction;
+  private SelectAction boxAction;
+  private SelectAction lineAction;
+  private SelectAction circleAction;
+  private DrawerFrame mainFrame;
+
+  DrawerView(DrawerFrame mainFrame) {
+    actionMode = NOTHING;
     selectedFigure = null;
+
+    pointAction = new SelectAction("Point(P)", new ImageIcon("img/point.png"), this, ID_POINT);
+    boxAction = new SelectAction("Box(B)", new ImageIcon("img/box.png"), this, ID_BOX);
+    lineAction = new SelectAction("Line(L)", new ImageIcon("img/line.png"), this, ID_LINE);
+    circleAction = new SelectAction("Circle(C)", new ImageIcon("img/circle.png"), this, ID_CIRCLE);
+
     mainPopup = new MainPopup(this);
     pointPopup = new FigurePopup(this, "Point", false);
     boxPopup = new FigurePopup(this, "Box", true);
     linePopup = new FigurePopup(this, "Line", false);
     circlePopup = new FigurePopup(this, "Circle", true);
+
+    this.mainFrame = mainFrame;
     addMouseListener(this);
     addMouseMotionListener(this);
+    setWhatToDraw(ID_BOX);
   }
 
   void setWhatToDraw(int figureType) {
     whatToDraw = figureType;
+    mainFrame.writeFigureType(figureTypes[whatToDraw]);
+  }
+
+  //  select action getter
+  SelectAction getPointAction() {
+    return pointAction;
+  }
+
+  SelectAction getBoxAction() {
+    return boxAction;
+  }
+
+  SelectAction getLineAction() {
+    return lineAction;
+  }
+
+  SelectAction getCircleAction() {
+    return circleAction;
   }
 
   //  팝업 getter
@@ -75,22 +110,6 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     }
     selectedFigure.setColor(color);
     repaint();
-  }
-
-  void setBlackColor() {
-    setFigureColor(Color.black);
-  }
-
-  void setRedColor() {
-    setFigureColor(Color.red);
-  }
-
-  void setGreenColor() {
-    setFigureColor(Color.green);
-  }
-
-  void setBlueColor() {
-    setFigureColor(Color.blue);
   }
 
   void showColorChooser() {
@@ -172,16 +191,16 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
       return;
     }
 
-    if (whatToDraw == DRAW_POINT) {
+    if (whatToDraw == ID_POINT) {
       selectedFigure = new Point(Color.black, x, y);
       selectedFigure.setPopup(pointPopup);
-    } else if (whatToDraw == DRAW_BOX) {
+    } else if (whatToDraw == ID_BOX) {
       selectedFigure = new Box(Color.black, x, y);
       selectedFigure.setPopup(boxPopup);
-    } else if (whatToDraw == DRAW_LINE) {
+    } else if (whatToDraw == ID_LINE) {
       selectedFigure = new Line(Color.black, x, y);
       selectedFigure.setPopup(linePopup);
-    } else if (whatToDraw == DRAW_CIRCLE) {
+    } else if (whatToDraw == ID_CIRCLE) {
       selectedFigure = new Circle(Color.black, x, y);
       selectedFigure.setPopup(circlePopup);
     }
@@ -199,6 +218,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     } else {
       setCursor(Cursor.getDefaultCursor());
     }
+    mainFrame.writePosition("x: " + x + "   y: " + y);
   }
 
   public void mouseDragged(MouseEvent e) {

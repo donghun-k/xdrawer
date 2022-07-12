@@ -36,4 +36,16 @@ public class StatusBar extends JPanel {
     add(box2, "East");
     setBorder(BorderFactory.createEtchedBorder());
   }
+
+  public void writePosition(String s) {
+    position.setText(s);
+  }
+
+  public void writeFigureType(String s) {
+    figureType.setText(s);
+  }
+
+  public void writeSize(String s) {
+    viewSize.setText(s);
+  }
 }

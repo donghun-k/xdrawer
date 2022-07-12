@@ -1,3 +1,4 @@
+import java.awt.Color;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
@@ -19,16 +20,16 @@ public class FigurePopup extends Popup {
     popupPtr.add(colorMenu);
 
     JMenuItem blackItem = new JMenuItem("Black");
-    blackItem.addActionListener((e) -> view.setBlackColor());
+    blackItem.addActionListener((e) -> view.setFigureColor(Color.BLACK));
     colorMenu.add(blackItem);
     JMenuItem redItem = new JMenuItem("Red");
-    redItem.addActionListener((e) -> view.setRedColor());
+    redItem.addActionListener((e) -> view.setFigureColor(Color.RED));
     colorMenu.add(redItem);
     JMenuItem greenItem = new JMenuItem("Green");
-    greenItem.addActionListener((e) -> view.setGreenColor());
+    greenItem.addActionListener((e) -> view.setFigureColor(Color.GREEN));
     colorMenu.add(greenItem);
     JMenuItem blueItem = new JMenuItem("Blue");
-    blueItem.addActionListener((e) -> view.setBlueColor());
+    blueItem.addActionListener((e) -> view.setFigureColor(Color.BLUE));
     colorMenu.add(blueItem);
     JMenuItem chooserItem = new JMenuItem("choose");
     chooserItem.addActionListener(e -> view.showColorChooser());

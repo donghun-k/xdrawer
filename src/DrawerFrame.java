@@ -8,6 +8,9 @@ class DrawerFrame extends JFrame {
   StatusBar statusBar;
 
   DrawerFrame() {
+    statusBar = new StatusBar();
+    view = new DrawerView(this);
+
     setTitle("Drawer");
 //    화면 2/3의 크기의 프레임 만들어서 가운데 위치 시키기
     Toolkit tk = Toolkit.getDefaultToolkit();
@@ -64,26 +67,14 @@ class DrawerFrame extends JFrame {
     JMenu figureMenu = new JMenu("그림(F)");
     menus.add(figureMenu);
 
-    JMenuItem figurePoint = new JMenuItem("Point(P)");
+    JMenuItem figurePoint = new JMenuItem(view.getPointAction());
     figureMenu.add(figurePoint);
-    figurePoint.addActionListener((e) -> {
-      view.setWhatToDraw(DrawerView.DRAW_POINT);
-    });
-    JMenuItem figureBox = new JMenuItem("Box(B)");
+    JMenuItem figureBox = new JMenuItem(view.getBoxAction());
     figureMenu.add(figureBox);
-    figureBox.addActionListener((e) -> {
-      view.setWhatToDraw(DrawerView.DRAW_BOX);
-    });
-    JMenuItem figureLine = new JMenuItem("Line(L)");
+    JMenuItem figureLine = new JMenuItem(view.getLineAction());
     figureMenu.add(figureLine);
-    figureLine.addActionListener((e) -> {
-      view.setWhatToDraw(DrawerView.DRAW_LINE);
-    });
-    JMenuItem figureCircle = new JMenuItem("Circle(C)");
+    JMenuItem figureCircle = new JMenuItem(view.getCircleAction());
     figureMenu.add(figureCircle);
-    figureCircle.addActionListener((e) -> {
-      view.setWhatToDraw(DrawerView.DRAW_CIRCLE);
-    });
 
 //    Dialog 메뉴
     JMenu toolMenu = new JMenu("도구(T)");
@@ -119,11 +110,25 @@ class DrawerFrame extends JFrame {
 
 //    Content panel 생성
     Container container = this.getContentPane();
-    view = new DrawerView();
     container.add(view, "Center");
-    statusBar = new StatusBar();
     container.add(statusBar, "South");
 
+    addComponentListener(new ComponentAdapter() {
+      public void componentResized(ComponentEvent e) {
+        Dimension sz = view.getSize();
+        String s = sz.width + " X " + sz.height + "px";
+        statusBar.writeSize(s);
+      }
+    });
+
     setDefaultCloseOperation(EXIT_ON_CLOSE);
+  }
+
+  public void writePosition(String s) {
+    statusBar.writePosition(s);
+  }
+
+  public void writeFigureType(String s) {
+    statusBar.writeFigureType(s);
   }
 }

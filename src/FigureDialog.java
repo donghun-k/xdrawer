@@ -39,7 +39,6 @@ public class FigureDialog extends JDialog {
     JTextField y1Field;
     JTextField x2Field;
     JTextField y2Field;
-    String[] figures = {"Point", "Box", "Line", "Circle"};
     JComboBox<String> cBox;
 
     JDialog dialog;
@@ -83,7 +82,7 @@ public class FigureDialog extends JDialog {
       y2Field.setHorizontalAlignment(JTextField.RIGHT);
       add(y2Field);
 
-      cBox = new JComboBox<String>(figures);
+      cBox = new JComboBox<String>(DrawerView.figureTypes);
       cBox.setBounds((PANEL_WIDTH - BOX_WIDTH) / 2, THIRD_ROW, BOX_WIDTH, HEIGHT);
       add(cBox);
 
