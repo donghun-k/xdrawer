@@ -6,6 +6,7 @@ class DrawerFrame extends JFrame {
 
   DrawerView view;
   StatusBar statusBar;
+  FigureDialog dialog;
 
   DrawerFrame() {
     statusBar = new StatusBar();
@@ -83,14 +84,18 @@ class DrawerFrame extends JFrame {
     JMenuItem modalTool = new JMenuItem("Modal(M)");
     toolMenu.add(modalTool);
     modalTool.addActionListener((e) -> {
-      FigureDialog dialog = new FigureDialog("Figure Dialog", view);
+      if (dialog == null) {
+        dialog = new FigureDialog("Figure Dialog", view);
+      }
       dialog.setModal(true);
       dialog.setVisible(true);
     });
     JMenuItem modalessTool = new JMenuItem("Modaless(S)");
     toolMenu.add(modalessTool);
     modalessTool.addActionListener((e) -> {
-      FigureDialog dialog = new FigureDialog("Figure Dialog ", view);
+      if (dialog == null) {
+        dialog = new FigureDialog("Figure Dialog", view);
+      }
       dialog.setModal(false);
       dialog.setVisible(true);
     });
