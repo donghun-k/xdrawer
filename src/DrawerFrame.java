@@ -7,12 +7,43 @@ class DrawerFrame extends JFrame {
   DrawerView view;
   StatusBar statusBar;
   FigureDialog dialog;
+  JScrollPane sp;
 
   DrawerFrame() {
+    setTitle("Drawer");
+
     statusBar = new StatusBar();
     view = new DrawerView(this);
 
-    setTitle("Drawer");
+//    스크롤 바
+    sp = new JScrollPane(view);
+    sp.registerKeyboardAction(e -> {
+          JScrollBar scrollBar = sp.getVerticalScrollBar();
+          scrollBar.setValue(scrollBar.getValue() + scrollBar.getBlockIncrement());
+        }
+        , KeyStroke.getKeyStroke(KeyEvent.VK_PAGE_DOWN, 0)
+        , JComponent.WHEN_IN_FOCUSED_WINDOW);
+    sp.registerKeyboardAction(e -> {
+          JScrollBar scrollBar = sp.getVerticalScrollBar();
+          scrollBar.setValue(scrollBar.getValue() - scrollBar.getBlockIncrement());
+        }
+        , KeyStroke.getKeyStroke(KeyEvent.VK_PAGE_UP, 0)
+        , JComponent.WHEN_IN_FOCUSED_WINDOW);
+    sp.registerKeyboardAction(e -> {
+          JScrollBar scrollBar = sp.getHorizontalScrollBar();
+          scrollBar.setValue(scrollBar.getValue() + scrollBar.getBlockIncrement());
+        }
+        , KeyStroke.getKeyStroke(KeyEvent.VK_PAGE_DOWN, InputEvent.CTRL_DOWN_MASK)
+        , JComponent.WHEN_IN_FOCUSED_WINDOW);
+    sp.registerKeyboardAction(e -> {
+          JScrollBar scrollBar = sp.getHorizontalScrollBar();
+          scrollBar.setValue(scrollBar.getValue() - scrollBar.getBlockIncrement());
+        }
+        , KeyStroke.getKeyStroke(KeyEvent.VK_PAGE_UP, InputEvent.CTRL_DOWN_MASK)
+        , JComponent.WHEN_IN_FOCUSED_WINDOW);
+    sp.registerKeyboardAction(e -> view.increaseHeight()
+        , KeyStroke.getKeyStroke(KeyEvent.VK_PAGE_DOWN, InputEvent.ALT_DOWN_MASK)
+        , JComponent.WHEN_IN_FOCUSED_WINDOW);
 //    화면 2/3의 크기의 프레임 만들어서 가운데 위치 시키기
     Toolkit tk = Toolkit.getDefaultToolkit();
     Dimension d = tk.getScreenSize();
@@ -122,7 +153,7 @@ class DrawerFrame extends JFrame {
 
 //    Content panel 생성
     Container container = this.getContentPane();
-    container.add(view, "Center");
+    container.add(sp, "Center");
     container.add(statusBar, "South");
     container.add(selectToolBar, "North");
 
@@ -143,5 +174,9 @@ class DrawerFrame extends JFrame {
 
   public void writeFigureType(String s) {
     statusBar.writeFigureType(s);
+  }
+
+  public void writeSize(String s) {
+    statusBar.writeSize(s);
   }
 }

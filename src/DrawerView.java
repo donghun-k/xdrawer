@@ -9,6 +9,10 @@ import javax.swing.JPopupMenu;
 
 public class DrawerView extends JPanel implements MouseListener, MouseMotionListener {
 
+  public static int INIT_WIDTH = 3000;
+  public static int INIT_HEIGHT = 1500;
+  public static int DELTA = 500;
+
   public static int ID_POINT = 0;
   public static int ID_BOX = 1;
   public static int ID_LINE = 2;
@@ -40,7 +44,11 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   private SelectAction boxAction;
   private SelectAction lineAction;
   private SelectAction circleAction;
+
   private DrawerFrame mainFrame;
+
+  private int width = INIT_WIDTH;
+  private int height = INIT_HEIGHT;
 
   DrawerView(DrawerFrame mainFrame) {
     actionMode = NOTHING;
@@ -61,6 +69,13 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     addMouseListener(this);
     addMouseMotionListener(this);
     setWhatToDraw(ID_BOX);
+
+    setPreferredSize(new Dimension(width, height));
+  }
+
+  public void increaseHeight() {
+    height = height + DELTA;
+    setPreferredSize(new Dimension(width, height));
   }
 
   void setWhatToDraw(int figureType) {
