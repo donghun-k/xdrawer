@@ -41,13 +41,22 @@ public class FigureDialog extends JDialog {
     JTextField y2Field;
     JComboBox<String> cBox;
 
+    JRadioButton blackButton;
+    JRadioButton redButton;
+    JRadioButton greenButton;
+    JRadioButton blueButton;
+    JRadioButton chooseButton;
+
+    Color color;
     JDialog dialog;
     DrawerView view;
 
     DialogPanel(JDialog dialog, DrawerView view) {
       this.view = view;
       this.dialog = dialog;
+
       setLayout(null);
+
       JLabel x1Label = new JLabel("x1: ");
       x1Label.setFont(new Font("Courier New", Font.BOLD, 16));
       x1Label.setBounds(X_LABEL_POS, FIRST_ROW, LABEL_WIDTH, HEIGHT);
@@ -86,6 +95,35 @@ public class FigureDialog extends JDialog {
       cBox.setBounds((PANEL_WIDTH - BOX_WIDTH) / 2, THIRD_ROW, BOX_WIDTH, HEIGHT);
       add(cBox);
 
+      ButtonGroup group = new ButtonGroup();
+
+      blackButton = new JRadioButton("Black", true);
+      blackButton.setBounds(RADIO_GAP, FOURTH_ROW, RADIO_WIDTH, HEIGHT);
+      add(blackButton);
+      group.add(blackButton);
+      blackButton.addActionListener((e) -> color = Color.black);
+      redButton = new JRadioButton("Red");
+      redButton.setBounds(2 * RADIO_GAP + RADIO_WIDTH, FOURTH_ROW, RADIO_WIDTH, HEIGHT);
+      add(redButton);
+      group.add(redButton);
+      redButton.addActionListener((e) -> color = Color.red);
+      greenButton = new JRadioButton("Green");
+      greenButton.setBounds(3 * RADIO_GAP + 2 * RADIO_WIDTH, FOURTH_ROW, RADIO_WIDTH, HEIGHT);
+      add(greenButton);
+      group.add(greenButton);
+      greenButton.addActionListener((e) -> color = Color.green);
+      blueButton = new JRadioButton("Blue");
+      blueButton.setBounds(4 * RADIO_GAP + 3 * RADIO_WIDTH, FOURTH_ROW, RADIO_WIDTH, HEIGHT);
+      add(blueButton);
+      group.add(blueButton);
+      blueButton.addActionListener((e) -> color = Color.blue);
+      chooseButton = new JRadioButton("Choose");
+      chooseButton.setBounds(5 * RADIO_GAP + 4 * RADIO_WIDTH, FOURTH_ROW, RADIO_WIDTH, HEIGHT);
+      add(chooseButton);
+      chooseButton.addActionListener(
+          (e) -> color = JColorChooser.showDialog(null, "Color Chooser", Color.black));
+      group.add(chooseButton);
+
       JButton ok = new JButton("OK");
       ok.setBounds(OK_POS, FINAL_ROW, BUTTON_WIDTH, HEIGHT);
       ok.addActionListener(this);
@@ -112,19 +150,19 @@ public class FigureDialog extends JDialog {
 
       switch (Objects.requireNonNull(selection)) {
         case "Point" -> {
-          newFigure = new Point(Color.black, x1, y1);
+          newFigure = new Point(color, x1, y1);
           newFigure.setPopup(view.getPointPopup());
         }
         case "Box" -> {
-          newFigure = new Box(Color.black, x1, y1, x2, y2);
+          newFigure = new Box(color, x1, y1, x2, y2);
           newFigure.setPopup(view.getBoxPopup());
         }
         case "Line" -> {
-          newFigure = new Line(Color.black, x1, y1, x2, y2);
+          newFigure = new Line(color, x1, y1, x2, y2);
           newFigure.setPopup(view.getLinePopup());
         }
         case "Circle" -> {
-          newFigure = new Circle(Color.black, x1, y1, x2, y2);
+          newFigure = new Circle(color, x1, y1, x2, y2);
           newFigure.setPopup(view.getCirclePopup());
         }
       }
@@ -157,7 +195,9 @@ public class FigureDialog extends JDialog {
 
   FigureDialog(String title, DrawerView view) {
     super((JFrame) null, title);
+
     setLocation(100, 150);
+    setResizable(false);
 
     Container container = getContentPane();
     JPanel panel = new DialogPanel(this, view);
