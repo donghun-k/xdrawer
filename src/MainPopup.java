@@ -17,5 +17,7 @@ public class MainPopup extends Popup {
     popupPtr.add(lineItem);
     JMenuItem circleItem = new JMenuItem(view.getCircleAction());
     popupPtr.add(circleItem);
+    JMenuItem tvItem = new JMenuItem(view.getTVAction());
+    popupPtr.add(tvItem);
   }
 }

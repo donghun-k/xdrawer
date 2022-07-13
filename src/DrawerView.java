@@ -17,12 +17,13 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   public static int ID_BOX = 1;
   public static int ID_LINE = 2;
   public static int ID_CIRCLE = 3;
+  public static int ID_TV = 4;
 
   public static int NOTHING = 0;
   public static int DRAWING = 1;
   public static int MOVING = 2;
 
-  public static String[] figureTypes = {"Point", "Box", "Line", "Circle"};
+  public static String[] figureTypes = {"Point", "Box", "Line", "Circle", "TV"};
 
   private int actionMode;
   private int whatToDraw;
@@ -39,11 +40,13 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   private Popup boxPopup;
   private Popup linePopup;
   private Popup circlePopup;
+  private Popup tvPopup;
 
   private SelectAction pointAction;
   private SelectAction boxAction;
   private SelectAction lineAction;
   private SelectAction circleAction;
+  private SelectAction tvAction;
 
   private DrawerFrame mainFrame;
 
@@ -58,12 +61,14 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     boxAction = new SelectAction("Box(B)", new ImageIcon("img/box.png"), this, ID_BOX);
     lineAction = new SelectAction("Line(L)", new ImageIcon("img/line.png"), this, ID_LINE);
     circleAction = new SelectAction("Circle(C)", new ImageIcon("img/circle.png"), this, ID_CIRCLE);
+    tvAction = new SelectAction("TV(V)", new ImageIcon("img/box.png"), this, ID_TV);
 
     mainPopup = new MainPopup(this);
     pointPopup = new FigurePopup(this, "Point", false);
     boxPopup = new FigurePopup(this, "Box", true);
     linePopup = new FigurePopup(this, "Line", false);
     circlePopup = new FigurePopup(this, "Circle", true);
+    tvPopup = new FigurePopup(this, "TV", false);
 
     this.mainFrame = mainFrame;
     addMouseListener(this);
@@ -100,6 +105,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     return circleAction;
   }
 
+  SelectAction getTVAction() {
+    return tvAction;
+  }
+
   //  팝업 getter
   public Popup getPointPopup() {
     return pointPopup;
@@ -115,6 +124,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   public Popup getCirclePopup() {
     return circlePopup;
+  }
+
+  public Popup getTvPopup() {
+    return tvPopup;
   }
 
 
@@ -218,6 +231,11 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     } else if (whatToDraw == ID_CIRCLE) {
       selectedFigure = new Circle(Color.black, x, y);
       selectedFigure.setPopup(circlePopup);
+    } else if (whatToDraw == ID_TV) {
+      selectedFigure = new TV(Color.black, x, y, true);
+      selectedFigure.setPopup(tvPopup);
+      addFigure(selectedFigure);
+      return;
     }
     actionMode = DRAWING;
 
