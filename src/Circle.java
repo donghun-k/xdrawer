@@ -43,4 +43,12 @@ public class Circle extends TwoPointFigure {
   void setFill() {
     fillFlag = !fillFlag;
   }
+
+  boolean getFillFlag() {
+    return fillFlag;
+  }
+
+  void setFillFlag(boolean flag) {
+    fillFlag = flag;
+  }
 }

@@ -18,12 +18,12 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   public static int ID_LINE = 2;
   public static int ID_CIRCLE = 3;
   public static int ID_TV = 4;
-
+  public static int ID_KITE = 5;
   public static int NOTHING = 0;
   public static int DRAWING = 1;
   public static int MOVING = 2;
 
-  public static String[] figureTypes = {"Point", "Box", "Line", "Circle", "TV"};
+  public static String[] figureTypes = {"Point", "Box", "Line", "Circle", "TV", "Kite"};
 
   private int actionMode;
   private int whatToDraw;
@@ -41,12 +41,14 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   private Popup linePopup;
   private Popup circlePopup;
   private Popup tvPopup;
+  private Popup kitePopup;
 
   private SelectAction pointAction;
   private SelectAction boxAction;
   private SelectAction lineAction;
   private SelectAction circleAction;
   private SelectAction tvAction;
+  private SelectAction kiteAction;
 
   private DrawerFrame mainFrame;
 
@@ -62,13 +64,15 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     lineAction = new SelectAction("Line(L)", new ImageIcon("img/line.png"), this, ID_LINE);
     circleAction = new SelectAction("Circle(C)", new ImageIcon("img/circle.png"), this, ID_CIRCLE);
     tvAction = new SelectAction("TV(V)", new ImageIcon("img/box.png"), this, ID_TV);
+    kiteAction = new SelectAction("Kite(K)", new ImageIcon("img/box.png"), this, ID_KITE);
 
     mainPopup = new MainPopup(this);
     pointPopup = new FigurePopup(this, "Point", false);
     boxPopup = new FigurePopup(this, "Box", true);
     linePopup = new FigurePopup(this, "Line", false);
     circlePopup = new FigurePopup(this, "Circle", true);
-    tvPopup = new FigurePopup(this, "TV", false);
+    tvPopup = new TVPopup(this);
+    kitePopup = new FigurePopup(this, "Kite", true);
 
     this.mainFrame = mainFrame;
     addMouseListener(this);
@@ -109,6 +113,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     return tvAction;
   }
 
+  SelectAction getKiteAction() {
+    return kiteAction;
+  }
+
   //  팝업 getter
   public Popup getPointPopup() {
     return pointPopup;
@@ -126,8 +134,12 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     return circlePopup;
   }
 
-  public Popup getTvPopup() {
+  public Popup getTVPopup() {
     return tvPopup;
+  }
+
+  public Popup getKitePopup() {
+    return kitePopup;
   }
 
 
@@ -199,6 +211,27 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     return (Figure) null;
   }
 
+  //  TV 조작
+  public void onOffTV() {
+    if (selectedFigure == null) {
+      return;
+    }
+    if (selectedFigure instanceof TV) {
+      ((TV) selectedFigure).pressPowerButton();
+      repaint();
+    }
+  }
+
+  public void setAntenna() {
+    if (selectedFigure == null) {
+      return;
+    }
+    if (selectedFigure instanceof TV) {
+      ((TV) selectedFigure).setAntenna();
+      repaint();
+    }
+  }
+
   //  마우스 이벤트 리스너
   public void mousePressed(MouseEvent e) {
     int x = e.getX();
@@ -236,6 +269,9 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
       selectedFigure.setPopup(tvPopup);
       addFigure(selectedFigure);
       return;
+    } else if (whatToDraw == ID_KITE) {
+      selectedFigure = new Kite(Color.black, x, y);
+      selectedFigure.setPopup(kitePopup);
     }
     actionMode = DRAWING;
 

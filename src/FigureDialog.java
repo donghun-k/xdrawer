@@ -165,7 +165,17 @@ public class FigureDialog extends JDialog {
           newFigure = new Circle(color, x1, y1, x2, y2);
           newFigure.setPopup(view.getCirclePopup());
         }
+        case "TV" -> {
+          newFigure = new TV(color, x1, y1, true);
+          newFigure.setPopup(view.getTVPopup());
+        }
+        case "Kite" -> {
+          newFigure = new Kite(color, x1, y1, x2, y2);
+          newFigure.setPopup(view.getKitePopup());
+        }
+
       }
+
       if (newFigure != null) {
         view.addFigure(newFigure);
       }
