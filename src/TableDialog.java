@@ -3,6 +3,9 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.TableModelListener;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
 import javax.swing.table.TableModel;
 
 public class TableDialog extends JDialog {
@@ -72,6 +75,18 @@ public class TableDialog extends JDialog {
 
     FigureTable(DrawerView view) {
       super(new FigureTableModel(view));
+      DefaultListSelectionModel selectionModel = new DefaultListSelectionModel();
+      setSelectionModel(selectionModel);
+
+      TableColumnModel colModel = getColumnModel();
+      TableColumn nameColumn = colModel.getColumn(0);
+      DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+      renderer.setHorizontalAlignment(SwingConstants.CENTER);
+      nameColumn.setCellRenderer(renderer);
+    }
+
+    public int getSelectedIndex() {
+      return selectionModel.getMinSelectionIndex();
     }
   }
 
@@ -81,7 +96,7 @@ public class TableDialog extends JDialog {
     DrawerView view;
     JButton done;
     JButton remove;
-    JTable table;
+    FigureTable table;
 
     DialogPanel(JDialog dialog, DrawerView view) {
       this.view = view;
@@ -97,11 +112,15 @@ public class TableDialog extends JDialog {
       bottom.add(done = new JButton("Done"));
       add(bottom, BorderLayout.SOUTH);
 
+      remove.addActionListener(this);
       done.addActionListener(this);
     }
 
     public void actionPerformed(ActionEvent e) {
-      if (e.getSource() == done) {
+      if (e.getSource() == remove) {
+        view.remove(table.getSelectedIndex());
+        updateUI();
+      } else if (e.getSource() == done) {
         dialog.setVisible(false);
       }
     }
