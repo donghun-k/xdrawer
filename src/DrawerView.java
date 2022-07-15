@@ -82,6 +82,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     setPreferredSize(new Dimension(width, height));
   }
 
+
   public void increaseHeight() {
     height = height + DELTA;
     setPreferredSize(new Dimension(width, height));
@@ -90,6 +91,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   void setWhatToDraw(int figureType) {
     whatToDraw = figureType;
     mainFrame.writeFigureType(figureTypes[whatToDraw]);
+  }
+
+  public ArrayList<Figure> getFigures() {
+    return figures;
   }
 
   //  select action getter

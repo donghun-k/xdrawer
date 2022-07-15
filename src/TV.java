@@ -12,19 +12,19 @@ public class TV extends TwoPointFigure {
   private Box powerButton;
   private Line antenna1;
   private Line antenna2;
-  private static int FRAME_WIDTH = 150;
-  private static int FRAME_HEIGHT = 90;
-  private static int ANTENNA_WIDTH = 30;
-  private static int ANTENNA_HEIGHT = 40;
-  private static int FRAME_GAP = 12;
-  private static int SCREEN_WIDTH = 105;
-  private static int SCREEN_HEIGHT = FRAME_HEIGHT - 2 * FRAME_GAP;
-  private static int SWITCH_GAP = 17;
-  private static int SWITCH_SIZE = 10;
-  private static int POWER_SWITCH_WIDTH = 15;
-  private static int POWER_SWITCH_HEIGHT = 8;
-  private static int TOTAL_WIDTH = FRAME_WIDTH;
-  private static int TOTAL_HEIGHT = FRAME_HEIGHT + ANTENNA_HEIGHT;
+  private static final int FRAME_WIDTH = 150;
+  private static final int FRAME_HEIGHT = 90;
+  private static final int ANTENNA_WIDTH = 30;
+  private static final int ANTENNA_HEIGHT = 40;
+  private static final int FRAME_GAP = 12;
+  private static final int SCREEN_WIDTH = 105;
+  private static final int SCREEN_HEIGHT = FRAME_HEIGHT - 2 * FRAME_GAP;
+  private static final int SWITCH_GAP = 17;
+  private static final int SWITCH_SIZE = 10;
+  private static final int POWER_SWITCH_WIDTH = 15;
+  private static final int POWER_SWITCH_HEIGHT = 8;
+  private static final int TOTAL_WIDTH = FRAME_WIDTH;
+  private static final int TOTAL_HEIGHT = FRAME_HEIGHT + ANTENNA_HEIGHT;
 
   TV(Color color, int x, int y, boolean antennaOption) {
     super(Color.black, x, y, x + TOTAL_WIDTH, y + TOTAL_HEIGHT);
@@ -57,7 +57,7 @@ public class TV extends TwoPointFigure {
     y2 = y1 + POWER_SWITCH_HEIGHT;
     powerButton = new Box(Color.black, x1, y1, x2, y2);
     antennaFlag = antennaOption;
-    if (antennaOption == true) {
+    if (antennaOption) {
       int cx = x + TOTAL_WIDTH / 2;
       x1 = cx - ANTENNA_WIDTH;
       y1 = y;
@@ -73,7 +73,7 @@ public class TV extends TwoPointFigure {
   }
 
   void setAntenna() {
-    if (antennaFlag == true) {
+    if (antennaFlag) {
       antenna1 = null;
       antenna2 = null;
     } else {

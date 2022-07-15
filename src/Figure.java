@@ -65,4 +65,20 @@ public abstract class Figure {
   void setFill() {
 
   }
+
+  int getX1() {
+    return -1;
+  }
+
+  int getY1() {
+    return -1;
+  }
+
+  int getX2() {
+    return -1;
+  }
+
+  int getY2() {
+    return -1;
+  }
 }

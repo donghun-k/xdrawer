@@ -7,6 +7,7 @@ class DrawerFrame extends JFrame {
   DrawerView view;
   StatusBar statusBar;
   FigureDialog dialog;
+  TableDialog tableDialog;
   JScrollPane sp;
 
   DrawerFrame() {
@@ -133,6 +134,15 @@ class DrawerFrame extends JFrame {
       }
       dialog.setModal(false);
       dialog.setVisible(true);
+    });
+    JMenuItem tableTool = new JMenuItem("Table(T)");
+    toolMenu.add(tableTool);
+    tableTool.addActionListener((e) -> {
+      if (tableDialog == null) {
+        tableDialog = new TableDialog("Table Dialog", view);
+        tableDialog.setModal(true);
+      }
+      tableDialog.setVisible(true);
     });
 
 //    도움말 메뉴
