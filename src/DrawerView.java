@@ -63,8 +63,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     boxAction = new SelectAction("Box(B)", new ImageIcon("img/box.png"), this, ID_BOX);
     lineAction = new SelectAction("Line(L)", new ImageIcon("img/line.png"), this, ID_LINE);
     circleAction = new SelectAction("Circle(C)", new ImageIcon("img/circle.png"), this, ID_CIRCLE);
-    tvAction = new SelectAction("TV(V)", new ImageIcon("img/box.png"), this, ID_TV);
-    kiteAction = new SelectAction("Kite(K)", new ImageIcon("img/box.png"), this, ID_KITE);
+    tvAction = new SelectAction("TV(V)", new ImageIcon("img/tv.png"), this, ID_TV);
+    kiteAction = new SelectAction("Kite(K)", new ImageIcon("img/kite.png"), this, ID_KITE);
 
     mainPopup = new MainPopup(this);
     pointPopup = new FigurePopup(this, "Point", false);

@@ -3,57 +3,17 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 import javax.swing.event.TreeModelListener;
+import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 public class TreeDialog extends JDialog {
 
-  static class MyTreeNode {
-
-    Object userObject;
-    ArrayList<MyTreeNode> children;
-
-    MyTreeNode(Object data) {
-      userObject = data;
-      children = new ArrayList<MyTreeNode>();
-    }
-
-    public String toString() {
-      return userObject.toString();
-    }
-
-    public Object getUserObject() {
-      return userObject;
-    }
-
-    public MyTreeNode getChildAt(int index) {
-      return children.get(index);
-    }
-
-    public int getChildCount() {
-      return children.size();
-    }
-
-    public int getIndex(MyTreeNode child) {
-      return children.indexOf(child);
-    }
-
-    public boolean isLeaf() {
-      return children.size() == 0;
-    }
-
-
-    public void add(MyTreeNode child) {
-      children.add(child);
-    }
-
-  }
-
   static class FigureTreeModel implements TreeModel {
 
     DrawerView view;
     ArrayList<Figure> figures;
-    MyTreeNode root;
+    DefaultMutableTreeNode root;
 
     FigureTreeModel(DrawerView view) {
       this.view = view;
@@ -62,17 +22,17 @@ public class TreeDialog extends JDialog {
     }
 
     public void constructTree() {
-      root = new MyTreeNode("Figure");
+      root = new DefaultMutableTreeNode("Figure");
 
       int length = DrawerView.figureTypes.length;
 
       ArrayList<String> names = new ArrayList<String>();
-      MyTreeNode[] nodes = new MyTreeNode[length];
+      DefaultMutableTreeNode[] nodes = new DefaultMutableTreeNode[length];
 
       for (int i = 0; i < length; i++) {
         String name = DrawerView.figureTypes[i];
         names.add(name);
-        MyTreeNode node = new MyTreeNode(name);
+        DefaultMutableTreeNode node = new DefaultMutableTreeNode(name);
         root.add(node);
         nodes[i] = node;
         root.add(node);
@@ -80,7 +40,7 @@ public class TreeDialog extends JDialog {
       for (Figure ptr : figures) {
         String figureTypeName = ptr.getClass().getName();
         int index = names.indexOf(figureTypeName);
-        nodes[index].add(new MyTreeNode(ptr));
+        nodes[index].add(new DefaultMutableTreeNode(ptr));
       }
     }
 
@@ -89,23 +49,23 @@ public class TreeDialog extends JDialog {
     }
 
     public Object getChild(Object parent, int index) {
-      MyTreeNode pNode = (MyTreeNode) parent;
+      DefaultMutableTreeNode pNode = (DefaultMutableTreeNode) parent;
       return pNode.getChildAt(index);
     }
 
     public int getChildCount(Object parent) {
-      MyTreeNode pNode = (MyTreeNode) parent;
+      DefaultMutableTreeNode pNode = (DefaultMutableTreeNode) parent;
       return pNode.getChildCount();
     }
 
     public boolean isLeaf(Object node) {
-      MyTreeNode pNode = (MyTreeNode) node;
+      DefaultMutableTreeNode pNode = (DefaultMutableTreeNode) node;
       return pNode.isLeaf();
     }
 
     public int getIndexOfChild(Object parent, Object child) {
-      MyTreeNode pNode = (MyTreeNode) parent;
-      MyTreeNode cNode = (MyTreeNode) child;
+      DefaultMutableTreeNode pNode = (DefaultMutableTreeNode) parent;
+      DefaultMutableTreeNode cNode = (DefaultMutableTreeNode) child;
       return pNode.getIndex(cNode);
     }
 
@@ -130,15 +90,6 @@ public class TreeDialog extends JDialog {
       super();
       model = new FigureTreeModel(view);
       setModel(model);
-//      super(new FigureTableModel(view));
-//      DefaultListSelectionModel selectionModel = new DefaultListSelectionModel();
-//      setSelectionModel(selectionModel);
-//
-//      TableColumnModel colModel = getColumnModel();
-//      TableColumn nameColumn = colModel.getColumn(0);
-//      DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-//      renderer.setHorizontalAlignment(SwingConstants.CENTER);
-//      nameColumn.setCellRenderer(renderer);
     }
 
     public void updateUI() {
@@ -182,7 +133,7 @@ public class TreeDialog extends JDialog {
         if (selectedPath == null) {
           return;
         }
-        MyTreeNode selectedNode = (MyTreeNode) selectedPath.getLastPathComponent();
+        DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) selectedPath.getLastPathComponent();
         updateUI();
         Object selectedObject = selectedNode.getUserObject();
         if (selectedObject instanceof Figure) {

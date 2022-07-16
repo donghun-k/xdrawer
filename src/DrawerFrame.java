@@ -54,7 +54,7 @@ class DrawerFrame extends JFrame {
     setSize(scrWidth * 2 / 3, scrHeight * 2 / 3);
     setLocation(scrWidth / 6, scrHeight / 6);
 //    아이콘 추가
-    Image img = tk.getImage("img/ball.gif");
+    Image img = tk.getImage("img/icon.png");
     setIconImage(img);
 
 //    메뉴바 생성
