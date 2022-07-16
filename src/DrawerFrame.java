@@ -8,6 +8,7 @@ class DrawerFrame extends JFrame {
   StatusBar statusBar;
   FigureDialog dialog;
   TableDialog tableDialog;
+  TreeDialog treeDialog;
   JScrollPane sp;
 
   DrawerFrame() {
@@ -143,6 +144,15 @@ class DrawerFrame extends JFrame {
         tableDialog.setModal(true);
       }
       tableDialog.setVisible(true);
+    });
+    JMenuItem treeTool = new JMenuItem("Tree(R)");
+    toolMenu.add(treeTool);
+    treeTool.addActionListener(e -> {
+      if (treeDialog == null) {
+        treeDialog = new TreeDialog("Tree Dialog", view);
+        treeDialog.setModal(true);
+      }
+      treeDialog.setVisible(true);
     });
 
 //    도움말 메뉴

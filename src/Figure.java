@@ -81,4 +81,14 @@ public abstract class Figure {
   int getY2() {
     return -1;
   }
+
+  public String toString() {
+    String s = getClass().getName() + " ( " + getX1() + ", " + getY1();
+    if (getX2() < 0) {
+      s = s + ")";
+      return s;
+    }
+    s = s + ", " + getX2() + ", " + getY2() + " )";
+    return s;
+  }
 }

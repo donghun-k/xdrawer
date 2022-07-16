@@ -200,8 +200,17 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   }
 
   public void remove(int index) {
+    if (index < 0) {
+      return;
+    }
     selectedFigure = null;
     figures.remove(index);
+    repaint();
+  }
+
+  public void remove(Figure ptr) {
+    selectedFigure = null;
+    figures.remove(ptr);
     repaint();
   }
 
