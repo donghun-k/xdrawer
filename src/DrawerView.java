@@ -306,6 +306,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
       selectedFigure.setPopup(tvPopup);
       addFigure(selectedFigure);
       selectedFigure = null;
+      actionMode = NOTHING;
       return;
     } else if (whatToDraw == ID_KITE) {
       selectedFigure = new Kite(Color.black, x, y);
