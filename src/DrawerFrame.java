@@ -94,7 +94,7 @@ class DrawerFrame extends JFrame {
     newFile.setIcon(new ImageIcon("img/new.gif"));
     newFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, InputEvent.CTRL_DOWN_MASK));
     newFile.addActionListener((e) -> {
-      System.out.println("test");
+      view.doFileNew();
     });
 
     JMenuItem openFile = new JMenuItem("열기(O)");
@@ -115,6 +115,7 @@ class DrawerFrame extends JFrame {
 
     JMenuItem anotherFile = new JMenuItem("다른 이름으로 저장(A)");
     fileMenu.add(anotherFile);
+    anotherFile.addActionListener(e -> doSaveAs());
 
     fileMenu.addSeparator();
 
@@ -262,12 +263,28 @@ class DrawerFrame extends JFrame {
     chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
     chooser.setDialogType(JFileChooser.OPEN_DIALOG);
     chooser.setFileFilter(new FileNameExtensionFilter("JDrawer file", "jdr"));
-    int value = chooser.showSaveDialog(null);
+    int value = chooser.showOpenDialog(null);
     if (value != JFileChooser.APPROVE_OPTION) {
       return;
     }
     fileName = chooser.getSelectedFile().getPath();
     view.doOpen(fileName);
+  }
+
+  public void doSaveAs() {
+    JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    chooser.setDialogType(JFileChooser.SAVE_DIALOG);
+    chooser.setFileFilter(new FileNameExtensionFilter("JDrawer file", "jdr"));
+    int value = chooser.showSaveDialog(null);
+    if (value != JFileChooser.APPROVE_OPTION) {
+      return;
+    }
+    fileName = chooser.getSelectedFile().getPath();
+    if (fileName.endsWith(".jdr") == false) {
+      fileName = fileName + ".jdr";
+    }
+    view.doSave(fileName);
   }
 
   static class ZoomBox extends JComboBox implements ActionListener {

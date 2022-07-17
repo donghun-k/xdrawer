@@ -93,6 +93,11 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     setPreferredSize(new Dimension(width, height));
   }
 
+  public void doFileNew() {
+    figures.clear();
+    repaint();
+  }
+
   public void doOpen(String fileName) {
     try {
       FileInputStream fis = new FileInputStream(fileName);
