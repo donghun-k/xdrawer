@@ -1,8 +1,7 @@
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
+import java.io.Serializable;
 import javax.swing.JPopupMenu;
 
-public class Popup {
+public class Popup implements Serializable {
 
   DrawerView view;
   JPopupMenu popupPtr;

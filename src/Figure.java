@@ -1,8 +1,9 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.io.Serializable;
 
-public abstract class Figure {
+public abstract class Figure implements Serializable {
 
   protected static int MOVE_DX = 20;
   protected static int MOVE_DY = 10;

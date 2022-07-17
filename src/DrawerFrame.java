@@ -30,6 +30,8 @@ class DrawerFrame extends JFrame {
   TreeDialog treeDialog;
   JScrollPane sp;
 
+  String fileName = "noname.jdr";
+
   DrawerFrame() {
     setTitle("Drawer");
 
@@ -104,6 +106,9 @@ class DrawerFrame extends JFrame {
     saveFile.setMnemonic('S');
     saveFile.setIcon(new ImageIcon("img/save.gif"));
     saveFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_S, InputEvent.CTRL_DOWN_MASK));
+    saveFile.addActionListener(e -> {
+      view.doSave(fileName);
+    });
 
     JMenuItem anotherFile = new JMenuItem("다른 이름으로 저장(A)");
     fileMenu.add(anotherFile);
