@@ -2,6 +2,7 @@ import java.awt.Color;
 import java.awt.Cursor;
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
@@ -54,6 +55,8 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
   private SelectAction kiteAction;
 
   private DrawerFrame mainFrame;
+
+  private Double zoomRatio = 1.0;
 
   private int width = INIT_WIDTH;
   private int height = INIT_HEIGHT;
@@ -169,12 +172,23 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
   //  paint event 시 자동 호출
   public void paintComponent(Graphics g) {
-
     super.paintComponent(g);
 
+    ((Graphics2D) g).scale(zoomRatio, zoomRatio);
     // Collection에 담긴 그림 객체 순회하면서 그리기
     for (Figure pFigure : figures) {
       pFigure.draw(g);
+    }
+  }
+
+  public void zoom(int ratio) {
+    zoomRatio = (double) ratio / 100.0;
+    repaint();
+    removeMouseListener(this);
+    removeMouseMotionListener(this);
+    if (ratio == 100) {
+      addMouseListener(this);
+      addMouseMotionListener(this);
     }
   }
 

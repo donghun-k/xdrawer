@@ -1,6 +1,25 @@
-import javax.swing.*;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JComboBox;
+import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
+import javax.swing.JToolBar;
+import javax.swing.KeyStroke;
 
 class DrawerFrame extends JFrame {
 
@@ -136,6 +155,7 @@ class DrawerFrame extends JFrame {
       dialog.setModal(false);
       dialog.setVisible(true);
     });
+//    테이블
     JMenuItem tableTool = new JMenuItem("Table(T)");
     toolMenu.add(tableTool);
     tableTool.addActionListener((e) -> {
@@ -145,6 +165,7 @@ class DrawerFrame extends JFrame {
       }
       tableDialog.setVisible(true);
     });
+//    트리
     JMenuItem treeTool = new JMenuItem("Tree(R)");
     toolMenu.add(treeTool);
     treeTool.addActionListener(e -> {
@@ -153,6 +174,26 @@ class DrawerFrame extends JFrame {
         treeDialog.setModal(true);
       }
       treeDialog.setVisible(true);
+    });
+
+//    Zoom 메뉴
+    JMenu zoomMenu = new JMenu("Zoom");
+    toolMenu.add(zoomMenu);
+
+    JMenuItem zoom100 = new JMenuItem("100%");
+    zoomMenu.add(zoom100);
+    zoom100.addActionListener(e -> {
+      view.zoom(100);
+    });
+    JMenuItem zoom80 = new JMenuItem("80%");
+    zoomMenu.add(zoom80);
+    zoom80.addActionListener(e -> {
+      view.zoom(80);
+    });
+    JMenuItem zoom50 = new JMenuItem("50%");
+    zoomMenu.add(zoom50);
+    zoom50.addActionListener(e -> {
+      view.zoom(50);
     });
 
 //    도움말 메뉴
@@ -176,6 +217,8 @@ class DrawerFrame extends JFrame {
     selectToolBar.add(view.getCircleAction());
     selectToolBar.add(view.getTVAction());
     selectToolBar.add(view.getKiteAction());
+    selectToolBar.add(new ZoomBox(view));
+    selectToolBar.add(javax.swing.Box.createGlue());
 
 //    Content panel 생성
     Container container = this.getContentPane();
@@ -204,5 +247,25 @@ class DrawerFrame extends JFrame {
 
   public void writeSize(String s) {
     statusBar.writeSize(s);
+  }
+
+  static class ZoomBox extends JComboBox implements ActionListener {
+
+
+    static String[] size = {"100", "80", "50"};
+    DrawerView view;
+
+    ZoomBox(DrawerView view) {
+      super(size);
+      this.view = view;
+      setMaximumSize(new Dimension(1500, 200));
+      addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e) {
+      JComboBox box = (JComboBox) e.getSource();
+      String ratio = (String) box.getSelectedItem();
+      view.zoom(Integer.parseInt(ratio));
+    }
   }
 }
