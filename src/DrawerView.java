@@ -1,11 +1,14 @@
+import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JColorChooser;
-import javax.swing.JMenuItem;
 import javax.swing.JPanel;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.JPopupMenu;
 
 public class DrawerView extends JPanel implements MouseListener, MouseMotionListener {
 
@@ -288,6 +291,7 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
       selectedFigure = new TV(Color.black, x, y, true);
       selectedFigure.setPopup(tvPopup);
       addFigure(selectedFigure);
+      selectedFigure = null;
       return;
     } else if (whatToDraw == ID_KITE) {
       selectedFigure = new Kite(Color.black, x, y);
