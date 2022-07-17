@@ -344,6 +344,10 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
       return;
     }
 
+    if (selectedFigure == null) {
+      return;
+    }
+
     Graphics g = getGraphics();
     if (actionMode == DRAWING) {
       selectedFigure.setXY2(x, y);
