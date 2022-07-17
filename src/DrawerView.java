@@ -6,8 +6,10 @@ import java.awt.Graphics2D;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import javax.swing.ImageIcon;
@@ -89,6 +91,19 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
     setWhatToDraw(ID_BOX);
 
     setPreferredSize(new Dimension(width, height));
+  }
+
+  public void doOpen(String fileName) {
+    try {
+      FileInputStream fis = new FileInputStream(fileName);
+      ObjectInputStream ois = new ObjectInputStream(fis);
+      figures = (ArrayList<Figure>) ois.readObject();
+      ois.close();
+      fis.close();
+      repaint();
+    } catch (IOException ex) {
+    } catch (ClassNotFoundException ex) {
+    }
   }
 
   public void doSave(String fileName) {

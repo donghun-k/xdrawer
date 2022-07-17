@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -20,6 +21,7 @@ import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.JToolBar;
 import javax.swing.KeyStroke;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 class DrawerFrame extends JFrame {
 
@@ -100,6 +102,7 @@ class DrawerFrame extends JFrame {
     openFile.setMnemonic('O');
     openFile.setIcon(new ImageIcon("img/open.gif"));
     openFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
+    openFile.addActionListener(e -> doOpen());
 
     JMenuItem saveFile = new JMenuItem("저장(S)");
     fileMenu.add(saveFile);
@@ -252,6 +255,19 @@ class DrawerFrame extends JFrame {
 
   public void writeSize(String s) {
     statusBar.writeSize(s);
+  }
+
+  public void doOpen() {
+    JFileChooser chooser = new JFileChooser(System.getProperty("user.dir"));
+    chooser.setFileSelectionMode(JFileChooser.FILES_AND_DIRECTORIES);
+    chooser.setDialogType(JFileChooser.OPEN_DIALOG);
+    chooser.setFileFilter(new FileNameExtensionFilter("JDrawer file", "jdr"));
+    int value = chooser.showSaveDialog(null);
+    if (value != JFileChooser.APPROVE_OPTION) {
+      return;
+    }
+    fileName = chooser.getSelectedFile().getPath();
+    view.doOpen(fileName);
   }
 
   static class ZoomBox extends JComboBox implements ActionListener {
