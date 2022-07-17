@@ -35,7 +35,7 @@ class DrawerFrame extends JFrame {
   String fileName = "noname.jdr";
 
   DrawerFrame() {
-    setTitle("Drawer");
+    setTitle("Drawer - [noname.jdr]");
 
     statusBar = new StatusBar();
     view = new DrawerView(this);
@@ -268,6 +268,7 @@ class DrawerFrame extends JFrame {
       return;
     }
     fileName = chooser.getSelectedFile().getPath();
+    setTitle("Drawer - [" + fileName + "]");
     view.doOpen(fileName);
   }
 
@@ -284,6 +285,7 @@ class DrawerFrame extends JFrame {
     if (fileName.endsWith(".jdr") == false) {
       fileName = fileName + ".jdr";
     }
+    setTitle("Drawer - [" + fileName + "]");
     view.doSave(fileName);
   }
 
