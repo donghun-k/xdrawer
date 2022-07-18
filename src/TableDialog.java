@@ -118,7 +118,7 @@ public class TableDialog extends JDialog {
 
     public void actionPerformed(ActionEvent e) {
       if (e.getSource() == remove) {
-        view.remove(table.getSelectedIndex());
+        view.removeFromDialog(table.getSelectedIndex());
         updateUI();
       } else if (e.getSource() == done) {
         dialog.setVisible(false);

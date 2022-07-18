@@ -156,6 +156,8 @@ class DrawerFrame extends JFrame {
     figureMenu.add(figureTV);
     JMenuItem figureKite = new JMenuItem(view.getKiteAction());
     figureMenu.add(figureKite);
+    JMenuItem figureText = new JMenuItem(view.getTextAction());
+    figureMenu.add(figureText);
 
 //    Dialog 메뉴
     JMenu toolMenu = new JMenu("도구(T)");
@@ -241,6 +243,7 @@ class DrawerFrame extends JFrame {
     selectToolBar.add(view.getCircleAction());
     selectToolBar.add(view.getTVAction());
     selectToolBar.add(view.getKiteAction());
+    selectToolBar.add(view.getTextAction());
     selectToolBar.add(new ZoomBox(view));
     selectToolBar.add(javax.swing.Box.createGlue());
 

@@ -137,7 +137,7 @@ public class TreeDialog extends JDialog {
         updateUI();
         Object selectedObject = selectedNode.getUserObject();
         if (selectedObject instanceof Figure) {
-          view.remove((Figure) selectedObject);
+          view.removeFromDialog((Figure) selectedObject);
           updateUI();
         }
       } else if (e.getSource() == done) {

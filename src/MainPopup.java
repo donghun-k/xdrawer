@@ -25,5 +25,7 @@ public class MainPopup extends Popup {
     popupPtr.add(tvItem);
     JMenuItem kiteItem = new JMenuItem(view.getKiteAction());
     popupPtr.add(kiteItem);
+    JMenuItem textItem = new JMenuItem(view.getTextAction());
+    popupPtr.add(textItem);
   }
 }

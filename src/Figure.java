@@ -12,7 +12,7 @@ public abstract class Figure implements Serializable {
   protected static int MOVE_DY = 10;
 
   protected Polygon region;
-  protected Popup popup;
+  transient protected Popup popup;
   protected Color color;
 
   Figure(Color color) {
