@@ -1,3 +1,4 @@
+import java.io.Serial;
 import javax.swing.AbstractAction;
 import javax.swing.ImageIcon;
 import javax.swing.JMenuItem;
@@ -6,6 +7,9 @@ import javax.swing.JPopupMenu;
 
 public class MainPopup extends Popup {
 
+
+  @Serial
+  private static final long serialVersionUID = 6722207746813629419L;
 
   MainPopup(DrawerView view) {
     super(view, "그림");

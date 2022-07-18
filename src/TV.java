@@ -1,8 +1,10 @@
 import java.awt.*;
+import java.io.Serial;
 
 public class TV extends TwoPointFigure {
 
-  private static final long serialVersionUID = -5242971533927480700L;
+  @Serial
+  private static final long serialVersionUID = 9004115175151210009L;
   private boolean antennaFlag;
   private Box frame;
   private Box screen;

@@ -1,8 +1,11 @@
+import java.io.Serial;
 import java.io.Serializable;
 import javax.swing.JPopupMenu;
 
 public class Popup implements Serializable {
 
+  @Serial
+  private static final long serialVersionUID = -2344618196729890029L;
   DrawerView view;
   JPopupMenu popupPtr;
 

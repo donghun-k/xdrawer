@@ -1,8 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.io.Serial;
 
 public class Line extends TwoPointFigure {
+
+  @Serial
+  private static final long serialVersionUID = 7398091801463116045L;
 
   Line(Color color) {
     super(color);

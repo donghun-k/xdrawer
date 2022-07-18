@@ -1,8 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serial;
 
 public class Box extends TwoPointFigure {
 
+  @Serial
+  private static final long serialVersionUID = 5988741680941996661L;
   protected boolean fillFlag;
 
   Box(Color color) {

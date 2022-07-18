@@ -1,7 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serial;
 
 public class Point extends OnePointFigure {
+
+  @Serial
+  private static final long serialVersionUID = -4403256306936776557L;
 
   Point(Color color) {
     super(color);

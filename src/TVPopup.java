@@ -1,10 +1,12 @@
+import java.io.Serial;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 
 class TVPopup extends FigurePopup {
 
-  private static final long serialVersionUID = 1311846301252431755L;
+  @Serial
+  private static final long serialVersionUID = 1406616085775463601L;
 
   TVPopup(DrawerView view) {
     super(view, "TV", false);

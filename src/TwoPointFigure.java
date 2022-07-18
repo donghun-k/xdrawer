@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.io.Serial;
 
 public abstract class TwoPointFigure extends Figure {
 
+  @Serial
+  private static final long serialVersionUID = 3747004477794959392L;
   protected int x1;
   protected int y1;
   protected int x2;

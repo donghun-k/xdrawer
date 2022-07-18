@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serial;
 import java.util.ArrayList;
 
 public class Kite extends Box {
 
+  @Serial
+  private static final long serialVersionUID = -4081464961756929206L;
   Circle center;
   Line line1;
   Line line2;

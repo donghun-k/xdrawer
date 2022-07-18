@@ -1,9 +1,12 @@
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Polygon;
+import java.io.Serial;
 
 public abstract class OnePointFigure extends Figure {
 
+  @Serial
+  private static final long serialVersionUID = -3942213484307031325L;
   protected static int GAP = 5;
   protected int x1;
   protected int y1;

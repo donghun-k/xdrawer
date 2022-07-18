@@ -1,8 +1,11 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.io.Serial;
 
 public class Circle extends TwoPointFigure {
 
+  @Serial
+  private static final long serialVersionUID = -6280192506980861781L;
   private boolean fillFlag;
 
   Circle(Color color) {

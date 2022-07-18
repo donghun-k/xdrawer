@@ -1,10 +1,14 @@
 import java.awt.Color;
+import java.io.Serial;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
 
 public class FigurePopup extends Popup {
+
+  @Serial
+  private static final long serialVersionUID = 8901594482578284322L;
 
   FigurePopup(DrawerView view, String title, boolean isFillable) {
     super(view, title);
