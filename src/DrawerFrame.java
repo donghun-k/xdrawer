@@ -364,8 +364,8 @@ class DrawerFrame extends JFrame {
       double pageY = format.getImageableY() + 1;
       g2.translate(pageX, pageY);
 
-      int pageWidth = format.getImageableWidth() - 2;
-      int pageHeight = format.getImageableHeight() - 2;
+      int pageWidth = (int) format.getImageableWidth() - 2;
+      int pageHeight = (int) format.getImageableHeight() - 2;
 
       g2.drawRect(-1, -1, pageWidth + 2, pageHeight + 2);
 
