@@ -1,5 +1,7 @@
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
@@ -8,6 +10,10 @@ import java.awt.event.ComponentAdapter;
 import java.awt.event.ComponentEvent;
 import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -115,7 +121,16 @@ class DrawerFrame extends JFrame {
 
     JMenuItem anotherFile = new JMenuItem("다른 이름으로 저장(A)");
     fileMenu.add(anotherFile);
+    anotherFile.setMnemonic('A');
+    anotherFile.setIcon(new ImageIcon("img/save.gif"));
+    saveFile.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_A, InputEvent.CTRL_DOWN_MASK));
     anotherFile.addActionListener(e -> doSaveAs());
+
+    fileMenu.addSeparator();
+
+    JMenuItem printFile = new JMenuItem("프린트(P)");
+    fileMenu.add(printFile);
+    printFile.addActionListener(e -> doPrint());
 
     fileMenu.addSeparator();
 
@@ -282,15 +297,33 @@ class DrawerFrame extends JFrame {
       return;
     }
     fileName = chooser.getSelectedFile().getPath();
-    if (fileName.endsWith(".jdr") == false) {
+    if (!fileName.endsWith(".jdr")) {
       fileName = fileName + ".jdr";
     }
     setTitle("Drawer - [" + fileName + "]");
     view.doSave(fileName);
   }
 
-  static class ZoomBox extends JComboBox implements ActionListener {
+  public void doPrint() {
+    PrinterJob job = PrinterJob.getPrinterJob();
 
+    PageFormat page = job.defaultPage();
+    page.setOrientation(PageFormat.LANDSCAPE);
+
+    Printable printable = new PrintableView(view, fileName);
+    job.setPrintable(printable, page);
+
+    if (job.printDialog()) {
+      try {
+        job.print();
+      } catch (PrinterException ex) {
+        JOptionPane.showMessageDialog(this, ex.toString(), "PrinterException",
+            JOptionPane.ERROR_MESSAGE);
+      }
+    }
+  }
+
+  static class ZoomBox extends JComboBox implements ActionListener {
 
     static String[] size = {"100", "80", "50"};
     DrawerView view;
@@ -306,6 +339,41 @@ class DrawerFrame extends JFrame {
       JComboBox box = (JComboBox) e.getSource();
       String ratio = (String) box.getSelectedItem();
       view.zoom(Integer.parseInt(ratio));
+    }
+  }
+
+  static class PrintableView implements Printable {
+
+    DrawerView view;
+    String fileName;
+
+    PrintableView(DrawerView view, String fileName) {
+      this.view = view;
+      this.fileName = fileName;
+    }
+
+    public int print(Graphics g, PageFormat format, int pageNum) {
+      System.out.print("HERE");
+
+      if (pageNum > 0) {
+        return Printable.NO_SUCH_PAGE;
+      }
+
+      Graphics2D g2 = (Graphics2D) g;
+      double pageX = format.getImageableX() + 1;
+      double pageY = format.getImageableY() + 1;
+      g2.translate(pageX, pageY);
+
+      int pageWidth = format.getImageableWidth() - 2;
+      int pageHeight = format.getImageableHeight() - 2;
+
+      g2.drawRect(-1, -1, pageWidth + 2, pageHeight + 2);
+
+      g2.setClip(0, 0, pageWidth, pageHeight);
+      g2.scale(0.5, 0.5);
+      view.print(g);
+
+      return Printable.PAGE_EXISTS;
     }
   }
 }
