@@ -224,13 +224,13 @@ public class DrawerView extends JPanel implements MouseListener, MouseMotionList
 
     textEditor = new TextEditor(this);
 
-    pointAction = new SelectAction("Point(P)", new ImageIcon("img/point.png"), this, ID_POINT);
-    boxAction = new SelectAction("Box(B)", new ImageIcon("img/box.png"), this, ID_BOX);
-    lineAction = new SelectAction("Line(L)", new ImageIcon("img/line.png"), this, ID_LINE);
-    circleAction = new SelectAction("Circle(C)", new ImageIcon("img/circle.png"), this, ID_CIRCLE);
-    tvAction = new SelectAction("TV(V)", new ImageIcon("img/tv.png"), this, ID_TV);
-    kiteAction = new SelectAction("Kite(K)", new ImageIcon("img/kite.png"), this, ID_KITE);
-    textAction = new SelectAction("Text(T)", new ImageIcon("img/text.png"), this, ID_TEXT);
+    pointAction = new SelectAction("Point(P)", new FigureIcon(figureTypes[0]), this, ID_POINT);
+    boxAction = new SelectAction("Box(B)", new FigureIcon(figureTypes[1]), this, ID_BOX);
+    lineAction = new SelectAction("Line(L)", new FigureIcon(figureTypes[2]), this, ID_LINE);
+    circleAction = new SelectAction("Circle(C)", new FigureIcon(figureTypes[3]), this, ID_CIRCLE);
+    tvAction = new SelectAction("TV(T)", new FigureIcon(figureTypes[4]), this, ID_TV);
+    kiteAction = new SelectAction("Kite(K)", new FigureIcon(figureTypes[5]), this, ID_KITE);
+    textAction = new SelectAction("Text(X)", new FigureIcon(figureTypes[6]), this, ID_TEXT);
 
     mainPopup = new MainPopup(this);
     pointPopup = new FigurePopup(this, "Point", false);
