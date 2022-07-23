@@ -156,6 +156,16 @@ namespace XDrawer
             else if (_whatToDraw == DRAW_TV)
             {
                 _selectedFigure = new TV(tvPopup, e.X, e.Y);
+                _actionMode = MOUSE_DEFAULT;
+                Graphics g = canvas.CreateGraphics();
+                Pen pen = new Pen(Color.Black);
+                _selectedFigure.draw(g, pen);
+                _selectedFigure.makeRegion();
+                _figures.Add(_selectedFigure);
+                _selectedFigure = null;
+                canvas.Invalidate();
+                g.Dispose();
+                return;
             }
             _selectedFigure.setColor(_currentColor);
             _actionMode = MOUSE_DRAWING;
