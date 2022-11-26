@@ -1,0 +1,33 @@
+﻿  stdafx.cpp
+  Box.cpp
+  Bubble.cpp
+  Circle.cpp
+  ClassView.cpp
+  CompositeFigure.cpp
+  Diamond.cpp
+  Figure.cpp
+  FigureList.cpp
+  FigurePopup.cpp
+  FileView.cpp
+  Kite1.cpp
+  Kite2.cpp
+  KIte3.cpp
+  Line.cpp
+  MainFrm.cpp
+  MainPopup.cpp
+  ModalDialog.cpp
+  OnePointFigure.cpp
+  OutputWnd.cpp
+  Popup.cpp
+  코드를 생성하고 있습니다...
+  컴파일하고 있습니다...
+  PropertiesWnd.cpp
+  TwoPointFigure.cpp
+  UFO.cpp
+  ViewTree.cpp
+  X.cpp
+  XDrawer.cpp
+  XDrawerDoc.cpp
+  XDrawerView.cpp
+  코드를 생성하고 있습니다...
+  XDrawer.vcxproj -> C:\Users\geyd6\Desktop\xdrawer-cpp\Debug\XDrawer.exe
